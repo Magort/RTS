@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Tile : MonoBehaviour
+public class Tile : MonoBehaviour, IPointerClickHandler
 {
 	public (int, int) coordinates;
 	public List<TileArea> areas;
@@ -13,14 +14,12 @@ public class Tile : MonoBehaviour
         RollAreas();
         SpawnDecorations();
     }
-
     public void TransformIntoTile(Tile tile)
     {
         areas = tile.areas;
         ClearDecorations();
         SpawnDecorations();
     }
-
     public void RollAreas()
     {
         List<TileArea.Type> rolledAreas = new() { TileArea.Type.Empty};
@@ -30,7 +29,7 @@ public class Tile : MonoBehaviour
             var roll = Random.Range(0, 100);
             var type = (TileArea.Type)TileArea.TypeChances.FindIndex(chance => chance >= roll);
 
-            if (GetAreaTypeCount(rolledAreas, type) < TileArea.MaxSameType)
+            if (GetAreaTypeCount(rolledAreas, type) < TileArea.MaxSameType[type])
                 rolledAreas.Add(type);
             else
                 rolledAreas.Add(TileArea.Type.Empty);
@@ -41,9 +40,9 @@ public class Tile : MonoBehaviour
         for(int i = 0; i < sortedTypes.Count; i++)
         {
             areas[i].type = sortedTypes[i];
+            areas[i].resourceAmount = TileArea.ResourceStartingAmount[sortedTypes[i]];
         }
 	}
-
 	public int GetAreaTypeCount(List<TileArea.Type> types, TileArea.Type searchedType)
 	{
 		int count = 0;
@@ -55,7 +54,6 @@ public class Tile : MonoBehaviour
 
         return count;
 	}
-
 	private void SpawnDecorations()
     {
         foreach(TileArea area in areas)
@@ -72,4 +70,10 @@ public class Tile : MonoBehaviour
             area.HideDecorations();
         }
 	}
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Debug.Log(coordinates);
+    }
+
 }

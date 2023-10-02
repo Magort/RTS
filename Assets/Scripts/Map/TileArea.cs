@@ -6,9 +6,25 @@ using UnityEngine;
 public class TileArea : MonoBehaviour
 {
     public static List<int> TypeChances = new() { 70, 82, 94, 98, 100 };
-	public static int MaxSameType = 3;
+    public static Dictionary<Type, int> MaxSameType = new()
+    {
+        {Type.Empty, 6 },
+		{Type.WoodSource, 3 },
+		{Type.FoodSource, 3 },
+		{Type.GoldSource, 2 },
+		{Type.EssenceSource, 1 }
+	};
+    public static Dictionary<Type, int> ResourceStartingAmount = new()
+    {
+		{Type.Empty, 0 },
+		{Type.WoodSource, 100 },
+		{Type.FoodSource, 100 },
+		{Type.GoldSource, 40 },
+		{Type.EssenceSource, 10000 }
+	};
 
 	public Type type;
+    public int resourceAmount = 0;
 
 	public GameObject woodDecorations;
 	public GameObject foodDecorations;

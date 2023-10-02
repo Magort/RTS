@@ -1,24 +1,40 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Tile : MonoBehaviour, IPointerClickHandler
 {
-	public (int, int) coordinates;
+    [Header("Data")]
+    public bool discovered;
+    public bool neighbour;
+    public Vector2 debugCoordinates;
+    public (int, int) coordinates;
+	[Header("Light")]
+    public Light lighting;
+    public float maxIntensity;
+    [Header("Tile Areas")]
+    public GameObject container;
 	public List<TileArea> areas;
     public Dictionary<TileArea.Type, GameObject> typeToDecoration = new();
-	public void InitializeTile((int, int) coordinates)
+
+    public void InitializeTile((int, int) coordinates)
     {
         this.coordinates = coordinates;
-        RollAreas();
-        SpawnDecorations();
+#if UNITY_EDITOR
+        debugCoordinates = new Vector2(coordinates.Item1, coordinates.Item2);
+#endif
+        container.transform.Rotate(0, Random.Range(0, 6) * 60, 0);
+		RollAreas();
     }
     public void TransformIntoTile(Tile tile)
     {
-        areas = tile.areas;
-        ClearDecorations();
-        SpawnDecorations();
+        for(int i = 0; i < areas.Count; i++)
+        {
+            areas[i].type = tile.areas[i].type;
+			areas[i].resourceAmount = tile.areas[i].resourceAmount;
+		}
     }
     public void RollAreas()
     {
@@ -54,26 +70,87 @@ public class Tile : MonoBehaviour, IPointerClickHandler
 
         return count;
 	}
-	private void SpawnDecorations()
+	private void ShowDecorations()
     {
         foreach(TileArea area in areas)
         {
             area.ShowDecorations();
         }
-
-        transform.Rotate(0, Random.Range(0, 6) * 60, 0);
     }
 	private void ClearDecorations()
 	{
-        foreach(TileArea area in areas)
+        Debug.Log(coordinates);
+
+		foreach (TileArea area in areas)
         {
             area.HideDecorations();
         }
 	}
 
+    public void BecomeNeighbour()
+    {
+        StartCoroutine(BecomeNeighbourCoroutine());
+    }
+	IEnumerator BecomeNeighbourCoroutine()
+	{
+		float intensityGrowth = maxIntensity/100;
+        WaitForSeconds waiter = new(0.01f);
+
+		while (lighting.intensity < maxIntensity/5)
+		{
+			lighting.intensity += intensityGrowth;
+			yield return waiter;
+		}
+
+		neighbour = true;
+	}
+
+	public void Reveal()
+    {
+		StartCoroutine(RevealCoroutine());
+	}
+
+    IEnumerator RevealCoroutine()
+    {
+        float intensityGrowth = maxIntensity/100;
+        WaitForSeconds waiter = new(0.01f);
+
+		while(lighting.intensity < maxIntensity)
+        {
+            lighting.intensity += intensityGrowth;
+            yield return waiter;
+        }
+
+		discovered = true;
+
+		foreach (Tile tile in TileGrid.GetNeighbouringTiles(coordinates))
+		{
+            if(!tile.neighbour)
+			    tile.BecomeNeighbour();
+		}
+
+        ShowDecorations();
+	}
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log(coordinates);
-    }
+        if (eventData.button == PointerEventData.InputButton.Right)
+            return;
 
+        if(!neighbour)
+        {
+			ContextMenu.Instance.CloseAll();
+			return;
+        }
+
+        ContextMenu.Instance.SelectedTile = this;
+
+        if(!discovered)
+        {
+            ContextMenu.Instance.ShowDiscoveryInfo();
+            return;
+        }
+
+        ContextMenu.Instance.ShowTileInfo();
+    }
 }

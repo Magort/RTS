@@ -56,7 +56,11 @@ public class TileArea : MonoBehaviour
 
     public void HideDecorations()
     {
-		typeToDecoration[type].SetActive(false);
+        if (type != Type.Empty)
+        {
+            Debug.Log(typeToDecoration[type]);
+            typeToDecoration[type].SetActive(false);
+        }
 	}
 
     public enum Type

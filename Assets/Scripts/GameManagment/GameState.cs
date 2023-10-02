@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public static class GameState
 {
@@ -11,4 +9,6 @@ public static class GameState
 		{Resource.Gold, 0 },
 		{Resource.Essence, 0 }
 	};
+
+	public static int ScoutsAvailable = 2;
 }

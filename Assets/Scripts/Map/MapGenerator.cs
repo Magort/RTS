@@ -3,13 +3,14 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
+	public Tile mainTile;
 	[Header("Prefabs")]
     public GameObject tilePrefab;
 	public Tile startingFoodTile;
 	public Tile startingWoodTile;
 	public Tile startingGoldTile;
 
-	[Range(1,5)] public int debugSize;
+	public int debugSize;
 
 	float xOffsetFull = 1.73f;
 	float zOffsetFull = 1.5f;
@@ -30,8 +31,14 @@ public class MapGenerator : MonoBehaviour
 			if (i != size)
 			{
 				var tile = Instantiate(tilePrefab, startingPoint - new Vector3(xOffsetFull, 0, 0) * (size - i), Quaternion.identity, transform).GetComponent<Tile>();
-				tile.InitializeTile((0, i));
+				tile.InitializeTile((size, i));
 				TileGrid.AddTile(tile);
+			}
+			else
+			{
+				mainTile.coordinates = (size, i);
+				mainTile.debugCoordinates = new Vector2(size, i);
+				TileGrid.AddTile(mainTile);
 			}
 		}
 
@@ -44,7 +51,7 @@ public class MapGenerator : MonoBehaviour
             {
 				var tile = Instantiate(tilePrefab, newStartingPoint + new Vector3(xOffsetFull, 0, 0) * j, Quaternion.identity, transform)
 					.GetComponent<Tile>();
-				tile.InitializeTile((i, j));
+				tile.InitializeTile((size + i, j));
 				TileGrid.AddTile(tile);
 			}
 		}
@@ -58,19 +65,27 @@ public class MapGenerator : MonoBehaviour
 			{
 				var tile = Instantiate(tilePrefab, newStartingPoint + new Vector3(xOffsetFull, 0, 0) * j, Quaternion.identity, transform)
 					.GetComponent<Tile>();
-				tile.InitializeTile((-i, j));
+				tile.InitializeTile((size - i, j));
 				TileGrid.AddTile(tile);
 			}
 		}
 
-		//EnsureStartingResources();
+		EnsureStartingResources();
+		EnableNeighbouringTiles();
 	}
 
 	void EnsureStartingResources()
 	{
+		var mainTileCoordinates = mainTile.coordinates;
+
 		List<(int, int)> validCoordinates = new()
 		{
-			(-1, -1), (-1, 0), (0, -1), (0, 1), (1, 1), (1, 0)
+			(mainTileCoordinates.Item1 -1 , mainTileCoordinates.Item2 - 1),
+			(mainTileCoordinates.Item1 -1, mainTileCoordinates.Item2),
+			(mainTileCoordinates.Item1, mainTileCoordinates.Item2 - 1),
+			(mainTileCoordinates.Item1, mainTileCoordinates.Item2 + 1),
+			(mainTileCoordinates.Item1, mainTileCoordinates.Item2 + 1),
+			(mainTileCoordinates.Item1 + 1, mainTileCoordinates.Item2)
 		};
 
 		var foodCoordinates = validCoordinates[Random.Range(0, validCoordinates.Count)];
@@ -78,6 +93,22 @@ public class MapGenerator : MonoBehaviour
 
 		TileGrid.Tiles.Find(tile => tile.coordinates == foodCoordinates).TransformIntoTile(startingFoodTile);
 
+		var woodCoordinates = validCoordinates[Random.Range(0, validCoordinates.Count)];
+		validCoordinates.Remove(woodCoordinates);
+
+		TileGrid.Tiles.Find(tile => tile.coordinates == woodCoordinates).TransformIntoTile(startingWoodTile);
+
+		var goldCoordinates = validCoordinates[Random.Range(0, validCoordinates.Count)];
+		validCoordinates.Remove(goldCoordinates);
+
+		TileGrid.Tiles.Find(tile => tile.coordinates == goldCoordinates).TransformIntoTile(startingGoldTile);
 	}
 
+	void EnableNeighbouringTiles()
+	{
+		foreach(var tile in TileGrid.GetNeighbouringTiles(mainTile.coordinates))
+		{
+			tile.BecomeNeighbour();
+		}
+	}
 }

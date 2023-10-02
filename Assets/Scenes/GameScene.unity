@@ -169,8 +169,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 1092668520974257327, guid: bf698c1968424e94e96daa86c7a2ae74, type: 3}
-  startingFoodTile: {fileID: 0}
-  startingWoodTile: {fileID: 0}
+  startingFoodTile: {fileID: 3185285131872373667, guid: 7eaa7c6ff2d2b344eaaeede71ea88be7, type: 3}
+  startingWoodTile: {fileID: 7131013926425449806, guid: eccf9dbe2c7860040bb64c8442681e42, type: 3}
   startingGoldTile: {fileID: 0}
   debugSize: 5
 --- !u!1 &705507993

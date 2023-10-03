@@ -15,10 +15,10 @@ public class BuildingHandler : MonoBehaviour
     {
 		gameObject.SetActive(discovered);
 
-		if (!ContextMenu.Instance.SelectedTile.areas.Find(area => area.type == TileArea.Type.Empty))
-            return;
-
 		ClearBuildingsList();
+
+		if (ContextMenu.Instance.SelectedTile.areas.Find(area => area.type == TileArea.Type.Empty) == null)
+            return;
 
 		foreach (BuildingSlot slot in buildingSlots)
         {

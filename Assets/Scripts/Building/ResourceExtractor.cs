@@ -29,10 +29,11 @@ public class ResourceExtractor : Building
 		{
 			yield return extractionPeriod;
 
-			var target = builtOn.areas.First(area => area.type == resourceToArea[resourceToExtract]);
+			var target = builtOn.areas.Find(area => area.type == resourceToArea[resourceToExtract]);
 
 			if(target == null)
 			{
+				GameState.AddResourceGrowth(resourceToExtract, -extractAmount);
 				enabled = false;
 				break;
 			}
@@ -41,7 +42,7 @@ public class ResourceExtractor : Building
 			{
 				target.resourceAmount -= extractAmount;
 
-				if(target.resourceAmount == 0)
+				if(target.resourceAmount < extractAmount)
 					target.DepleteResources();
 			}
 		}

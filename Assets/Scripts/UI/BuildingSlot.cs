@@ -9,7 +9,7 @@ public class BuildingSlot : MonoBehaviour
     {
         if(BuildingHandler.Instance.TryBuild(building))
         {
-            ContextMenu.Instance.CloseAll();
-        }
+            BuildingHandler.Instance.PopulateBuildingsList(true);
+		}
     }
 }

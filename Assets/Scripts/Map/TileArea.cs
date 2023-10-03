@@ -64,7 +64,6 @@ public class TileArea : MonoBehaviour
     {
         if (type != Type.Empty)
         {
-            Debug.Log(typeToDecoration[type]);
             typeToDecoration[type].SetActive(false);
         }
 	}

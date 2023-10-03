@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Woodcutters' Lodge
-  description: A core structrue that allows us to expand our kindgom by producing
+  description: A core structrue that allows us to expand our Kindgom by extracting
     Wood.
   builtOn: {fileID: 0}
   requirements:
@@ -85,3 +85,89 @@ MonoBehaviour:
     requiredArea: 1
   resourceToExtract: 0
   extractAmount: 3
+--- !u!4 &8361738849381550001 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8687861292292457714, guid: 3c09760cbd46f0f4c9a4dd2a714e9103, type: 3}
+  m_PrefabInstance: {fileID: 908503363808510787}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4091032105283880030
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8361738849381550001}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 7c9518354b9d8d547883658bca2d4b9a, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c9518354b9d8d547883658bca2d4b9a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c9518354b9d8d547883658bca2d4b9a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c9518354b9d8d547883658bca2d4b9a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c9518354b9d8d547883658bca2d4b9a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c9518354b9d8d547883658bca2d4b9a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c9518354b9d8d547883658bca2d4b9a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c9518354b9d8d547883658bca2d4b9a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c9518354b9d8d547883658bca2d4b9a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c9518354b9d8d547883658bca2d4b9a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c9518354b9d8d547883658bca2d4b9a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7601226680800833775, guid: 7c9518354b9d8d547883658bca2d4b9a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7a31c8039b6fa234dbd2e6a1b390ccc5, type: 2}
+    - target: {fileID: -4683669308469848369, guid: 7c9518354b9d8d547883658bca2d4b9a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c4085a7df6e735e489e492cd41a7f0a4, type: 2}
+    - target: {fileID: -1439730007547781893, guid: 7c9518354b9d8d547883658bca2d4b9a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7a31c8039b6fa234dbd2e6a1b390ccc5, type: 2}
+    - target: {fileID: 919132149155446097, guid: 7c9518354b9d8d547883658bca2d4b9a, type: 3}
+      propertyPath: m_Name
+      value: Woodcutter
+      objectReference: {fileID: 0}
+    - target: {fileID: 1129496810705857465, guid: 7c9518354b9d8d547883658bca2d4b9a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7a31c8039b6fa234dbd2e6a1b390ccc5, type: 2}
+    - target: {fileID: 7071182760956848314, guid: 7c9518354b9d8d547883658bca2d4b9a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7a31c8039b6fa234dbd2e6a1b390ccc5, type: 2}
+    - target: {fileID: 7202271454713460447, guid: 7c9518354b9d8d547883658bca2d4b9a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7a31c8039b6fa234dbd2e6a1b390ccc5, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7c9518354b9d8d547883658bca2d4b9a, type: 3}

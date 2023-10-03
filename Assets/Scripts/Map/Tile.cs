@@ -9,22 +9,17 @@ public class Tile : MonoBehaviour, IPointerClickHandler
     [Header("Data")]
     public bool discovered;
     public bool neighbour;
-    public Vector2 debugCoordinates;
-    public (int, int) coordinates;
 	[Header("Light")]
     public Light lighting;
     public float maxIntensity;
     [Header("Tile Areas")]
     public GameObject container;
+    public Animator containerAnimator;
 	public List<TileArea> areas;
     public Dictionary<TileArea.Type, GameObject> typeToDecoration = new();
 
-    public void InitializeTile((int, int) coordinates)
+    public void InitializeTile()
     {
-        this.coordinates = coordinates;
-#if UNITY_EDITOR
-        debugCoordinates = new Vector2(coordinates.Item1, coordinates.Item2);
-#endif
         container.transform.Rotate(0, Random.Range(0, 6) * 60, 0);
 		RollAreas();
     }
@@ -36,6 +31,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
 			areas[i].resourceAmount = tile.areas[i].resourceAmount;
 		}
     }
+
     public void RollAreas()
     {
         List<TileArea.Type> rolledAreas = new() { TileArea.Type.Empty};
@@ -45,7 +41,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
             var roll = Random.Range(0, 100);
             var type = (TileArea.Type)TileArea.TypeChances.FindIndex(chance => chance >= roll);
 
-            if (GetAreaTypeCount(rolledAreas, type) < TileArea.MaxSameType[type])
+            if (TileGrid.GetAreaTypeCount(rolledAreas, type) < TileArea.MaxSameType[type])
                 rolledAreas.Add(type);
             else
                 rolledAreas.Add(TileArea.Type.Empty);
@@ -59,17 +55,6 @@ public class Tile : MonoBehaviour, IPointerClickHandler
             areas[i].resourceAmount = TileArea.ResourceStartingAmount[sortedTypes[i]];
         }
 	}
-	public int GetAreaTypeCount(List<TileArea.Type> types, TileArea.Type searchedType)
-	{
-		int count = 0;
-		foreach(TileArea.Type type in types)
-        {
-            if(type == searchedType)
-                count++;
-        }
-
-        return count;
-	}
 	private void ShowDecorations()
     {
         foreach(TileArea area in areas)
@@ -79,8 +64,6 @@ public class Tile : MonoBehaviour, IPointerClickHandler
     }
 	private void ClearDecorations()
 	{
-        Debug.Log(coordinates);
-
 		foreach (TileArea area in areas)
         {
             area.HideDecorations();
@@ -95,6 +78,9 @@ public class Tile : MonoBehaviour, IPointerClickHandler
 	{
 		float intensityGrowth = maxIntensity/100;
         WaitForSeconds waiter = new(0.01f);
+
+        container.SetActive(true);
+        containerAnimator.Play("Show");
 
 		while (lighting.intensity < maxIntensity/5)
 		{
@@ -123,7 +109,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
 
 		discovered = true;
 
-		foreach (Tile tile in TileGrid.GetNeighbouringTiles(coordinates))
+		foreach (Tile tile in TileGrid.GetNeighbouringTiles(this))
 		{
             if(!tile.neighbour)
 			    tile.BecomeNeighbour();
@@ -145,12 +131,6 @@ public class Tile : MonoBehaviour, IPointerClickHandler
 
         ContextMenu.Instance.SelectedTile = this;
 
-        if(!discovered)
-        {
-            ContextMenu.Instance.ShowDiscoveryInfo();
-            return;
-        }
-
-        ContextMenu.Instance.ShowTileInfo();
-    }
+		ContextMenu.Instance.ShowTileInfo(discovered);
+	}
 }

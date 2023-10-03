@@ -87,9 +87,17 @@ PrefabInstance:
       propertyPath: discovered
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2510267300210715041, guid: bf698c1968424e94e96daa86c7a2ae74, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3273440224093584141, guid: bf698c1968424e94e96daa86c7a2ae74, type: 3}
       propertyPath: m_Intensity
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4839677956474916656, guid: bf698c1968424e94e96daa86c7a2ae74, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8007448145221332658, guid: bf698c1968424e94e96daa86c7a2ae74, type: 3}
       propertyPath: m_Intensity

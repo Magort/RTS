@@ -16,7 +16,7 @@ public class ScoutingHandler : MonoBehaviour
         if (GameState.ScoutsAvailable > 0)
         {
             ContextMenu.Instance.StartCoroutine(StartScouting(ContextMenu.Instance.SelectedTile));
-            gameObject.SetActive(false);
+            ContextMenu.Instance.CloseAll();
         }
     }
 

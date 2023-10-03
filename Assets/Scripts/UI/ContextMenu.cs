@@ -8,25 +8,26 @@ public class ContextMenu : MonoBehaviour
 
     public ScoutingHandler scoutingPanel;
     public TileInfoPanel tileInfoPanel;
+    public BuildingHandler buildingPanel;
 
     private void Awake()
     {
         Instance = this;
     }
 
-    public void ShowTileInfo()
+    public void ShowTileInfo(bool discovered)
     {
-        tileInfoPanel.gameObject.SetActive(true);
-    }
+        tileInfoPanel.PopulatePanel(discovered);
 
-    public void ShowDiscoveryInfo()
-    {
-        scoutingPanel.gameObject.SetActive(true);
-    }
+        scoutingPanel.gameObject.SetActive(!discovered);
+
+        buildingPanel.PopulateBuildingsList(discovered);
+	}
 
     public void CloseAll()
     {
 		scoutingPanel.gameObject.SetActive(false);
 		tileInfoPanel.gameObject.SetActive(false);
+        buildingPanel.gameObject.SetActive(false);
 	}
 }

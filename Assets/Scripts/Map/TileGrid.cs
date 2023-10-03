@@ -22,17 +22,20 @@ public static class TileGrid
 		return count;
 	}
 
-	public static List<Tile> GetNeighbouringTiles((int, int) coordinates)
+	public static List<Tile> GetNeighbouringTiles(Tile tile)
 	{
 		List<Tile> neighbouringTiles = new();
 		var colliders = Physics.OverlapSphere
-			(Tiles.Find(tile => tile.coordinates == coordinates).transform.position,
+			(tile.transform.position,
 			1.5f,
 			LayerMask.GetMask("Tile"));
+
 		foreach (var collider in colliders)
 		{
 			neighbouringTiles.Add(collider.GetComponent<Tile>());
 		}
+
+		neighbouringTiles.Remove(tile);
 
 		return neighbouringTiles;
 	}

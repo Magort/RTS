@@ -46,6 +46,12 @@ public class TileArea : MonoBehaviour
 		};
     }
 
+    public void DepleteResources()
+    {
+		HideDecorations();
+		type = Type.Empty;
+    }
+
     public void ShowDecorations()
     {
         if(type != Type.Empty)

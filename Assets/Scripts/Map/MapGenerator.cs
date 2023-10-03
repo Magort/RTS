@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
@@ -31,13 +32,11 @@ public class MapGenerator : MonoBehaviour
 			if (i != size)
 			{
 				var tile = Instantiate(tilePrefab, startingPoint - new Vector3(xOffsetFull, 0, 0) * (size - i), Quaternion.identity, transform).GetComponent<Tile>();
-				tile.InitializeTile((size, i));
+				tile.InitializeTile();
 				TileGrid.AddTile(tile);
 			}
 			else
 			{
-				mainTile.coordinates = (size, i);
-				mainTile.debugCoordinates = new Vector2(size, i);
 				TileGrid.AddTile(mainTile);
 			}
 		}
@@ -51,7 +50,7 @@ public class MapGenerator : MonoBehaviour
             {
 				var tile = Instantiate(tilePrefab, newStartingPoint + new Vector3(xOffsetFull, 0, 0) * j, Quaternion.identity, transform)
 					.GetComponent<Tile>();
-				tile.InitializeTile((size + i, j));
+				tile.InitializeTile();
 				TileGrid.AddTile(tile);
 			}
 		}
@@ -65,7 +64,7 @@ public class MapGenerator : MonoBehaviour
 			{
 				var tile = Instantiate(tilePrefab, newStartingPoint + new Vector3(xOffsetFull, 0, 0) * j, Quaternion.identity, transform)
 					.GetComponent<Tile>();
-				tile.InitializeTile((size - i, j));
+				tile.InitializeTile();
 				TileGrid.AddTile(tile);
 			}
 		}
@@ -76,37 +75,27 @@ public class MapGenerator : MonoBehaviour
 
 	void EnsureStartingResources()
 	{
-		var mainTileCoordinates = mainTile.coordinates;
+		var potentialTiles = TileGrid.GetNeighbouringTiles(mainTile);
 
-		List<(int, int)> validCoordinates = new()
-		{
-			(mainTileCoordinates.Item1 -1 , mainTileCoordinates.Item2 - 1),
-			(mainTileCoordinates.Item1 -1, mainTileCoordinates.Item2),
-			(mainTileCoordinates.Item1, mainTileCoordinates.Item2 - 1),
-			(mainTileCoordinates.Item1, mainTileCoordinates.Item2 + 1),
-			(mainTileCoordinates.Item1, mainTileCoordinates.Item2 + 1),
-			(mainTileCoordinates.Item1 + 1, mainTileCoordinates.Item2)
-		};
+		var foodTile = potentialTiles[Random.Range(0, potentialTiles.Count)];
+		potentialTiles.Remove(foodTile);
 
-		var foodCoordinates = validCoordinates[Random.Range(0, validCoordinates.Count)];
-		validCoordinates.Remove(foodCoordinates);
+		TileGrid.Tiles.Find(tile => tile == foodTile).TransformIntoTile(startingFoodTile);
 
-		TileGrid.Tiles.Find(tile => tile.coordinates == foodCoordinates).TransformIntoTile(startingFoodTile);
+		var woodTile = potentialTiles[Random.Range(0, potentialTiles.Count)];
+		potentialTiles.Remove(woodTile);
 
-		var woodCoordinates = validCoordinates[Random.Range(0, validCoordinates.Count)];
-		validCoordinates.Remove(woodCoordinates);
+		TileGrid.Tiles.Find(tile => tile == woodTile).TransformIntoTile(startingWoodTile);
 
-		TileGrid.Tiles.Find(tile => tile.coordinates == woodCoordinates).TransformIntoTile(startingWoodTile);
+		var goldTile = potentialTiles[Random.Range(0, potentialTiles.Count)];
+		potentialTiles.Remove(goldTile);
 
-		var goldCoordinates = validCoordinates[Random.Range(0, validCoordinates.Count)];
-		validCoordinates.Remove(goldCoordinates);
-
-		TileGrid.Tiles.Find(tile => tile.coordinates == goldCoordinates).TransformIntoTile(startingGoldTile);
+		TileGrid.Tiles.Find(tile => tile == goldTile).TransformIntoTile(startingGoldTile);
 	}
 
 	void EnableNeighbouringTiles()
 	{
-		foreach(var tile in TileGrid.GetNeighbouringTiles(mainTile.coordinates))
+		foreach(var tile in TileGrid.GetNeighbouringTiles(mainTile))
 		{
 			tile.BecomeNeighbour();
 		}

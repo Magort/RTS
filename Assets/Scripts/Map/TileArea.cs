@@ -31,6 +31,7 @@ public class TileArea : MonoBehaviour
 	public GameObject goldDecorations;
 	public GameObject essenceDecorations;
     public GameObject buildingSlot;
+    public LineRenderer lineRenderer;
 
     Dictionary<Type, GameObject> typeToDecoration;
 

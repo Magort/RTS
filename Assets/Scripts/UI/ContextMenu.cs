@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ContextMenu : MonoBehaviour
@@ -15,13 +14,14 @@ public class ContextMenu : MonoBehaviour
         Instance = this;
     }
 
-    public void ShowTileInfo(bool discovered)
+    public void ShowTileInfo(bool discovered, Affiliation affiliation)
     {
         tileInfoPanel.PopulatePanel(discovered);
 
         scoutingPanel.gameObject.SetActive(!discovered);
 
-        buildingPanel.PopulateBuildingsList(discovered);
+        if(affiliation != Affiliation.Enemy)
+            buildingPanel.PopulateBuildingsList(discovered);
 	}
 
     public void CloseAll()

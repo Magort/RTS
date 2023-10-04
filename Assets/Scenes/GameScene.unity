@@ -186,6 +186,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 71678344}
+  - component: {fileID: 71678345}
   m_Layer: 0
   m_Name: Systems
   m_TagString: Untagged
@@ -201,7 +202,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 71678343}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 408.34396, y: 536.4817, z: -0.67840576}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -210,6 +211,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &71678345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71678343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71f2f2fcbb2e19c42b54a4c437b12907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &137890987
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,7 +794,7 @@ MonoBehaviour:
   startingFoodTile: {fileID: 3185285131872373667, guid: 7eaa7c6ff2d2b344eaaeede71ea88be7, type: 3}
   startingWoodTile: {fileID: 7131013926425449806, guid: eccf9dbe2c7860040bb64c8442681e42, type: 3}
   startingGoldTile: {fileID: 2910938102403119597, guid: f1641654438d3af4998f00acb3eb71e0, type: 3}
-  debugSize: 10
+  debugSize: 3
 --- !u!114 &506203392 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}

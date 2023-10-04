@@ -9,6 +9,9 @@ public class Tile : MonoBehaviour, IPointerClickHandler
     [Header("Data")]
     public bool discovered;
     public bool neighbour;
+    public List<MapUnit> units;
+    public Affiliation affiliation;
+    public Vector2 coordinates;
 	[Header("Light")]
     public Light lighting;
     public float maxIntensity;
@@ -18,9 +21,9 @@ public class Tile : MonoBehaviour, IPointerClickHandler
 	public List<TileArea> areas;
     public Dictionary<TileArea.Type, GameObject> typeToDecoration = new();
 
-    public void InitializeTile()
+    public void InitializeTile(Vector2 coordinates)
     {
-        container.transform.Rotate(0, Random.Range(0, 6) * 60, 0);
+        this.coordinates = coordinates;
 		RollAreas();
     }
     public void TransformIntoTile(Tile tile)
@@ -47,12 +50,10 @@ public class Tile : MonoBehaviour, IPointerClickHandler
                 rolledAreas.Add(TileArea.Type.Empty);
         }
 
-		var sortedTypes = rolledAreas.OrderBy(o => (int)o).ToList();
-
-        for(int i = 0; i < sortedTypes.Count; i++)
+        for(int i = 0; i < rolledAreas.Count; i++)
         {
-            areas[i].type = sortedTypes[i];
-            areas[i].resourceAmount = TileArea.ResourceStartingAmount[sortedTypes[i]];
+            areas[i].type = rolledAreas[i];
+            areas[i].resourceAmount = TileArea.ResourceStartingAmount[rolledAreas[i]];
         }
 	}
 	private void ShowDecorations()
@@ -69,6 +70,16 @@ public class Tile : MonoBehaviour, IPointerClickHandler
             area.HideDecorations();
         }
 	}
+
+    public void ChangeAffiliation(Affiliation affiliation)
+    {
+        if(affiliation != this.affiliation)
+        {
+            this.affiliation = affiliation;
+            if(affiliation == Affiliation.Player)
+                KindgomLine.Instance.AddTileToBorder(this);
+        }
+    }
 
     public void BecomeNeighbour()
     {
@@ -131,6 +142,6 @@ public class Tile : MonoBehaviour, IPointerClickHandler
 
         ContextMenu.Instance.SelectedTile = this;
 
-		ContextMenu.Instance.ShowTileInfo(discovered);
+		ContextMenu.Instance.ShowTileInfo(discovered, affiliation);
 	}
 }

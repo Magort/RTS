@@ -49,6 +49,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   discovered: 0
   neighbour: 0
+  units: []
+  affiliation: 0
+  coordinates: {x: 0, y: 0}
   lighting: {fileID: 3273440224093584141}
   maxIntensity: 5
   container: {fileID: 2510267300210715041}
@@ -318,6 +321,14 @@ PrefabInstance:
     - target: {fileID: 3068340961320264480, guid: de7b2f4e1fdf9b744bce2043357bf2b8, type: 3}
       propertyPath: m_Name
       value: TileArea (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3487667299160429202, guid: de7b2f4e1fdf9b744bce2043357bf2b8, type: 3}
+      propertyPath: m_Positions.Array.data[0].x
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3487667299160429202, guid: de7b2f4e1fdf9b744bce2043357bf2b8, type: 3}
+      propertyPath: m_Positions.Array.data[1].x
+      value: -0.35
       objectReference: {fileID: 0}
     - target: {fileID: 5454286826526195913, guid: de7b2f4e1fdf9b744bce2043357bf2b8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -892,6 +903,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TileArea (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3487667299160429202, guid: de7b2f4e1fdf9b744bce2043357bf2b8, type: 3}
+      propertyPath: m_Positions.Array.data[0].x
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3487667299160429202, guid: de7b2f4e1fdf9b744bce2043357bf2b8, type: 3}
+      propertyPath: m_Positions.Array.data[1].x
+      value: -0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 5454286826526195913, guid: de7b2f4e1fdf9b744bce2043357bf2b8, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
@@ -1001,6 +1020,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TileArea (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 3487667299160429202, guid: de7b2f4e1fdf9b744bce2043357bf2b8, type: 3}
+      propertyPath: m_Positions.Array.data[0].x
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3487667299160429202, guid: de7b2f4e1fdf9b744bce2043357bf2b8, type: 3}
+      propertyPath: m_Positions.Array.data[1].x
+      value: -0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 5454286826526195913, guid: de7b2f4e1fdf9b744bce2043357bf2b8, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
@@ -1109,6 +1136,14 @@ PrefabInstance:
     - target: {fileID: 3068340961320264480, guid: de7b2f4e1fdf9b744bce2043357bf2b8, type: 3}
       propertyPath: m_Name
       value: TileArea (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3487667299160429202, guid: de7b2f4e1fdf9b744bce2043357bf2b8, type: 3}
+      propertyPath: m_Positions.Array.data[0].x
+      value: -0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3487667299160429202, guid: de7b2f4e1fdf9b744bce2043357bf2b8, type: 3}
+      propertyPath: m_Positions.Array.data[1].x
+      value: -0.35
       objectReference: {fileID: 0}
     - target: {fileID: 5454286826526195913, guid: de7b2f4e1fdf9b744bce2043357bf2b8, type: 3}
       propertyPath: m_LocalPosition.z

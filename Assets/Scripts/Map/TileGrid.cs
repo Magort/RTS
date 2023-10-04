@@ -3,7 +3,16 @@ using UnityEngine;
 
 public static class TileGrid
 {
-	public static List<Tile> Tiles = new List<Tile>();
+	public static List<Tile> Tiles = new();
+	public static List<Vector2> NeighbouringCoordinates = new()
+	{
+		new Vector2(-1, 0),
+		new Vector2(0, -1),
+		new Vector2(1, -1),
+		new Vector2(1, 0),
+		new Vector2(0, 1),
+		new Vector2(-1, 1)
+	};
 
 	public static void AddTile(Tile tile)
 	{
@@ -25,17 +34,14 @@ public static class TileGrid
 	public static List<Tile> GetNeighbouringTiles(Tile tile)
 	{
 		List<Tile> neighbouringTiles = new();
-		var colliders = Physics.OverlapSphere
-			(tile.transform.position,
-			1.5f,
-			LayerMask.GetMask("Tile"));
 
-		foreach (var collider in colliders)
+		foreach(Vector2 coords in NeighbouringCoordinates)
 		{
-			neighbouringTiles.Add(collider.GetComponent<Tile>());
-		}
+			var potentialTile = Tiles.Find(nTile => nTile.coordinates == tile.coordinates + coords);
 
-		neighbouringTiles.Remove(tile);
+			if (potentialTile != null)
+				neighbouringTiles.Add(potentialTile);
+		}
 
 		return neighbouringTiles;
 	}

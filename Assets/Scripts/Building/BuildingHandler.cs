@@ -42,6 +42,9 @@ public class BuildingHandler : MonoBehaviour
         if(!building.SufficientResources())
             return false;
 
+        if (ContextMenu.Instance.SelectedTile.affiliation == Affiliation.Enemy)
+            return false;
+
         Build(building);
         ExtractResources(building);
         return true;
@@ -53,7 +56,9 @@ public class BuildingHandler : MonoBehaviour
         freeArea.type = TileArea.Type.Building;
         Instantiate(building.gameObject, freeArea.buildingSlot.transform.position, Quaternion.identity, freeArea.buildingSlot.transform)
             .GetComponent<Building>().builtOn = ContextMenu.Instance.SelectedTile;
-    }
+
+        ContextMenu.Instance.SelectedTile.ChangeAffiliation(Affiliation.Player);
+	}
 
     void ExtractResources(Building building)
     {

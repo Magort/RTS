@@ -1,16 +1,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Unit", menuName = "Combat/Unit", order = 1)]
 public class Unit : ScriptableObject
 {
-    public List<Building.Requirements.ResourceRequirement> cost;
-    [Header("Stats")]
+    public List<Building.Requirements.ResourceRequirement> recruitCost;
+	public List<Building.Requirements.ResourceRequirement> upkeepCost;
+	[Header("Stats")]
     public int health;
     public int speed;
-    public List<Dice> actions;
+    public Dice dice;
+    public Sprite icon;
 
-    public Dice RollAction()
+    public CombatAction RollAction()
     {
-        return actions[Random.Range(0, 6)];
+        return dice.actions[Random.Range(0, 6)];
     }
 }

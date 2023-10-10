@@ -8,6 +8,7 @@ public class ContextMenu : MonoBehaviour
     public ScoutingHandler scoutingPanel;
     public TileInfoPanel tileInfoPanel;
     public BuildingHandler buildingPanel;
+    public UnitRecruitmentHandler unitRecruitmentPanel;
 
     private void Awake()
     {
@@ -20,14 +21,23 @@ public class ContextMenu : MonoBehaviour
 
         scoutingPanel.gameObject.SetActive(!discovered);
 
-        if(affiliation != Affiliation.Enemy)
-            buildingPanel.PopulateBuildingsList(discovered);
+        if(affiliation == Affiliation.Player)
+            unitRecruitmentPanel.PopulateUnitSlots();
+        else
+			unitRecruitmentPanel.ClearSlots();
+
+		if (affiliation != Affiliation.Enemy)
+        {
+			buildingPanel.PopulateBuildingsList(discovered);
+		}
 	}
+
 
     public void CloseAll()
     {
 		scoutingPanel.gameObject.SetActive(false);
 		tileInfoPanel.gameObject.SetActive(false);
         buildingPanel.gameObject.SetActive(false);
+        unitRecruitmentPanel.gameObject.SetActive(false);
 	}
 }

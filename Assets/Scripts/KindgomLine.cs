@@ -5,7 +5,6 @@ using UnityEngine;
 public class KindgomLine : MonoBehaviour
 {
     public static KindgomLine Instance;
-    
 
     private void Start()
     {
@@ -15,8 +14,6 @@ public class KindgomLine : MonoBehaviour
     {
         List<Tile> tilesToUpdate = TileGrid.GetNeighbouringTiles(tile)
             .Where(tile => tile.affiliation == Affiliation.Player).ToList();
-
-        Debug.Log(tilesToUpdate.Count);
 
         foreach(TileArea area in tile.areas)
         {

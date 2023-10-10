@@ -1,18 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dice : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+[CreateAssetMenu(fileName = "Dice", menuName = "Combat/Dice", order = 2)]
 
-    // Update is called once per frame
-    void Update()
+public class Dice : ScriptableObject
+{
+    public List<CombatAction> actions = new()
     {
-        
-    }
+        null, null, null, null, null, null
+    };
 }

@@ -25,6 +25,7 @@ public class TileArea : MonoBehaviour
 
 	public Type type;
     public int resourceAmount = 0;
+    public List<Building.Code> buildingsBuilt = new();
 
 	public GameObject woodDecorations;
 	public GameObject foodDecorations;

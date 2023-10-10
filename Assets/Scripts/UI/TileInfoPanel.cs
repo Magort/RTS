@@ -7,7 +7,9 @@ public class TileInfoPanel : MonoBehaviour
     public TextMeshProUGUI infoText;
     [TextArea] public string notDiscoveredText;
 
-    void Start()
+	public List<MapUnitSlot> mapUnitSlots;
+
+	void Start()
     {
         gameObject.SetActive(false);
     }
@@ -16,17 +18,30 @@ public class TileInfoPanel : MonoBehaviour
     {
         gameObject.SetActive(true);
 
-        if(!discovered)
+		PopulatePresentMapUnits();
+
+		if (!discovered)
         {
             infoText.text = notDiscoveredText;
             return;
         }
 
-
-        infoText.text = TileInformation();
+		infoText.text = TileInformation();
     }
 
-    string TileInformation()
+	public void PopulatePresentMapUnits()
+	{
+		foreach(MapUnitSlot mapUnitSlot in mapUnitSlots)
+        {
+            mapUnitSlot.DepopulateSlot();
+        }
+		for (int i = 0; i < ContextMenu.Instance.SelectedTile.units.Count; i++)
+		{
+            mapUnitSlots[i].PopulateSlot(ContextMenu.Instance.SelectedTile.units[i]);
+		}
+	}
+
+	string TileInformation()
     {
         string info = "";
 

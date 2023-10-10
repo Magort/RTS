@@ -1,6 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-
 
 public abstract class Building : MonoBehaviour
 {
@@ -8,13 +8,28 @@ public abstract class Building : MonoBehaviour
     [TextArea] public string description;
     public Tile builtOn;
 	public Requirements requirements;
+	public Code code;
+
+	public void OnBuildingComplete(Tile tile, TileArea area)
+	{
+		builtOn = tile;
+		SpecialOnBuild(tile, area);
+	}
+	public abstract void SpecialOnBuild(Tile tile, TileArea area);
+	public enum Code
+	{
+		Woodcutters,
+		Gatherers,
+		Mine,
+		Researchers,
+		Fighters
+	}
 
 	public bool ValidPlacement()
 	{
-		if (!ContextMenu.Instance.SelectedTile.areas.Find(area => area.type == requirements.requiredArea))
-			return false;
-
-		return true;
+		return ContextMenu.Instance.SelectedTile.areas.Find(area => area.type == requirements.requiredArea)
+				&& ContextMenu.Instance.SelectedTile.areas.Where(area => area.type == TileArea.Type.Building)
+					.ToList().Find(area => area.buildingsBuilt.Contains(code)) == null;
 	}
 
 	public bool SufficientResources()

@@ -185,5 +185,6 @@ MonoBehaviour:
     - resource: 0
       amount: 25
     requiredArea: 3
+  code: 2
   resourceToExtract: 2
   extractAmount: 2

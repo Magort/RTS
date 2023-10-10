@@ -95,6 +95,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c4085a7df6e735e489e492cd41a7f0a4, type: 2}
+    - target: {fileID: -2571118854743697038, guid: dd4f6ab0023626c4fb7411da87c61d60, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9faaa1547d36d6f438d7d1130630b638, type: 2}
     - target: {fileID: 919132149155446097, guid: dd4f6ab0023626c4fb7411da87c61d60, type: 3}
       propertyPath: m_Name
       value: Gold

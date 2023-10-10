@@ -32,13 +32,13 @@ public class MapGenerator : MonoBehaviour
 			if (i != size)
 			{
 				var tile = Instantiate(tilePrefab, startingPoint - new Vector3(xOffsetFull, 0, 0) * (size - i), Quaternion.identity, transform).GetComponent<Tile>();
-				tile.InitializeTile(new Vector2(i, size));
+				tile.InitializeTile(new Vector3Int(i, size, (i + size) * -1));
 				TileGrid.AddTile(tile);
 			}
 			else
 			{
 				TileGrid.AddTile(mainTile);
-				mainTile.coordinates = new Vector2(size, size);
+				mainTile.coordinates = new Vector3Int(size, size, size * -2);
 			}
 		}
 
@@ -51,7 +51,7 @@ public class MapGenerator : MonoBehaviour
             {
 				var tile = Instantiate(tilePrefab, newStartingPoint + new Vector3(xOffsetFull, 0, 0) * j, Quaternion.identity, transform)
 					.GetComponent<Tile>();
-				tile.InitializeTile(new Vector2(j, size + i));
+				tile.InitializeTile(new Vector3Int(j, size + i, (j + size + i) * -1));
 				TileGrid.AddTile(tile);
 			}
 		}
@@ -65,7 +65,7 @@ public class MapGenerator : MonoBehaviour
 			{
 				var tile = Instantiate(tilePrefab, newStartingPoint + new Vector3(xOffsetFull, 0, 0) * j, Quaternion.identity, transform)
 					.GetComponent<Tile>();
-				tile.InitializeTile(new Vector2(i + j, size - i));
+				tile.InitializeTile(new Vector3Int(i + j, size - i, (i + j + size - i) * -1));
 				TileGrid.AddTile(tile);
 			}
 		}

@@ -4,14 +4,14 @@ using UnityEngine;
 public static class TileGrid
 {
 	public static List<Tile> Tiles = new();
-	public static List<Vector2> NeighbouringCoordinates = new()
+	public static List<Vector3Int> NeighbouringCoordinates = new()
 	{
-		new Vector2(-1, 0),
-		new Vector2(0, -1),
-		new Vector2(1, -1),
-		new Vector2(1, 0),
-		new Vector2(0, 1),
-		new Vector2(-1, 1)
+		new Vector3Int(-1, 0, 1),
+		new Vector3Int(0, -1, 1),
+		new Vector3Int(1, -1, 0),
+		new Vector3Int(1, 0, -1),
+		new Vector3Int(0, 1, -1),
+		new Vector3Int(-1, 1, 0)
 	};
 
 	public static void AddTile(Tile tile)
@@ -35,7 +35,7 @@ public static class TileGrid
 	{
 		List<Tile> neighbouringTiles = new();
 
-		foreach(Vector2 coords in NeighbouringCoordinates)
+		foreach(Vector3Int coords in NeighbouringCoordinates)
 		{
 			var potentialTile = Tiles.Find(nTile => nTile.coordinates == tile.coordinates + coords);
 

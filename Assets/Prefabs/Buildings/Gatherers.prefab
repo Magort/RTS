@@ -164,6 +164,7 @@ MonoBehaviour:
     - resource: 0
       amount: 15
     requiredArea: 2
+  code: 1
   resourceToExtract: 1
   extractAmount: 3
 --- !u!4 &2560181093747634071 stripped

@@ -46,7 +46,7 @@ public class BuildingHandler : MonoBehaviour
             return false;
 
         Build(building);
-        ExtractResources(building);
+        SubstractResources(building);
         return true;
     }
 
@@ -54,13 +54,14 @@ public class BuildingHandler : MonoBehaviour
     {
         var freeArea = ContextMenu.Instance.SelectedTile.areas.Find(area => area.type == TileArea.Type.Empty);
         freeArea.type = TileArea.Type.Building;
+        freeArea.buildingsBuilt.Add(building.code);
         Instantiate(building.gameObject, freeArea.buildingSlot.transform.position, Quaternion.identity, freeArea.buildingSlot.transform)
-            .GetComponent<Building>().builtOn = ContextMenu.Instance.SelectedTile;
+            .GetComponent<Building>().OnBuildingComplete(ContextMenu.Instance.SelectedTile, freeArea);
 
-        ContextMenu.Instance.SelectedTile.ChangeAffiliation(Affiliation.Player);
+		ContextMenu.Instance.SelectedTile.ChangeAffiliation(Affiliation.Player);
 	}
 
-    void ExtractResources(Building building)
+    void SubstractResources(Building building)
     {
         foreach(var requirement in building.requirements.resourceRequirements)
         {

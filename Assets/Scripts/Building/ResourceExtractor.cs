@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class ResourceExtractor : Building
@@ -16,6 +15,10 @@ public class ResourceExtractor : Building
 	};
 
 	private WaitForSeconds extractionPeriod = new(5);
+
+	public override void SpecialOnBuild(Tile tile, TileArea area)
+	{
+	}
 
 	private void Start()
 	{

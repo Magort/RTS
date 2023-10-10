@@ -1,17 +1,16 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Tile : MonoBehaviour, IPointerClickHandler
+public class Tile : MonoBehaviour, IPointerUpHandler
 {
     [Header("Data")]
     public bool discovered;
     public bool neighbour;
     public List<MapUnit> units;
     public Affiliation affiliation;
-    public Vector2 coordinates;
+    public Vector3Int coordinates;
 	[Header("Light")]
     public Light lighting;
     public float maxIntensity;
@@ -20,8 +19,13 @@ public class Tile : MonoBehaviour, IPointerClickHandler
     public Animator containerAnimator;
 	public List<TileArea> areas;
     public Dictionary<TileArea.Type, GameObject> typeToDecoration = new();
+    public TileUnitSpot unitSpot;
+    public List<UnitRecruiter> unitRecruiters;
 
-    public void InitializeTile(Vector2 coordinates)
+    //Navigation
+    public int g, h, F;
+
+    public void InitializeTile(Vector3Int coordinates)
     {
         this.coordinates = coordinates;
 		RollAreas();
@@ -69,6 +73,35 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         {
             area.HideDecorations();
         }
+	}
+
+    public void AddUnit(MapUnit unit)
+    {
+        units.Add(unit);
+        unit.currentTile = this;
+
+        if(units.Count == 1)
+        {
+            unitSpot.ShowUnitModel(unit.affiliation);
+        }
+
+        ContextMenu.Instance.tileInfoPanel.PopulatePanel(true);
+    }
+
+    public void RemoveUnit(MapUnit unit)
+    {
+        units.Remove(unit);
+
+		if (units.Count == 0)
+		{
+			unitSpot.HideUnitModel();
+		}
+        else
+        {
+            unitSpot.ShowUnitModel(unit.affiliation);
+        }
+
+		ContextMenu.Instance.tileInfoPanel.PopulatePanel(true);
 	}
 
     public void ChangeAffiliation(Affiliation affiliation)
@@ -129,19 +162,25 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         ShowDecorations();
 	}
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerUp(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Right)
-            return;
-
-        if(!neighbour)
-        {
+		if (!neighbour)
+		{
 			ContextMenu.Instance.CloseAll();
 			return;
-        }
+		}
 
-        ContextMenu.Instance.SelectedTile = this;
+		if (eventData.button == PointerEventData.InputButton.Right)
+		{
+			if (!discovered)
+				return;
 
+			UnitMovementHandler.Instance.TryMove(this);
+			return;
+		}
+
+		ContextMenu.Instance.SelectedTile = this;
 		ContextMenu.Instance.ShowTileInfo(discovered, affiliation);
+		UnitMovementHandler.Instance.Deselect();
 	}
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public static class TileGrid
 {
+	public static int Size;
 	public static List<Tile> Tiles = new();
 	public static List<Vector3Int> NeighbouringCoordinates = new()
 	{

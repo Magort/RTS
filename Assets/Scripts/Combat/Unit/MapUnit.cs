@@ -10,6 +10,30 @@ public class MapUnit
     public Tile currentTile;
     public List<Tile> path = new();
 
+    public int GetSpeedSum()
+    {
+		int sum = 0;
+
+		foreach (Unit unit in units)
+		{
+			sum += unit.speed;
+		}
+
+		return sum;
+	}
+
+    public int GetHealthSum()
+    {
+		int sum = 0;
+
+		foreach (Unit unit in units)
+		{
+			sum += unit.health;
+		}
+
+		return sum;
+	}
+
     public void SetCustomName(string newName)
     {
         customName = newName;

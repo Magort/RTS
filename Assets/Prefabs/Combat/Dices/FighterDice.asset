@@ -16,24 +16,36 @@ MonoBehaviour:
   - subActions:
     - value: 3
       target: 1
-      effect: 2
+      effect: 1
+      quantity: 0
+    name: Slash
   - subActions:
-    - value: 3
+    - value: 4
       target: 1
-      effect: 2
+      effect: 1
+      quantity: 0
+    name: Slash
   - subActions:
-    - value: 5
+    - value: 4
       target: 1
-      effect: 2
+      effect: 1
+      quantity: 1
+    name: Broad Swing
   - subActions:
-    - value: 5
+    - value: 1
       target: 1
-      effect: 2
+      effect: 1
+      quantity: 1
+    name: Broad Swing
   - subActions:
-    - value: 5
+    - value: 2
       target: 1
-      effect: 2
+      effect: 1
+      quantity: 0
+    name: Pommel Strike
   - subActions:
-    - value: 9
-      target: 0
-      effect: 0
+    - value: 8
+      target: 1
+      effect: 1
+      quantity: 0
+    name: Crushing Blow

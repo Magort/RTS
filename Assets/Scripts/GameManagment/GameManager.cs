@@ -6,10 +6,10 @@ public class GameManager : MonoBehaviour
 {
 	public int productionInterval = 5;
 	public List<Building.Requirements.ResourceRequirement> startingResources;
+   
     void Start()
     {
         GrantStartingResources();
-        StartCoroutine(ResourceProduction());
     }
 
     void GrantStartingResources()
@@ -20,19 +20,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    IEnumerator ResourceProduction()
+    public static void SwitchPauseState(bool state)
     {
-        var waiter = new WaitForSeconds(productionInterval);
-
-        while(true)
+        if(state)
         {
-            yield return waiter;
-
-            foreach(var resource in GameState.ResourcesGrowth)
-            {
-				GameState.AddResource(resource.Key, resource.Value);
-			}
+            Time.timeScale = 0;
         }
-    }
+        else
+        {
+            Time.timeScale = 1;
+        }    
+    }    
 
 }

@@ -16,27 +16,34 @@ MonoBehaviour:
   - subActions:
     - value: 2
       target: 1
-      effect: 2
+      effect: 1
+      quantity: 0
   - subActions:
     - value: 2
       target: 1
-      effect: 2
+      effect: 1
+      quantity: 0
   - subActions:
     - value: 2
       target: 1
-      effect: 2
+      effect: 1
+      quantity: 0
   - subActions:
     - value: 3
       target: 1
-      effect: 2
+      effect: 1
+      quantity: 0
   - subActions:
     - value: 4
       target: 1
-      effect: 0
+      effect: 1
+      quantity: 0
   - subActions:
     - value: 5
       target: 1
-      effect: 2
+      effect: 1
+      quantity: 0
     - value: 1
       target: 1
-      effect: 5
+      effect: 6
+      quantity: 0

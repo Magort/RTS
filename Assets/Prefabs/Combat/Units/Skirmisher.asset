@@ -20,5 +20,6 @@ MonoBehaviour:
     amount: 1
   health: 30
   speed: 15
-  dice: {fileID: 0}
+  dice: {fileID: 11400000, guid: a68eeeb771fd23b4bb47fb6c6b12102d, type: 2}
+  unitName: Skirmisher
   icon: {fileID: 0}

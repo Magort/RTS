@@ -1,10 +1,12 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ScoutingHandler : MonoBehaviour
 {
-    public int scoutingTime;
-    WaitForSeconds waiter = new(1);
+    public float defaultScoutingTime;
+    public string scoutingText;
+    WaitForSeconds waiter = new(0.1f);
 
     private void Start()
     {
@@ -20,16 +22,28 @@ public class ScoutingHandler : MonoBehaviour
         }
     }
 
+    public float ScoutingTime()
+    {
+        var selectedTileCoords = ContextMenu.Instance.SelectedTile.coordinates;
+        var mainTileCoords = new Vector3Int(TileGrid.Size, TileGrid.Size, TileGrid.Size * -2);
+        return defaultScoutingTime * Mathf.Max(Mathf.Abs(selectedTileCoords.x - mainTileCoords.x),
+                         Mathf.Abs(selectedTileCoords.y - mainTileCoords.y),
+                         Mathf.Abs(selectedTileCoords.z - mainTileCoords.z));
+    }
+
     IEnumerator StartScouting(Tile scoutedTile)
     {
         GameState.ScoutsAvailable--;
+        float scoutingTime = defaultScoutingTime + (ScoutingTime() / 3);
 
-        //Show update bar
-        float timer = 0;
+		ProgressBarManager.Instance.GetProgressBar().ShowProgress(scoutedTile.transform, scoutingTime, scoutingText);
+        scoutedTile.beingScouted = true;
+
+		float timer = 0;
         while(timer < scoutingTime)
         {
             yield return waiter;
-            timer++;
+            timer += 0.1f;
         }
 
         scoutedTile.Reveal();

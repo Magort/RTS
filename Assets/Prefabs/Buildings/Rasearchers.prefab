@@ -77,6 +77,7 @@ MonoBehaviour:
   _name: Researchers' Camp
   description: Our scholars will study the nearby Relic, which should grant us better
     understanding of the Magic taht surrounds us.
+  buildingTime: 10
   builtOn: {fileID: 0}
   requirements:
     resourceRequirements:
@@ -87,4 +88,4 @@ MonoBehaviour:
     requiredArea: 4
   code: 3
   resourceToExtract: 3
-  extractAmount: 2
+  extractSpeed: 8

@@ -6,6 +6,7 @@ public abstract class Building : MonoBehaviour
 {
     public string _name;
     [TextArea] public string description;
+	public int buildingTime;
     public Tile builtOn;
 	public Requirements requirements;
 	public Code code;

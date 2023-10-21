@@ -10,10 +10,20 @@ public class Unit : ScriptableObject
     public int health;
     public int speed;
     public Dice dice;
+    [Header("Identification")]
+    public string unitName;
     public Sprite icon;
 
-    public CombatAction RollAction()
+    public (CombatAction, CombatAction) RollActions()
     {
-        return dice.actions[Random.Range(0, 6)];
+        var tempActions = dice.CloneActions();
+
+        var action1 = tempActions[Random.Range(0, 6)];
+
+        tempActions.Remove(action1);
+
+        var action2 = tempActions[Random.Range(0, 5)];
+
+        return (action1, action2);
     }
 }

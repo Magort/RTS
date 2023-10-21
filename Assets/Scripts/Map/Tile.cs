@@ -8,6 +8,7 @@ public class Tile : MonoBehaviour, IPointerUpHandler
     [Header("Data")]
     public bool discovered;
     public bool neighbour;
+    public bool beingScouted;
     public List<MapUnit> units;
     public Affiliation affiliation;
     public Vector3Int coordinates;
@@ -86,10 +87,13 @@ public class Tile : MonoBehaviour, IPointerUpHandler
         }
 
         ContextMenu.Instance.tileInfoPanel.PopulatePanel(true);
+
+        CombatHandler.CheckForCombat(this);
     }
 
     public void RemoveUnit(MapUnit unit)
     {
+        Debug.Log("removed");
         units.Remove(unit);
 
 		if (units.Count == 0)
@@ -152,6 +156,7 @@ public class Tile : MonoBehaviour, IPointerUpHandler
         }
 
 		discovered = true;
+        beingScouted = false;
 
 		foreach (Tile tile in TileGrid.GetNeighbouringTiles(this))
 		{
@@ -176,6 +181,12 @@ public class Tile : MonoBehaviour, IPointerUpHandler
 				return;
 
 			UnitMovementHandler.Instance.TryMove(this);
+			return;
+		}
+
+        if (beingScouted)
+		{
+			ContextMenu.Instance.CloseAll();
 			return;
 		}
 

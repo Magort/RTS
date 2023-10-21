@@ -10,7 +10,7 @@ public static class GameState
 		{Resource.Essence, 0 }
 	};
 
-	public static Dictionary<Resource, int> ResourcesGrowth = new()
+	public static Dictionary<Resource, float> ResourcesGrowth = new()
 	{
 		{Resource.Wood, 0 },
 		{Resource.Food, 0 },
@@ -25,7 +25,7 @@ public static class GameState
 		Resources[resource] += amount;
 		ResourcesPanel.Instance.UpdateDisplay();
 	}
-	public static void AddResourceGrowth(Resource resource, int amount)
+	public static void AddResourceGrowth(Resource resource, float amount)
 	{
 		ResourcesGrowth[resource] += amount;
 		ResourcesPanel.Instance.UpdateDisplay();

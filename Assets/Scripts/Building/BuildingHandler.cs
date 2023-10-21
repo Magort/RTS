@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class BuildingHandler : MonoBehaviour
 {
     public static BuildingHandler Instance;
     public List<BuildingSlot> buildingSlots;
+    public string buildingText;
 
     private void Start()
     {
@@ -54,14 +56,24 @@ public class BuildingHandler : MonoBehaviour
     {
         var freeArea = ContextMenu.Instance.SelectedTile.areas.Find(area => area.type == TileArea.Type.Empty);
         freeArea.type = TileArea.Type.Building;
-        freeArea.buildingsBuilt.Add(building.code);
-        Instantiate(building.gameObject, freeArea.buildingSlot.transform.position, Quaternion.identity, freeArea.buildingSlot.transform)
-            .GetComponent<Building>().OnBuildingComplete(ContextMenu.Instance.SelectedTile, freeArea);
 
-		ContextMenu.Instance.SelectedTile.ChangeAffiliation(Affiliation.Player);
+        StartCoroutine(DelayBuild(building, freeArea, ContextMenu.Instance.SelectedTile));
+		freeArea.buildingsBuilt.Add(building.code);
 	}
 
-    void SubstractResources(Building building)
+    IEnumerator DelayBuild(Building building, TileArea tileArea, Tile tile)
+    {
+        ProgressBarManager.Instance.GetProgressBar().ShowProgress(tileArea.buildingSlot.transform, building.buildingTime, buildingText);
+
+        yield return new WaitForSeconds(building.buildingTime);
+
+		Instantiate(building.gameObject, tileArea.buildingSlot.transform.position, Quaternion.identity, tileArea.buildingSlot.transform)
+	        .GetComponent<Building>().OnBuildingComplete(tile, tileArea);
+
+		tile.ChangeAffiliation(Affiliation.Player);
+	}
+
+	void SubstractResources(Building building)
     {
         foreach(var requirement in building.requirements.resourceRequirements)
         {

@@ -150,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: 
   description: 
+  buildingTime: 10
   builtOn: {fileID: 0}
   requirements:
     resourceRequirements:

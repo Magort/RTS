@@ -179,6 +179,7 @@ MonoBehaviour:
   _name: Mine
   description: A core building that allows us to expand our Kingdom by extracting
     Gold.
+  buildingTime: 7
   builtOn: {fileID: 0}
   requirements:
     resourceRequirements:
@@ -187,4 +188,4 @@ MonoBehaviour:
     requiredArea: 3
   code: 2
   resourceToExtract: 2
-  extractAmount: 2
+  extractSpeed: 5

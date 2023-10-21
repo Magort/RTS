@@ -20,6 +20,9 @@ public class UnitMovementHandler : MonoBehaviour
 
 	public void SelectUnit(MapUnit unit)
 	{
+		if (unit.affiliation != Affiliation.Player)
+			return;
+
 		selectedUnits.Add(unit);
 		ShowPath(unit.path);
 	}

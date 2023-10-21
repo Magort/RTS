@@ -21,6 +21,7 @@ public class MapGenerator : MonoBehaviour
 	private void Start()
     {
         GenerateMap(debugSize);
+		TileGrid.Size = debugSize;
     }
 
     void GenerateMap(int size)

@@ -5,7 +5,6 @@ using UnityEngine;
 public abstract class Building : MonoBehaviour
 {
     public string _name;
-    [TextArea] public string description;
 	public int buildingTime;
     public Tile builtOn;
 	public Requirements requirements;
@@ -17,6 +16,7 @@ public abstract class Building : MonoBehaviour
 		SpecialOnBuild(tile, area);
 	}
 	public abstract void SpecialOnBuild(Tile tile, TileArea area);
+	public abstract string Description();
 	public enum Code
 	{
 		Woodcutters,
@@ -24,6 +24,18 @@ public abstract class Building : MonoBehaviour
 		Mine,
 		Researchers,
 		Fighters
+	}
+
+	public string RequirementsToString()
+	{
+		string requirementsString = "<b>Building Cost:\n</b>";
+
+		foreach(Requirements.ResourceRequirement requirement in requirements.resourceRequirements)
+		{
+			requirementsString += "<sprite=" + IconIDs.resourceToIconID[requirement.resource] + "> " + requirement.amount + " ";
+		}
+
+		return requirementsString;
 	}
 
 	public bool ValidPlacement()
@@ -45,10 +57,10 @@ public abstract class Building : MonoBehaviour
 	}
 
 	[System.Serializable]
-	public struct Requirements
+	public class Requirements
 	{
 		[System.Serializable]
-		public struct ResourceRequirement
+		public class ResourceRequirement
 		{
 			public Resource resource;
 			public int amount;

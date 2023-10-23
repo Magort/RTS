@@ -1,7 +1,8 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UnitSlot : MonoBehaviour
+public class UnitSlot : MonoBehaviour,IPointerEnterHandler, IPointerExitHandler
 {
     public UnitRecruiter unitRecruiter;
 
@@ -22,4 +23,14 @@ public class UnitSlot : MonoBehaviour
         unitRecruiter.Recruit();
 		ContextMenu.Instance.tileInfoPanel.PopulatePresentMapUnits();
 	}
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        HoverPanel.instance.PopulateHoverPanel(gameObject, unitRecruiter.unit.unitName, unitRecruiter.unit.Description());
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        HoverPanel.instance.DepopulateHoverPanel();
+    }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class TileGrid
@@ -30,6 +31,11 @@ public static class TileGrid
 		}
 
 		return count;
+	}
+	public static bool IsNextToPlyerKingdom(Tile tile)
+	{
+		return TileGrid.GetNeighbouringTiles(tile)
+			.Where(tile => tile.affiliation == Affiliation.Player).ToList().Count == 0;
 	}
 
 	public static List<Tile> GetNeighbouringTiles(Tile tile)

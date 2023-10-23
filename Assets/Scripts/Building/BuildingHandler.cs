@@ -7,6 +7,7 @@ public class BuildingHandler : MonoBehaviour
     public static BuildingHandler Instance;
     public List<BuildingSlot> buildingSlots;
     public string buildingText;
+    public GameObject panel;
 
     private void Start()
     {
@@ -15,7 +16,11 @@ public class BuildingHandler : MonoBehaviour
 
     public void PopulateBuildingsList(bool discovered)
     {
-		gameObject.SetActive(discovered);
+        if (TileGrid.IsNextToPlyerKingdom(ContextMenu.Instance.SelectedTile)
+            && ContextMenu.Instance.SelectedTile.affiliation != Affiliation.Player)
+            return;
+
+		panel.SetActive(discovered);
 
 		ClearBuildingsList();
 

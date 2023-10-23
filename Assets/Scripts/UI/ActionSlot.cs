@@ -44,6 +44,9 @@ public class ActionSlot : MonoBehaviour
 		CombatHandler.ExecuteAction(combatActions[index], affiliation, transform.GetSiblingIndex());
 		CombatPanel.Instance.ShowAnimations(combatActions[index]);
 		DisablePairActions(index);
+
+		FloatingTextManager.Instance
+			.Show(combatActions[index].name, Color.white, actionButtons[index].transform.position, new Vector3(0, 50, 0), 0.75f);
 	}
 
 	void DisablePairActions(int index)

@@ -148,8 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72ff3462449cfdc4a83f6ca34364a4b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: 
-  description: 
+  _name: Figthers' Camp
   buildingTime: 10
   builtOn: {fileID: 0}
   requirements:

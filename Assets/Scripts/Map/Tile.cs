@@ -93,7 +93,6 @@ public class Tile : MonoBehaviour, IPointerUpHandler
 
     public void RemoveUnit(MapUnit unit)
     {
-        Debug.Log("removed");
         units.Remove(unit);
 
 		if (units.Count == 0)

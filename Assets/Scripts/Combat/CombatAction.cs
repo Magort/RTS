@@ -17,7 +17,7 @@ public class CombatAction
 
     public CombatAction CloneAction()
     {
-        return new CombatAction() { subActions = CloneSubActions() };
+        return new CombatAction() { subActions = CloneSubActions(), name = name };
     }
 
     List<SubAction> CloneSubActions()

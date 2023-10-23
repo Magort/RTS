@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1a8d0ab86a34fc648b6e631604371c72
+guid: 089adf13cc933de419b7da6655260394
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -68,7 +68,7 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -117,11 +117,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Atlas_0
+      name: Icons_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 32
+        y: 112
         width: 16
         height: 16
       alignment: 0
@@ -131,18 +131,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ee6f807c9cbe4bf449e5aba3ec2dadfa
-      internalID: -150177835
+      spriteID: 63a32337683c73840a9ae29878ee4494
+      internalID: 1614056863
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_1
+      name: Icons_1
       rect:
         serializedVersion: 2
         x: 16
-        y: 32
+        y: 112
         width: 16
         height: 16
       alignment: 0
@@ -152,18 +152,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d59b5601b0a1a644ace0eb8e12b55e3
-      internalID: 1628778603
+      spriteID: 43ca9a90c464b024e85f593514dbc7fa
+      internalID: 586098127
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_2
+      name: Icons_2
       rect:
         serializedVersion: 2
         x: 32
-        y: 32
+        y: 112
         width: 16
         height: 16
       alignment: 0
@@ -173,18 +173,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd8e13b7a5ff49840864d993d2762722
-      internalID: -1078308960
+      spriteID: da221a9834734124b8772ce470219a6e
+      internalID: 1471553266
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_3
+      name: Icons_3
       rect:
         serializedVersion: 2
         x: 48
-        y: 32
+        y: 112
         width: 16
         height: 16
       alignment: 0
@@ -194,18 +194,102 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8407a8f2c6eb754398ec13bf2d1d56b
-      internalID: 1274770584
+      spriteID: b6b78330f7c196f4193fc275dc24885e
+      internalID: 212540800
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_4
+      name: Icons_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9443025181146314ea133ea32fb08a68
+      internalID: 1068235849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_5
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 742d4fc800d2cad4d89390656bddba4e
+      internalID: -1962615908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_6
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b164c6a6687c6844682829c97e1b030a
+      internalID: -1798532416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_7
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a43a2e36798dd74a8c7263e0fa83e8e
+      internalID: -838655139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_8
       rect:
         serializedVersion: 2
         x: 0
-        y: 16
+        y: 96
         width: 16
         height: 16
       alignment: 0
@@ -215,18 +299,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8dd24f98b2c38a84eb4513a7c3cc8253
-      internalID: 1093852402
+      spriteID: ba72e15c7da340f49ade36937c86e721
+      internalID: -1490718150
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_5
+      name: Icons_9
       rect:
         serializedVersion: 2
         x: 16
-        y: 16
+        y: 96
         width: 16
         height: 16
       alignment: 0
@@ -236,18 +320,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30b8d8066f7aa754baae5b1b919a98e7
-      internalID: 325872610
+      spriteID: 42e141e96e33a154996c5c5a4429e36b
+      internalID: -2069459917
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_6
+      name: Icons_10
       rect:
         serializedVersion: 2
         x: 32
-        y: 16
+        y: 96
         width: 16
         height: 16
       alignment: 0
@@ -257,18 +341,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 14bfccb9d3c979d488be7ec8fcc889c1
-      internalID: 2023046267
+      spriteID: e34ea94e7fef3a647bc21fc9960f928e
+      internalID: -1419699765
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_7
+      name: Icons_11
       rect:
         serializedVersion: 2
         x: 48
-        y: 16
+        y: 96
         width: 16
         height: 16
       alignment: 0
@@ -278,18 +362,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 635f5ede610a4b44b9a02a8131f45277
-      internalID: 824769247
+      spriteID: 0c476b5dc8ca94640aaa1b447c83b774
+      internalID: 1794609291
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_8
+      name: Icons_12
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 64
+        y: 96
         width: 16
         height: 16
       alignment: 0
@@ -299,18 +383,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 355723841151ef740bf2b87d6cf2c7da
-      internalID: 864675200
+      spriteID: afae2d6a73ee0e54bbe9d91dec92f83a
+      internalID: -1921924228
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Atlas_9
+      name: Icons_13
       rect:
         serializedVersion: 2
-        x: 16
-        y: 0
+        x: 80
+        y: 96
         width: 16
         height: 16
       alignment: 0
@@ -320,8 +404,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 33302b7e0d08fc44a8470c852790a06c
-      internalID: 2129109295
+      spriteID: a7645cba490aa4846bfbe9e16402fa51
+      internalID: 1278898622
       vertices: []
       indices: 
       edges: []
@@ -329,7 +413,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 3bf2ea5981839a44e89187fa801d76d2
     internalID: 0
     vertices: []
     indices: 
@@ -337,16 +421,20 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Atlas_6: 2023046267
-      Atlas_8: 864675200
-      Atlas_3: 1274770584
-      Atlas_2: -1078308960
-      Atlas_5: 325872610
-      Atlas_1: 1628778603
-      Atlas_7: 824769247
-      Atlas_0: -150177835
-      Atlas_9: 2129109295
-      Atlas_4: 1093852402
+      Icons_5: -1962615908
+      Icons_11: 1794609291
+      Icons_10: -1419699765
+      Icons_13: 1278898622
+      Icons_1: 586098127
+      Icons_8: -1490718150
+      Icons_12: -1921924228
+      Icons_4: 1068235849
+      Icons_6: -1798532416
+      Icons_3: 212540800
+      Icons_2: 1471553266
+      Icons_9: -2069459917
+      Icons_7: -838655139
+      Icons_0: 1614056863
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

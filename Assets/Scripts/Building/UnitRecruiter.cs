@@ -75,4 +75,9 @@ public class UnitRecruiter : Building
 
 		return true;
 	}
+
+    public override string Description()
+    {
+        return "Allows to recruit <i>" + unit.name + "</i> on this tile.";
+    }
 }

@@ -16,6 +16,13 @@ public class ResourceExtractor : Building
 
 	private WaitForSeconds extractionPeriod;
 
+	public override string Description()
+	{
+		return "Extracts 1<sprite="
+			+ IconIDs.resourceToIconID[resourceToExtract]
+			+ "> from the tile every <b>" + extractSpeed + "</b> seconds.";
+	}
+
 	public override void SpecialOnBuild(Tile tile, TileArea area)
 	{
 	}

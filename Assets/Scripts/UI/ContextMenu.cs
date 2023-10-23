@@ -37,7 +37,7 @@ public class ContextMenu : MonoBehaviour
     {
 		scoutingPanel.gameObject.SetActive(false);
 		tileInfoPanel.gameObject.SetActive(false);
-        buildingPanel.gameObject.SetActive(false);
+        buildingPanel.panel.SetActive(false);
         unitRecruitmentPanel.gameObject.SetActive(false);
 	}
 }

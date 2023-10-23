@@ -119,10 +119,10 @@ public static class CombatHandler
         presentMapUnits.OrderByDescending(army => army.units.Count).ThenByDescending(army => army.GetSpeedSum());
 
         playerArmy = new();
-        playerArmy.InitializeArmy(GetNextArmy(Affiliation.Player));
+        playerArmy.InitializeArmy(GetNextMapUnit(Affiliation.Player));
 
         opponentArmy = new();
-        opponentArmy.InitializeArmy(GetNextArmy(Affiliation.Enemy));
+        opponentArmy.InitializeArmy(GetNextMapUnit(Affiliation.Enemy));
 
 		CombatPanel.Instance.PopulatePanel();
 	}
@@ -141,7 +141,11 @@ public static class CombatHandler
     public static void EndRound()
     {
         CombatPanel.Instance.SwitchRollButton(true);
-    }
+        if(CheckForArmyDeath(playerArmy))
+        {
+			HandleArmyDeath(Affiliation.Player);
+		}
+	}
 
     static void HandlePlayerTurn()
     {
@@ -194,13 +198,25 @@ public static class CombatHandler
 
     static void HandleArmyDeath(Affiliation affiliation)
     {
-        var newArmy = GetNextArmy(affiliation);
+        var newUnit = GetNextMapUnit(affiliation);
 
-        if (newArmy == null)
+        if (newUnit == null)
+        {
             EndCombat();
+            return;
+        }
 
-
-    }
+        if(affiliation == Affiliation.Player)
+        {
+            playerArmy.InitializeArmy(newUnit);
+            HandlePlayerTurn();
+        }
+        else
+        {
+			opponentArmy.InitializeArmy(newUnit);
+            HandleEnemyTurn();
+		}
+	}
 
     static void EndCombat()
     {
@@ -216,7 +232,7 @@ public static class CombatHandler
 		GameManager.SwitchPauseState(false);
 	}
 
-	static MapUnit GetNextArmy(Affiliation affiliation)
+	static MapUnit GetNextMapUnit(Affiliation affiliation)
     {
 		MapUnit unit = null;
 

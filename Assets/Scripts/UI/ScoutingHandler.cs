@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ScoutingHandler : MonoBehaviour
 {
+    public TextMeshProUGUI button;
+
     public float defaultScoutingTime;
     public string scoutingText;
     WaitForSeconds waiter = new(0.1f);
@@ -11,6 +14,11 @@ public class ScoutingHandler : MonoBehaviour
     private void Start()
     {
         gameObject.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        button.text = "Scout\n(" + GameState.ScoutsAvailable + "/" + GameState.MaxScouts + ")";
     }
 
     public void TryScout()

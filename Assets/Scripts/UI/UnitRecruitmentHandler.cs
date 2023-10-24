@@ -7,6 +7,9 @@ public class UnitRecruitmentHandler : MonoBehaviour
 
     public void PopulateUnitSlots()
     {
+        if (ContextMenu.Instance.SelectedTile == null)
+            return;
+
         ClearSlots();
         gameObject.SetActive(true);
 

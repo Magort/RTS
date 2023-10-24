@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
-	public int productionInterval = 5;
 	public List<Building.Requirements.ResourceRequirement> startingResources;
    
     void Start()

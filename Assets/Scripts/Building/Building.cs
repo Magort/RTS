@@ -9,6 +9,7 @@ public abstract class Building : MonoBehaviour
     public Tile builtOn;
 	public Requirements requirements;
 	public Code code;
+	public bool isUpgrade;
 
 	public void OnBuildingComplete(Tile tile, TileArea area)
 	{
@@ -23,7 +24,10 @@ public abstract class Building : MonoBehaviour
 		Gatherers,
 		Mine,
 		Researchers,
-		Fighters
+		Fighters,
+		MainBase,
+		MainBase2,
+		MainBase3
 	}
 
 	public string RequirementsToString()
@@ -35,14 +39,24 @@ public abstract class Building : MonoBehaviour
 			requirementsString += "<sprite=" + IconIDs.resourceToIconID[requirement.resource] + "> " + requirement.amount + " ";
 		}
 
+		if(isUpgrade)
+		{
+			requirementsString += "\n<b>Upgrade of</b>: " + requirements.requiredBuilding.ToString();  
+		}
+
 		return requirementsString;
 	}
 
 	public bool ValidPlacement()
 	{
+		if (isUpgrade)
+			return ContextMenu.Instance.SelectedTile.areas
+				.Where(area => area.type == TileArea.Type.Building).ToList()
+				.Find(area => area.building == requirements.requiredBuilding) != null;
+
 		return ContextMenu.Instance.SelectedTile.areas.Find(area => area.type == requirements.requiredArea)
 				&& ContextMenu.Instance.SelectedTile.areas.Where(area => area.type == TileArea.Type.Building)
-					.ToList().Find(area => area.buildingsBuilt.Contains(code)) == null;
+					.ToList().Find(area => area.building == code) == null;
 	}
 
 	public bool SufficientResources()
@@ -67,5 +81,6 @@ public abstract class Building : MonoBehaviour
 		}
 		public List<ResourceRequirement> resourceRequirements;
 		public TileArea.Type requiredArea;
+		public Code requiredBuilding;
 	}
 }

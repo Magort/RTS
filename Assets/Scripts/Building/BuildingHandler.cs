@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using System.Linq;
 
 public class BuildingHandler : MonoBehaviour
 {
@@ -18,7 +19,10 @@ public class BuildingHandler : MonoBehaviour
     {
         if (TileGrid.IsNextToPlyerKingdom(ContextMenu.Instance.SelectedTile)
             && ContextMenu.Instance.SelectedTile.affiliation != Affiliation.Player)
+        { 
+            panel.SetActive(false);
             return;
+        }
 
 		panel.SetActive(discovered);
 
@@ -34,6 +38,11 @@ public class BuildingHandler : MonoBehaviour
                 slot.gameObject.SetActive(true);
             }
         }
+    }
+
+    public void SwitchBuildingLock(Building.Code building, bool state)
+    {
+        buildingSlots.Find(slot => slot.building.code == building).unlocked = state;
     }
 
     public void ClearBuildingsList()
@@ -52,10 +61,24 @@ public class BuildingHandler : MonoBehaviour
         if (ContextMenu.Instance.SelectedTile.affiliation == Affiliation.Enemy)
             return false;
 
-        Build(building);
+        if(building.isUpgrade)
+            Upgrade(building);
+        else
+            Build(building);
+
         SubstractResources(building);
         return true;
     }
+
+    void Upgrade(Building building)
+    {
+		var currentBuildingArea = ContextMenu.Instance.SelectedTile.areas
+            .Where(area => area.type == TileArea.Type.Building).ToList()
+            .Find(area => area.building == building.requirements.requiredBuilding);
+
+		currentBuildingArea.building = building.code;
+		StartCoroutine(DelayUpgrade(building, currentBuildingArea, ContextMenu.Instance.SelectedTile));
+	}
 
     void Build(Building building)
     {
@@ -63,10 +86,25 @@ public class BuildingHandler : MonoBehaviour
         freeArea.type = TileArea.Type.Building;
 
         StartCoroutine(DelayBuild(building, freeArea, ContextMenu.Instance.SelectedTile));
-		freeArea.buildingsBuilt.Add(building.code);
+		freeArea.building = building.code;
 	}
 
-    IEnumerator DelayBuild(Building building, TileArea tileArea, Tile tile)
+	IEnumerator DelayUpgrade(Building building, TileArea tileArea, Tile tile)
+	{
+		ProgressBarManager.Instance.GetProgressBar().ShowProgress(tileArea.buildingSlot.transform, building.buildingTime, buildingText);
+
+		yield return new WaitForSeconds(building.buildingTime);
+
+        tileArea.RemoveBuilding();
+
+		Instantiate(building.gameObject, tileArea.buildingSlot.transform.position, Quaternion.identity, tileArea.buildingSlot.transform)
+			.GetComponent<Building>().OnBuildingComplete(tile, tileArea);
+
+		tile.ChangeAffiliation(Affiliation.Player);
+        tileArea.type = TileArea.Type.Building;
+	}
+
+	IEnumerator DelayBuild(Building building, TileArea tileArea, Tile tile)
     {
         ProgressBarManager.Instance.GetProgressBar().ShowProgress(tileArea.buildingSlot.transform, building.buildingTime, buildingText);
 

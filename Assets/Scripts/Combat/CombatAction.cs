@@ -60,6 +60,8 @@ public class CombatAction
         Freeze,
         Haste,
         Disarm,
-        Block
+        Block,
+        Shatter,
+        Wound
     }
 }

@@ -11,7 +11,9 @@ public static class IconIDs
 		{ CombatAction.Effect.Burn, 10 },
 		{ CombatAction.Effect.Disarm, 11 },
 		{ CombatAction.Effect.Haste, 12 },
-		{ CombatAction.Effect.Freeze, 13 }
+		{ CombatAction.Effect.Freeze, 13 },
+		{ CombatAction.Effect.Wound, 14 },
+		{ CombatAction.Effect.Shatter, 15 }
 	};
 
 	public static Dictionary<CombatAction.Quantity, int> quantityToIconID = new()
@@ -25,6 +27,6 @@ public static class IconIDs
 		{ Resource.Wood, 0 },
 		{ Resource.Food, 1 },
 		{ Resource.Gold, 8 },
-		{ Resource.Essence, 14 }
+		{ Resource.Essence, 9 }
 	};
 }

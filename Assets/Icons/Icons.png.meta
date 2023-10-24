@@ -410,6 +410,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Icons_14
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df6c34fbab5a9ad4a87eda1bfe04dfee
+      internalID: 286681670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_15
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e2c9aa205fb3dd46be85d9230c4f0e9
+      internalID: 1698119308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -422,12 +464,14 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Icons_5: -1962615908
+      Icons_14: 286681670
       Icons_11: 1794609291
       Icons_10: -1419699765
       Icons_13: 1278898622
       Icons_1: 586098127
       Icons_8: -1490718150
       Icons_12: -1921924228
+      Icons_15: 1698119308
       Icons_4: 1068235849
       Icons_6: -1798532416
       Icons_3: 212540800

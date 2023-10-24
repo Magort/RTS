@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -19,6 +20,7 @@ public static class CombatHandler
         public int health;
         public int speed;
         public int block;
+        public int wounds;
 
         public List<CombatStatus> statuses;
         public MapUnit mapUnit;
@@ -34,6 +36,7 @@ public static class CombatHandler
             health = mapUnit.GetHealthSum();
             speed = mapUnit.GetSpeedSum();
             block = 0;
+            wounds = 0;
             statuses = new List<CombatStatus>();
             frozen = new List<int>();
             disarmed = new List<int>();
@@ -48,11 +51,12 @@ public static class CombatHandler
 		}
         public void TakeDamage(int value)
         {
-            health -= Mathf.Max(0, value - block);
+            health -= Mathf.Max(0, value - block + wounds);
         }
         public void HealHealth(int value)
         {
             health += value;
+            ChangeWounds(-value);
         }
         public void AddCombatStatus(CombatStatus status, int amount)
         {
@@ -68,11 +72,15 @@ public static class CombatHandler
 				statuses.Remove(status);
 			}
         }
-        public void ChangeBlock(int amount)
+        public void ChangeBlock(int value)
         {
-            block += amount;
-            block = Mathf.Min(block, 5);
+            block += value;
+            block = Mathf.Clamp(block, 0, 5);
         }
+        public void ChangeWounds(int value)
+        {
+			wounds = Mathf.Max(0, wounds + value);
+		}
         public int GetStatusAmount(CombatStatus status)
         {
             int amount = 0;
@@ -377,8 +385,11 @@ public static class CombatHandler
             switch(subAction.effect)
             {
                 case Effect.Damage:
-                    if(!OtherArmy(target).disarmed.Contains(unitID))
-                        target.TakeDamage(subAction.value * multiplier);
+                    if (!OtherArmy(target).disarmed.Contains(unitID))
+                    {
+                        for(int i = 0; i < multiplier; i++)
+                            target.TakeDamage(subAction.value);
+                    }
                     break;
 				case Effect.Heal:
 					target.HealHealth(subAction.value * multiplier);
@@ -400,6 +411,12 @@ public static class CombatHandler
 					break;
 				case Effect.Haste:
 					target.AddCombatStatus(CombatStatus.Haste, subAction.value * multiplier);
+					break;
+				case Effect.Shatter:
+					target.ChangeBlock(subAction.value * multiplier);
+					break;
+				case Effect.Wound:
+					target.ChangeWounds(subAction.value * multiplier);
 					break;
 			}
         }

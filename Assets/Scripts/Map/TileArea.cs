@@ -25,7 +25,7 @@ public class TileArea : MonoBehaviour
 
 	public Type type;
     public int resourceAmount = 0;
-    public List<Building.Code> buildingsBuilt = new();
+    public Building.Code building;
 
 	public GameObject woodDecorations;
 	public GameObject foodDecorations;
@@ -52,6 +52,12 @@ public class TileArea : MonoBehaviour
     {
 		HideDecorations();
 		type = Type.Empty;
+    }
+
+    public void RemoveBuilding()
+    {
+        Destroy(buildingSlot.transform.GetChild(0).gameObject);
+        type = Type.Empty;
     }
 
     public void ShowDecorations()

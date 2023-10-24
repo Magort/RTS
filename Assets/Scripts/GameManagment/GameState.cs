@@ -18,7 +18,14 @@ public static class GameState
 		{Resource.Essence, 0 }
 	};
 
-	public static int ScoutsAvailable = 2;
+	public static int MaxScouts = 0;
+	public static int ScoutsAvailable = 0;
+
+	public static void AddScouts(int amount)
+	{
+		MaxScouts += amount;
+		ScoutsAvailable += amount;
+	}
 
 	public static void AddResource(Resource resource, int amount)
 	{

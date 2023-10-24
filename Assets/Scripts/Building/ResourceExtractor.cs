@@ -14,6 +14,8 @@ public class ResourceExtractor : Building
 		{Resource.Essence, TileArea.Type.EssenceSource }
 	};
 
+	TileArea currentTarget = null;
+
 	private WaitForSeconds extractionPeriod;
 
 	public override string Description()
@@ -40,16 +42,23 @@ public class ResourceExtractor : Building
 		{
 			yield return extractionPeriod;
 
-			var target = builtOn.areas.Find(area => area.type == resourceToArea[resourceToExtract]);
+			if(currentTarget == null)
+				currentTarget = builtOn.areas.Find(area => area.type == resourceToArea[resourceToExtract]);
 
-			if(target != null)
+			if(currentTarget != null)
 			{
-				target.resourceAmount--;
+				currentTarget.resourceAmount--;
 				GameState.AddResource(resourceToExtract, 1);
+				if(currentTarget.resourceAmount <= 0)
+				{
+					currentTarget.DepleteResources();
+					currentTarget = null;
+				}
 			}
 			else
 			{
-				GameState.AddResourceGrowth(resourceToExtract, 1 / extractSpeed);
+				GameState.AddResourceGrowth(resourceToExtract, -1 / extractSpeed);
+				builtOn.areas.Find(area => area.building == code).RemoveBuilding();
 				yield break;
 			}
 		}

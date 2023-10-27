@@ -10,58 +10,62 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f7ad3c37f7602a46879781f8cd1b208, type: 3}
-  m_Name: FighterDice
+  m_Name: WolfDice
   m_EditorClassIdentifier: 
   actions:
   - subActions:
-    - value: 9
-      target: 1
-      effect: 1
-      quantity: 0
-    name: Slash
-  - subActions:
-    - value: 6
-      target: 1
-      effect: 1
-      quantity: 0
-    - value: 2
-      target: 1
-      effect: 9
-      quantity: 0
-    name: Stab
-  - subActions:
-    - value: 5
-      target: 1
-      effect: 1
-      quantity: 1
-    name: Broad Swing
-  - subActions:
-    - value: 5
+    - value: 10
       target: 1
       effect: 1
       quantity: 0
     - value: 1
       target: 1
-      effect: 7
+      effect: 9
       quantity: 0
-    name: Counter Strike
+    name: Bite
   - subActions:
-    - value: 6
+    - value: 10
       target: 1
       effect: 1
       quantity: 0
+    - value: 1
+      target: 1
+      effect: 9
+      quantity: 0
+    name: Bite
+  - subActions:
+    - value: 5
+      target: 1
+      effect: 9
+      quantity: 0
+    - value: 3
+      target: 1
+      effect: 9
+      quantity: 0
+    name: Scratch
+  - subActions:
     - value: 1
       target: 1
       effect: 6
       quantity: 0
-    name: Pommel Strike
+    name: Fearsome Howl
   - subActions:
-    - value: 12
-      target: 1
+    - value: 3
+      target: 0
+      effect: 0
+      quantity: 1
+    - value: 1
+      target: 0
+      effect: 7
+      quantity: 0
+    name: Pack's Call
+  - subActions:
+    - value: 4
+      target: 0
       effect: 1
-      quantity: 0
-    - value: 2
-      target: 1
-      effect: 8
-      quantity: 0
-    name: Crushing Blow
+      quantity: 1
+    - value: 1
+      target: 0
+      effect: 9
+      quantity: 1
+    name: Ravage

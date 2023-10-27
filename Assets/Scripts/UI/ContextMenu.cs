@@ -39,14 +39,14 @@ public class ContextMenu : MonoBehaviour
     {
         tileInfoPanel.PopulatePanel(discovered);
 
-        scoutingPanel.gameObject.SetActive(!discovered);
+        scoutingPanel.PopulateScoutingButton(!discovered);
 
         if(affiliation == Affiliation.Player && SelectedTile.unitRecruiters.Count > 0)
             unitRecruitmentPanel.PopulateUnitSlots();
         else
 			unitRecruitmentPanel.ClearSlots();
 
-		if (affiliation != Affiliation.Enemy)
+		if (affiliation != Affiliation.Enemy && SelectedTile.units.Find(unit => unit.affiliation != Affiliation.Player) == null)
         {
 			buildingPanel.PopulateBuildingsList(discovered);
 		}

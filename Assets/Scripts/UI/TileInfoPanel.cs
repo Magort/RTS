@@ -18,13 +18,13 @@ public class TileInfoPanel : MonoBehaviour
     {
         gameObject.SetActive(true);
 
-		PopulatePresentMapUnits();
-
 		if (!discovered)
         {
             infoText.text = notDiscoveredText;
             return;
         }
+
+		PopulatePresentMapUnits();
 
 		infoText.text = TileInformation();
     }

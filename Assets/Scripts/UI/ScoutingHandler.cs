@@ -16,10 +16,11 @@ public class ScoutingHandler : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void OnEnable()
+    public void PopulateScoutingButton(bool state)
     {
-        button.text = "Scout\n(" + GameState.ScoutsAvailable + "/" + GameState.MaxScouts + ")";
-    }
+        gameObject.SetActive(state);
+		button.text = "Scout\n(" + GameState.ScoutsAvailable + "/" + GameState.MaxScouts + ")";
+	}
 
     public void TryScout()
     {

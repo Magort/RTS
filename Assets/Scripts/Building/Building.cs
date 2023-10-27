@@ -27,7 +27,9 @@ public abstract class Building : MonoBehaviour
 		Fighters,
 		MainBase,
 		MainBase2,
-		MainBase3
+		MainBase3,
+		Druids,
+		Skirmishers
 	}
 
 	public string RequirementsToString()

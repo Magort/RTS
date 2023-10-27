@@ -140,6 +140,8 @@ public static class CombatHandler
 		playerArmy.NewRoundReset();
 		opponentArmy.NewRoundReset();
 
+        CombatPanel.Instance.UpdateStats();
+
         actionsMade = 0;
         maxPlayerActions = 0;
 

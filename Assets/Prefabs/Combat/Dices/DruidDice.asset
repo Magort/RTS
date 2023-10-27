@@ -10,58 +10,42 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f7ad3c37f7602a46879781f8cd1b208, type: 3}
-  m_Name: FighterDice
+  m_Name: DruidDice
   m_EditorClassIdentifier: 
   actions:
   - subActions:
-    - value: 9
-      target: 1
-      effect: 1
+    - value: 5
+      target: 0
+      effect: 0
       quantity: 0
-    name: Slash
+    name: Healing Touch
   - subActions:
-    - value: 6
-      target: 1
-      effect: 1
+    - value: 5
+      target: 0
+      effect: 0
       quantity: 0
-    - value: 2
-      target: 1
-      effect: 9
-      quantity: 0
-    name: Stab
+    name: Healing Touch
   - subActions:
     - value: 5
       target: 1
       effect: 1
+      quantity: 0
+    name: Staff Slam
+  - subActions:
+    - value: 5
+      target: 1
+      effect: 1
+      quantity: 0
+    name: Staff Slam
+  - subActions:
+    - value: 2
+      target: 0
+      effect: 0
       quantity: 1
-    name: Broad Swing
+    name: Healing Word
   - subActions:
-    - value: 5
+    - value: 4
       target: 1
-      effect: 1
+      effect: 2
       quantity: 0
-    - value: 1
-      target: 1
-      effect: 7
-      quantity: 0
-    name: Counter Strike
-  - subActions:
-    - value: 6
-      target: 1
-      effect: 1
-      quantity: 0
-    - value: 1
-      target: 1
-      effect: 6
-      quantity: 0
-    name: Pommel Strike
-  - subActions:
-    - value: 12
-      target: 1
-      effect: 1
-      quantity: 0
-    - value: 2
-      target: 1
-      effect: 8
-      quantity: 0
-    name: Crushing Blow
+    name: Poisonous Herbs

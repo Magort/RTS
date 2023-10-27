@@ -5,13 +5,16 @@ using UnityEngine;
 public class MapGenerator : MonoBehaviour
 {
 	public Tile mainTile;
+	public int debugSize;
 	[Header("Prefabs")]
     public GameObject tilePrefab;
 	public Tile startingFoodTile;
 	public Tile startingWoodTile;
 	public Tile startingGoldTile;
+	public List<MapUnit> neutralMapUnits = new();
+	[Header("Hostilities")]
+	public int neutralsDensity;
 
-	public int debugSize;
 
 	float xOffsetFull = 1.73f;
 	float zOffsetFull = 1.5f;
@@ -22,6 +25,7 @@ public class MapGenerator : MonoBehaviour
     {
         GenerateMap(debugSize);
 		TileGrid.Size = debugSize;
+		GenerateNeutralUnits();
     }
 
     void GenerateMap(int size)
@@ -93,6 +97,31 @@ public class MapGenerator : MonoBehaviour
 		potentialTiles.Remove(goldTile);
 
 		TileGrid.Tiles.Find(tile => tile == goldTile).TransformIntoTile(startingGoldTile);
+	}
+
+	void GenerateNeutralUnits()
+	{
+		List<Tile> availableTiles = TileGrid.Tiles.Except(TileGrid.GetNeighbouringTiles(mainTile)).ToList();
+		availableTiles.Remove(mainTile);
+
+		var neutralsToSpawn = neutralsDensity * TileGrid.Size;
+
+		for(int i = 0; i < neutralsToSpawn; i++)
+		{
+			Tile selectedTile = availableTiles[Random.Range(0, availableTiles.Count)];
+
+			selectedTile.MapGenerationAddUnit(GetNeutralUnit(
+				Mathf.Max(Mathf.Abs(selectedTile.coordinates.x - TileGrid.Size),
+				Mathf.Abs(selectedTile.coordinates.y - TileGrid.Size))));
+
+			availableTiles.Remove(selectedTile);
+		}
+	}	
+
+	MapUnit GetNeutralUnit(int highestCoordinate)
+	{
+		int index = Mathf.FloorToInt(highestCoordinate / 3);
+		return neutralMapUnits[index];
 	}
 
 	void EnableNeighbouringTiles()

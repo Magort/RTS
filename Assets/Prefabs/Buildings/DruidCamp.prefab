@@ -1,11 +1,11 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &7289459445041794882
+--- !u!1001 &2588317183340966716
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1368814866884788336}
+    m_TransformParent: {fileID: 1041237695565479589}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 10e636ee6c26669439444c5f9b9172a8, type: 3}
       propertyPath: m_RootOrder
@@ -29,15 +29,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 10e636ee6c26669439444c5f9b9172a8, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 10e636ee6c26669439444c5f9b9172a8, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 10e636ee6c26669439444c5f9b9172a8, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 10e636ee6c26669439444c5f9b9172a8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -61,15 +61,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: bbd2c3d29ef903a419a67f245da3fdb4, type: 2}
     - target: {fileID: 919132149155446097, guid: 10e636ee6c26669439444c5f9b9172a8, type: 3}
       propertyPath: m_Name
-      value: FightersCamp
+      value: DruidCamp
       objectReference: {fileID: 0}
     - target: {fileID: 6317578925029434746, guid: 10e636ee6c26669439444c5f9b9172a8, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: bbd2c3d29ef903a419a67f245da3fdb4, type: 2}
+      objectReference: {fileID: 2100000, guid: 710cce87fa449044f81da7c656bfca39, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10e636ee6c26669439444c5f9b9172a8, type: 3}
---- !u!1001 &7669201419614045314
+--- !u!1001 &8566484184147196503
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -78,7 +78,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6600612917193744094, guid: 3c09760cbd46f0f4c9a4dd2a714e9103, type: 3}
       propertyPath: m_Name
-      value: FighterCamp
+      value: DruidCamp
       objectReference: {fileID: 0}
     - target: {fileID: 6763905371243049497, guid: 3c09760cbd46f0f4c9a4dd2a714e9103, type: 3}
       propertyPath: m_RootOrder
@@ -126,30 +126,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c09760cbd46f0f4c9a4dd2a714e9103, type: 3}
---- !u!4 &1368814866884788336 stripped
+--- !u!4 &1041237695565479589 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8687861292292457714, guid: 3c09760cbd46f0f4c9a4dd2a714e9103, type: 3}
-  m_PrefabInstance: {fileID: 7669201419614045314}
+  m_PrefabInstance: {fileID: 8566484184147196503}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &3599621251174521436 stripped
+--- !u!1 &3276462739155346569 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6600612917193744094, guid: 3c09760cbd46f0f4c9a4dd2a714e9103, type: 3}
-  m_PrefabInstance: {fileID: 7669201419614045314}
+  m_PrefabInstance: {fileID: 8566484184147196503}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7323688721538099713
+--- !u!114 &7655332901979392170
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3599621251174521436}
+  m_GameObject: {fileID: 3276462739155346569}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72ff3462449cfdc4a83f6ca34364a4b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: Figthers' Camp
-  buildingTime: 1
+  _name: Druid Camp
+  buildingTime: 10
   builtOn: {fileID: 0}
   requirements:
     resourceRequirements:
@@ -157,6 +157,6 @@ MonoBehaviour:
       amount: 25
     requiredArea: 0
     requiredBuilding: 0
-  code: 4
+  code: 8
   isUpgrade: 0
-  unit: {fileID: 11400000, guid: c995d61035b6ffc4380ebbfa4304aab1, type: 2}
+  unit: {fileID: 11400000, guid: 3ab72ba5e25d2154c85ef7c3dbbfcab4, type: 2}

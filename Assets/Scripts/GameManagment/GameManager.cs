@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         GrantStartingResources();
+        GameState.AddScouts(2);
     }
 
     void GrantStartingResources()

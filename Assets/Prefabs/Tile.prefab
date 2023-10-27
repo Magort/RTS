@@ -50,9 +50,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   discovered: 0
   neighbour: 0
+  beingScouted: 0
   units: []
   affiliation: 0
-  coordinates: {x: 0, y: 0}
+  coordinates: {x: 0, y: 0, z: 0}
   lighting: {fileID: 3273440224093584141}
   maxIntensity: 5
   container: {fileID: 2510267300210715041}
@@ -66,6 +67,9 @@ MonoBehaviour:
   - {fileID: 4557752062718946204}
   unitSpot: {fileID: 9128213937241333654}
   unitRecruiters: []
+  g: 0
+  h: 0
+  F: 0
 --- !u!114 &-147644687413921155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,8 +334,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6166321684579938550}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.15, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.14999962, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children:

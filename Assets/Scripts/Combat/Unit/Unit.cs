@@ -31,7 +31,7 @@ public class Unit : ScriptableObject
 
     public string Description()
     {
-        string description = "<b>Health</b>: " + health + "\t<b>Speed</b>: " + speed + "\n<b>Actions</b>: ";
+        string description = "<b>Health</b>: " + health + "\t<b>Speed</b>: " + speed + "\n<b>Actions</b>: | ";
 
         foreach(var action in dice.actions)
         {
@@ -41,7 +41,7 @@ public class Unit : ScriptableObject
                     + "<sprite=" + IconIDs.effectToIconID[subAction.effect] + ">"
 					+ "<sprite=" + IconIDs.quantityToIconID[subAction.quantity] + ">";
             }
-            description += " ";
+            description += " | ";
         }
 
         description += "\n<b>Recruit Cost:</b>";

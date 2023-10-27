@@ -76,6 +76,13 @@ public class Tile : MonoBehaviour, IPointerUpHandler
         }
 	}
 
+    public void MapGenerationAddUnit(MapUnit unit)
+    {
+		units.Add(unit);
+
+		unit.currentTile = this;
+	}
+
     public void AddUnit(MapUnit unit)
     {
         units.Add(unit);
@@ -164,6 +171,10 @@ public class Tile : MonoBehaviour, IPointerUpHandler
 		}
 
         ShowDecorations();
+        if(units.Count > 0)
+        {
+            unitSpot.ShowUnitModel(units[0].affiliation);
+        }    
 	}
 
     public void OnPointerUp(PointerEventData eventData)

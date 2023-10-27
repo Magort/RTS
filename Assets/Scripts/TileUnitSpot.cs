@@ -13,7 +13,7 @@ public class TileUnitSpot : MonoBehaviour
 
     Dictionary<Affiliation, Material> affiliationToMaterial;
 
-    private void Start()
+    private void Awake()
     {
         affiliationToMaterial = new()
         {

@@ -20,6 +20,7 @@ public class UnitSlot : MonoBehaviour,IPointerEnterHandler, IPointerExitHandler
         if (!unitRecruiter.CanAfford())
             return;
 
+        AudioManager.Instance.Play(Sound.Name.Click);
         unitRecruiter.Recruit();
 		ContextMenu.Instance.tileInfoPanel.PopulatePresentMapUnits();
 	}

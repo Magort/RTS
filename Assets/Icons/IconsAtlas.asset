@@ -135,6 +135,18 @@ MonoBehaviour:
     m_Scale: 1
     m_Name: Icons_15
     m_HashCode: 1979596483
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 16
+    m_Scale: 1
+    m_Name: Icons_16
+    m_HashCode: 1979596480
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 17
+    m_Scale: 1
+    m_Name: Icons_17
+    m_HashCode: 1979596481
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:
@@ -376,6 +388,36 @@ MonoBehaviour:
     m_Scale: 1
     m_AtlasIndex: 0
     sprite: {fileID: 1698119308, guid: 089adf13cc933de419b7da6655260394, type: 3}
+  - m_Index: 16
+    m_Metrics:
+      m_Width: 16
+      m_Height: 16
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 16
+      m_HorizontalAdvance: 16
+    m_GlyphRect:
+      m_X: 0
+      m_Y: 80
+      m_Width: 16
+      m_Height: 16
+    m_Scale: 1
+    m_AtlasIndex: 0
+    sprite: {fileID: -409093720, guid: 089adf13cc933de419b7da6655260394, type: 3}
+  - m_Index: 17
+    m_Metrics:
+      m_Width: 16
+      m_Height: 16
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 16
+      m_HorizontalAdvance: 16
+    m_GlyphRect:
+      m_X: 16
+      m_Y: 80
+      m_Width: 16
+      m_Height: 16
+    m_Scale: 1
+    m_AtlasIndex: 0
+    sprite: {fileID: 1182417018, guid: 089adf13cc933de419b7da6655260394, type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []
 --- !u!21 &3625896320467360182

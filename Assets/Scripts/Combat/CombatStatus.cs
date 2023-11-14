@@ -5,5 +5,6 @@ public enum CombatStatus
 	Burn,
 	Poison,
 	Haste,
-	Wound
+	Wound,
+	Block
 }

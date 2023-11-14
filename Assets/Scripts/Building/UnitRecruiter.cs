@@ -3,7 +3,7 @@ using UnityEngine;
 public class UnitRecruiter : Building
 {
     public Unit unit;
-
+    public static int armyNumber = 1;
 	public override void SpecialOnBuild(Tile tile, TileArea area)
     {
         tile.unitRecruiters.Add(this);
@@ -42,6 +42,7 @@ public class UnitRecruiter : Building
         }
 
         mapUnitWithFreeSlots = new();
+        mapUnitWithFreeSlots.SetCustomName("Army" + armyNumber++);
         mapUnitWithFreeSlots.affiliation = builtOn.affiliation;
 
 		mapUnitWithFreeSlots.AddToArmy(unit);
@@ -61,7 +62,7 @@ public class UnitRecruiter : Building
     {
 		foreach (var requirement in unit.upkeepCost)
 		{
-			GameState.AddResourceGrowth(requirement.resource, -requirement.amount);
+            UnitUpkeepHandler.Instance.AddUpkeep(requirement.amount, requirement.resource);
 		}
 	}
 

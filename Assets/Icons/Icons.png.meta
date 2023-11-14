@@ -452,6 +452,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Icons_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2823d0b8fc46e1a4ea4b95cbb5f4980c
+      internalID: -409093720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_17
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 80
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1251d4ca87d212047bc48bbe452616b7
+      internalID: 1182417018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -470,6 +512,7 @@ TextureImporter:
       Icons_13: 1278898622
       Icons_1: 586098127
       Icons_8: -1490718150
+      Icons_17: 1182417018
       Icons_12: -1921924228
       Icons_15: 1698119308
       Icons_4: 1068235849
@@ -479,6 +522,7 @@ TextureImporter:
       Icons_9: -2069459917
       Icons_7: -838655139
       Icons_0: 1614056863
+      Icons_16: -409093720
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

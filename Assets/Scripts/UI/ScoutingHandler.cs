@@ -24,7 +24,9 @@ public class ScoutingHandler : MonoBehaviour
 
     public void TryScout()
     {
-        if (GameState.ScoutsAvailable > 0)
+		AudioManager.Instance.Play(Sound.Name.Click);
+
+		if (GameState.ScoutsAvailable > 0)
         {
             ContextMenu.Instance.StartCoroutine(StartScouting(ContextMenu.Instance.SelectedTile));
             ContextMenu.Instance.CloseAll();

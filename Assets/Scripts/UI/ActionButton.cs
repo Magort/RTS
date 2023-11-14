@@ -14,7 +14,7 @@ public class ActionButton : MonoBehaviour
 		{
 			actionText.text += subAction.value
 							+ "<sprite=" + IconIDs.effectToIconID[subAction.effect] + "> "
-							+ "<sprite=" + IconIDs.quantityToIconID[subAction.quantity] + "> ";
+							+ "<sprite=" + IconIDs.quantityToIconID[(subAction.quantity, subAction.target)] + ">\n";
 		}
 
 		if (affiliation != Affiliation.Player)

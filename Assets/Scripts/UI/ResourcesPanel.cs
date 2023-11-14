@@ -20,19 +20,19 @@ public class ResourcesPanel : MonoBehaviour
     {
         foodText.text = GameState.Resources[Resource.Food].ToString()
 			+ " "
-			+ GetGrowthText(GameState.ResourcesGrowth[Resource.Food]);
+			+ GetGrowthText(GameState.ResourcesGrowth[Resource.Food] * 10);
 
 		woodText.text = GameState.Resources[Resource.Wood].ToString()
 			+ " "
-			+ GetGrowthText(GameState.ResourcesGrowth[Resource.Wood]);
+			+ GetGrowthText(GameState.ResourcesGrowth[Resource.Wood] * 10);
 
 		goldText.text = GameState.Resources[Resource.Gold].ToString()
 			+ " "
-			+ GetGrowthText(GameState.ResourcesGrowth[Resource.Gold]);
+			+ GetGrowthText(GameState.ResourcesGrowth[Resource.Gold] * 10);
 
 		essenceText.text = GameState.Resources[Resource.Essence].ToString()
 			+ " "
-			+ GetGrowthText(GameState.ResourcesGrowth[Resource.Essence]);
+			+ GetGrowthText(GameState.ResourcesGrowth[Resource.Essence] * 10);
 	}
 
 	string GetGrowthText(float value)

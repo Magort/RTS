@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recruitCost:
   - resource: 1
-    amount: 25
+    amount: 20
+  - resource: 2
+    amount: 2
   upkeepCost:
   - resource: 1
-    amount: 1
+    amount: 0.25
   health: 30
   speed: 15
   dice: {fileID: 11400000, guid: a68eeeb771fd23b4bb47fb6c6b12102d, type: 2}

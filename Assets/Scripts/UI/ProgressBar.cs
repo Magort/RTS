@@ -16,13 +16,24 @@ public class ProgressBar : MonoBehaviour
 		if (!target)
 			return;
 
-		transform.position = Camera.main.WorldToScreenPoint(target.position);
+		UpdatePosition();
 		
 		timer += Time.deltaTime;
-		progressBar.fillAmount = timer / duration;
+
+		UpdateFill();
 
 		if (timer >= duration)
 			ClearBar();
+	}
+
+	void UpdatePosition()
+	{
+		transform.position = Camera.main.WorldToScreenPoint(target.position);
+	}
+
+	void UpdateFill()
+	{
+		progressBar.fillAmount = timer / duration;
 	}
 
 	public void ShowProgress(Transform target, float time, string text)
@@ -30,6 +41,8 @@ public class ProgressBar : MonoBehaviour
 		duration = time;
 		this.target = target;
 		textBar.text = text;
+		UpdatePosition();
+		UpdateFill();
 		gameObject.SetActive(true);
 	}
 

@@ -8,6 +8,7 @@ public class TileInfoPanel : MonoBehaviour
     [TextArea] public string notDiscoveredText;
 
 	public List<MapUnitSlot> mapUnitSlots;
+    public MapUnitWindow mapUnitWindow;
 
 	void Start()
     {
@@ -16,12 +17,16 @@ public class TileInfoPanel : MonoBehaviour
     
     public void PopulatePanel(bool discovered)
     {
-        gameObject.SetActive(true);
+        if (ContextMenu.Instance.SelectedTile == null)
+            return;
+
+		DepopulatePresentMapUnits();
+		gameObject.SetActive(true);
 
 		if (!discovered)
         {
             infoText.text = notDiscoveredText;
-            return;
+			return;
         }
 
 		PopulatePresentMapUnits();
@@ -31,13 +36,20 @@ public class TileInfoPanel : MonoBehaviour
 
 	public void PopulatePresentMapUnits()
 	{
-		foreach(MapUnitSlot mapUnitSlot in mapUnitSlots)
-        {
-            mapUnitSlot.DepopulateSlot();
-        }
+        if (ContextMenu.Instance.SelectedTile == null)
+            return;
+
 		for (int i = 0; i < ContextMenu.Instance.SelectedTile.units.Count; i++)
 		{
             mapUnitSlots[i].PopulateSlot(ContextMenu.Instance.SelectedTile.units[i]);
+		}
+	}
+
+    void DepopulatePresentMapUnits()
+    {
+		foreach (MapUnitSlot mapUnitSlot in mapUnitSlots)
+		{
+			mapUnitSlot.DepopulateSlot();
 		}
 	}
 
@@ -78,7 +90,7 @@ public class TileInfoPanel : MonoBehaviour
         {
             if(addedResource.Value > 0)
             {
-                info += addedResource.Key + ": " + addedResource.Value + "\n";
+                info += "<sprite=" + IconIDs.resourceToIconID[addedResource.Key] + ">: " + addedResource.Value + "\n";
             }
         }
 
@@ -89,4 +101,22 @@ public class TileInfoPanel : MonoBehaviour
 
         return info;
     }
+
+    public void SelectAllUnits()
+    {
+        foreach(var slot in mapUnitSlots)
+        {
+            if(slot.gameObject.activeSelf)
+                slot.OnClick();
+        }
+
+        AudioManager.Instance.Play(Sound.Name.Click);
+    }
+
+    public void ShowMapUnitWindow()
+    {
+        mapUnitWindow.PopulateWindow();
+
+		AudioManager.Instance.Play(Sound.Name.Click);
+	}
 }

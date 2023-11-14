@@ -17,7 +17,7 @@ MonoBehaviour:
     amount: 25
   upkeepCost:
   - resource: 1
-    amount: 1
+    amount: 0.25
   health: 50
   speed: 5
   dice: {fileID: 11400000, guid: fb784d3d85c908e40a7710377ca93f58, type: 2}

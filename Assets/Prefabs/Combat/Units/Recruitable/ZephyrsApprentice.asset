@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12012b7fa8da7f042b615c60e083b737, type: 3}
+  m_Name: ZephyrsApprentice
+  m_EditorClassIdentifier: 
+  recruitCost:
+  - resource: 1
+    amount: 30
+  - resource: 2
+    amount: 25
+  - resource: 3
+    amount: 5
+  upkeepCost:
+  - resource: 1
+    amount: 0.5
+  - resource: 3
+    amount: 0.1
+  health: 75
+  speed: 12
+  dice: {fileID: 11400000, guid: f4f38d92a07aa514aa30e5e2e46678a4, type: 2}
+  unitName: Zephyr's Apprentice
+  icon: {fileID: 21300000, guid: c9eef1ce0b0bec54aa9a4f2898d5f2a5, type: 3}

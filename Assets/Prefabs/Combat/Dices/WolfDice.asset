@@ -36,7 +36,7 @@ MonoBehaviour:
   - subActions:
     - value: 5
       target: 1
-      effect: 9
+      effect: 1
       quantity: 0
     - value: 3
       target: 1
@@ -61,11 +61,11 @@ MonoBehaviour:
     name: Pack's Call
   - subActions:
     - value: 4
-      target: 0
+      target: 1
       effect: 1
       quantity: 1
     - value: 1
-      target: 0
+      target: 1
       effect: 9
       quantity: 1
     name: Ravage

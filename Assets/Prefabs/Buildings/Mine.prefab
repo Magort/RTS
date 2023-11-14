@@ -177,8 +177,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Mine
-  description: A core building that allows us to expand our Kingdom by extracting
-    Gold.
   buildingTime: 7
   builtOn: {fileID: 0}
   requirements:
@@ -186,6 +184,8 @@ MonoBehaviour:
     - resource: 0
       amount: 25
     requiredArea: 3
+    requiredBuilding: 0
   code: 2
+  isUpgrade: 0
   resourceToExtract: 2
-  extractSpeed: 5
+  extractInterval: 4

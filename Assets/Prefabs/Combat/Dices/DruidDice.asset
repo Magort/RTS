@@ -14,23 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actions:
   - subActions:
-    - value: 5
+    - value: 6
       target: 0
       effect: 0
       quantity: 0
     name: Healing Touch
   - subActions:
-    - value: 5
+    - value: 6
       target: 0
       effect: 0
       quantity: 0
     name: Healing Touch
-  - subActions:
-    - value: 5
-      target: 1
-      effect: 1
-      quantity: 0
-    name: Staff Slam
   - subActions:
     - value: 5
       target: 1
@@ -44,7 +38,13 @@ MonoBehaviour:
       quantity: 1
     name: Healing Word
   - subActions:
-    - value: 4
+    - value: 2
+      target: 0
+      effect: 0
+      quantity: 1
+    name: Healing Word
+  - subActions:
+    - value: 6
       target: 1
       effect: 2
       quantity: 0

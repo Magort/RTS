@@ -5,7 +5,7 @@ using UnityEngine;
 [Serializable]
 public class TileArea : MonoBehaviour
 {
-    public static List<int> TypeChances = new() { 70, 82, 94, 98, 100 };
+    public static List<int> TypeChances = new() { 75, 85, 95, 98, 100 };
     public static Dictionary<Type, int> MaxSameType = new()
     {
         {Type.Empty, 6 },
@@ -17,10 +17,16 @@ public class TileArea : MonoBehaviour
     public static Dictionary<Type, int> ResourceStartingAmount = new()
     {
 		{Type.Empty, 0 },
-		{Type.WoodSource, 100 },
-		{Type.FoodSource, 100 },
-		{Type.GoldSource, 40 },
+		{Type.WoodSource, 150 },
+		{Type.FoodSource, 75 },
+		{Type.GoldSource, 25 },
 		{Type.EssenceSource, 10000 }
+	};
+	public static Dictionary<Affiliation, Color> affiliationToColor = new()
+	{
+		{ Affiliation.Player, Color.blue },
+		{ Affiliation.Enemy, Color.red },
+		{ Affiliation.Neutral, Color.green }
 	};
 
 	public Type type;

@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class MainBase : ResourceProducer
 {
@@ -14,9 +12,16 @@ public class MainBase : ResourceProducer
 			   + IconIDs.resourceToIconID[resource] + "> ";
 		}
 
-		description += "every <b>" + productionSpeed + "</b> seconds.";
+		description += "every ";
 
-		description += " Unlocks new buildings.";
+		foreach (var time in productionSpeeds)
+		{
+			description += time + "/";
+		}
+
+		description = description.Remove(description.Length - 1);
+
+		description += " seconds. Unlocks new buildings. Grants one more Scout.";
 
 		return description;
 	}
@@ -29,5 +34,7 @@ public class MainBase : ResourceProducer
 		{
 			BuildingHandler.Instance.SwitchBuildingLock(building, true);
 		}
+
+		GameState.AddScouts(1);
 	}
 }

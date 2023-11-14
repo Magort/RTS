@@ -29,7 +29,13 @@ public abstract class Building : MonoBehaviour
 		MainBase2,
 		MainBase3,
 		Druids,
-		Skirmishers
+		Skirmishers,
+		Archers,
+		Zephyrs,
+		Traders,
+		Farmers,
+		Watchmen,
+		GroveTenders
 	}
 
 	public string RequirementsToString()
@@ -79,7 +85,7 @@ public abstract class Building : MonoBehaviour
 		public class ResourceRequirement
 		{
 			public Resource resource;
-			public int amount;
+			public float amount;
 		}
 		public List<ResourceRequirement> resourceRequirements;
 		public TileArea.Type requiredArea;

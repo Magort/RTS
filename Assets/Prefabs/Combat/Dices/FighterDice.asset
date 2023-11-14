@@ -14,49 +14,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actions:
   - subActions:
-    - value: 9
+    - value: 12
       target: 1
       effect: 1
       quantity: 0
     name: Slash
   - subActions:
-    - value: 6
+    - value: 12
       target: 1
       effect: 1
       quantity: 0
-    - value: 2
-      target: 1
-      effect: 9
-      quantity: 0
-    name: Stab
+    name: Slash
   - subActions:
-    - value: 5
+    - value: 3
       target: 1
       effect: 1
       quantity: 1
     name: Broad Swing
   - subActions:
-    - value: 5
+    - value: 3
+      target: 1
+      effect: 1
+      quantity: 1
+    name: Broad Swing
+  - subActions:
+    - value: 10
       target: 1
       effect: 1
       quantity: 0
-    - value: 1
+    - value: 2
       target: 1
-      effect: 7
+      effect: 8
       quantity: 0
-    name: Counter Strike
+    name: Crushing Blow
   - subActions:
-    - value: 6
-      target: 1
-      effect: 1
-      quantity: 0
-    - value: 1
-      target: 1
-      effect: 6
-      quantity: 0
-    name: Pommel Strike
-  - subActions:
-    - value: 12
+    - value: 10
       target: 1
       effect: 1
       quantity: 0

@@ -38,11 +38,12 @@ public class UnitMovementHandler : MonoBehaviour
 		if (selectedUnits.Count == 0)
 			return;
 
+		AudioManager.Instance.Play(Sound.Name.Click);
 		var path = CreatePath(destinationTile);
 		
 		foreach (var unit in selectedUnits)
 		{ 	
-			unit.path = path;
+			unit.path = path.ToList();
 
 			if (movementDictionary.ContainsKey(unit))
 			{
@@ -70,6 +71,13 @@ public class UnitMovementHandler : MonoBehaviour
 		{
 			yield return waiter;
 
+
+			if (unit.path.Count == 1)
+			{
+				unit.path.RemoveAt(0);
+				break;
+			}
+
 			unit.path[0].RemoveUnit(unit);
 			unit.path[1].AddUnit(unit);
 			unit.path.RemoveAt(0);
@@ -78,7 +86,8 @@ public class UnitMovementHandler : MonoBehaviour
 				ShowPath(unit.path);
 			}
 
-			if(unit.path.Count == 1)
+
+			if (unit.path.Count == 1)
 			{
 				unit.path.RemoveAt(0);
 				break;

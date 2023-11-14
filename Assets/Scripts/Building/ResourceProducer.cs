@@ -5,39 +5,34 @@ using UnityEngine;
 public class ResourceProducer : Building
 {
     public List<Resource> resourcesToProduce;
-    public float productionSpeed;
-
-	private WaitForSeconds productionPeriod;
-
+    public List<float> productionSpeeds;
 	private void Start()
 	{
-		productionPeriod = new(productionSpeed);
-		StartCoroutine(Produce());
-
-		foreach(var resource in resourcesToProduce)
-			GameState.AddResourceGrowth(resource, 1 / productionSpeed);
+		for (int i = 0; i < productionSpeeds.Count; i++)
+		{
+			StartCoroutine(Produce(resourcesToProduce[i], new(productionSpeeds[i])));
+			GameState.AddResourceGrowth(resourcesToProduce[i], 1 / productionSpeeds[i]);
+		}
 	}
 
-	IEnumerator Produce()
+	IEnumerator Produce(Resource resource, WaitForSeconds waiter)
 	{
 		while (true)
 		{
-			yield return productionPeriod;
-			foreach (var resource in resourcesToProduce)	
-				GameState.AddResource(resource, 1);
+			yield return waiter;
+
+			GameState.AddResource(resource, 1);
 		}
 	}
 
 	public override string Description()
     {
-		string description = "Produces ";
-		foreach (var resource in resourcesToProduce)
+		string description = "Produces: ";
+		for (int i = 0; i < productionSpeeds.Count; i++)
 		{
 			description += "1<sprite="
-			   + IconIDs.resourceToIconID[resource] + "> ";
+			   + IconIDs.resourceToIconID[resourcesToProduce[i]] + ">/" + "<b>" + productionSpeeds[i] + "</b>s ";
 		}
-
-		description += "every <b>" + productionSpeed + "</b> seconds.";
 
 		return description;
 	}

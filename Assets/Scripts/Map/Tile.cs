@@ -38,6 +38,8 @@ public class Tile : MonoBehaviour, IPointerUpHandler
             areas[i].type = tile.areas[i].type;
 			areas[i].resourceAmount = tile.areas[i].resourceAmount;
 		}
+        affiliation = tile.affiliation;
+
     }
 
     public void RollAreas()
@@ -119,8 +121,19 @@ public class Tile : MonoBehaviour, IPointerUpHandler
         if(affiliation != this.affiliation)
         {
             this.affiliation = affiliation;
-            if(affiliation == Affiliation.Player)
-                KindgomLine.Instance.AddTileToBorder(this);
+
+            if(affiliation == Affiliation.Neutral)
+            {
+				KindgomLine.Instance.ChangeKingdomLine(this, false);
+				return;
+			}
+
+            KindgomLine.Instance.ChangeKingdomLine(this, true);
+            foreach(var area in areas)
+            {
+                area.lineRenderer.startColor = TileArea.affiliationToColor[affiliation];
+                area.lineRenderer.endColor = TileArea.affiliationToColor[affiliation];
+			}
         }
     }
 
@@ -134,7 +147,7 @@ public class Tile : MonoBehaviour, IPointerUpHandler
         WaitForSeconds waiter = new(0.01f);
 
         container.SetActive(true);
-        containerAnimator.Play("Show");
+        //containerAnimator.Play("Show");
 
 		while (lighting.intensity < maxIntensity/5)
 		{
@@ -187,7 +200,7 @@ public class Tile : MonoBehaviour, IPointerUpHandler
 
 		if (eventData.button == PointerEventData.InputButton.Right)
 		{
-			if (!discovered)
+			if (!discovered || CameraController.Instance.dragged)
 				return;
 
 			UnitMovementHandler.Instance.TryMove(this);
@@ -200,6 +213,7 @@ public class Tile : MonoBehaviour, IPointerUpHandler
 			return;
 		}
 
+		AudioManager.Instance.Play(Sound.Name.Click);
 		ContextMenu.Instance.SelectedTile = this;
 		ContextMenu.Instance.ShowTileInfo(discovered, affiliation);
 		UnitMovementHandler.Instance.Deselect();

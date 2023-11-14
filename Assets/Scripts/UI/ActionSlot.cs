@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +10,8 @@ public class ActionSlot : MonoBehaviour
 
 	[Header("Refs")]
 	public List<ActionButton> actionButtons;
+
+	WaitForSecondsRealtime waiter = new(0.25f);
 
 	public void AssignActions((CombatAction, CombatAction) actions, Affiliation affiliation)
     {
@@ -41,12 +45,24 @@ public class ActionSlot : MonoBehaviour
 
 	public void OnClick(int index)
     {
-		CombatHandler.ExecuteAction(combatActions[index], affiliation, transform.GetSiblingIndex());
+		StartCoroutine(ExecuteSubActions(combatActions[index]));
 		CombatPanel.Instance.ShowAnimations(combatActions[index]);
 		DisablePairActions(index);
 
 		FloatingTextManager.Instance
 			.Show(combatActions[index].name, Color.white, actionButtons[index].transform.position, new Vector3(0, 50, 0), 0.75f);
+	}
+
+	IEnumerator ExecuteSubActions(CombatAction action)
+	{
+		for (int i = 0; i < action.subActions.Count; i++)
+		{
+			CombatHandler.ExecuteSubAction(action.subActions[i], affiliation, transform.GetSiblingIndex());
+			yield return waiter;
+		}
+
+		if (affiliation == Affiliation.Player)
+			CombatHandler.CheckForPlayerTurnEnd();
 	}
 
 	void DisablePairActions(int index)
@@ -72,18 +88,24 @@ public class ActionSlot : MonoBehaviour
 		}
 	}
 
-	public bool HandleEnemyAction()
+	public int HandleEnemyActions()
 	{
-		if (combatActions.Count == 0)
-			return false;
+		StartCoroutine(HandleActions(combatActions.Count));
+		return combatActions.Count;
+	}
 
-		OnClick(Random.Range(0, 2));
+	IEnumerator HandleActions(int amount)
+	{
+		WaitForSecondsRealtime waiter = new(1);
+		int min = 0;
+		int max = 2;
 
-		if (combatActions.Count <= 2)
-			return true;
-
-		OnClick(Random.Range(2, 4));
-
-		return true;
+		for (int i = 0; i < amount / 2; i++)
+		{
+			OnClick(UnityEngine.Random.Range(min, max));
+			min += 2;
+			max += 2;
+			yield return waiter;
+		}
 	}
 }

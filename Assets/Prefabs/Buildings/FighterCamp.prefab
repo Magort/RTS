@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Figthers' Camp
-  buildingTime: 1
+  buildingTime: 10
   builtOn: {fileID: 0}
   requirements:
     resourceRequirements:

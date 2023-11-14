@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 [System.Serializable]
 public class MapUnit
@@ -7,8 +8,8 @@ public class MapUnit
     public List<Unit> units = new();
     public Affiliation affiliation;
     public static float armylimit = 10;
-    public Tile currentTile;
-    public List<Tile> path = new();
+    [HideInInspector] public Tile currentTile;
+	[HideInInspector] public List<Tile> path = new();
 
     public int GetSpeedSum()
     {
@@ -47,5 +48,28 @@ public class MapUnit
     public void AddToArmy(Unit unit)
     {
         units.Add(unit);
+    }
+
+    public void KillUnit(Unit unit)
+    {
+        if (affiliation == Affiliation.Player)
+        {
+			foreach (var requirement in unit.upkeepCost)
+			{
+				UnitUpkeepHandler.Instance.RemoveUpkeep(requirement.amount, requirement.resource);
+			}
+		}
+
+        RemoveFromArmy(unit);
+	}
+
+    public void RemoveFromArmy(Unit unit)
+    {
+        units.Remove(unit);
+
+        if(units.Count == 0)
+        {
+            currentTile.RemoveUnit(this);
+        }    
     }
 }

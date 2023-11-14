@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,12 +17,17 @@ public class CombatPanel : MonoBehaviour
 
 	public TextMeshProUGUI playerHealthText;
 	public TextMeshProUGUI opponentHealthText;
+	public TextMeshProUGUI playerArmiesText;
+	public TextMeshProUGUI opponentArmiesText;
 	public Image playerHealthBar;
 	public Image opponentHealthBar;
 	public List<StatusSlot> playerStatuses;
 	public List<StatusSlot> opponentStatuses;
 
 	public Button rollButton;
+	public GameObject combatStartPrompt;
+	public SpeedPrompt speedPrompt;
+	public CombatEndPrompt combatEndPrompt;
 
 	private void Start()
 	{
@@ -29,10 +35,22 @@ public class CombatPanel : MonoBehaviour
 		gameObject.SetActive(false);
 	}
 
+	public void SwitchCombatStartPromptState(bool state)
+	{
+		combatStartPrompt.SetActive(state);
+	}
+
+	public void ShowCombatEndPrompt(Affiliation looser)
+	{
+		combatEndPrompt.ShowPrompt(looser);
+	}
+
 	public void PopulatePanel()
 	{
 		gameObject.SetActive(true);
+		ClearActions();
 		ShowUnits();
+		SwitchRollButton(true);
 		UpdateStats();
 	}
 
@@ -41,8 +59,9 @@ public class CombatPanel : MonoBehaviour
 		gameObject.SetActive(false);
 	}	
 
-	public void OnClick()
+	public void OnRollButtonClick()
 	{
+		AudioManager.Instance.Play(Sound.Name.Click);
 		CombatHandler.StartNewRound();
 		SwitchRollButton(false);
 	}
@@ -83,6 +102,9 @@ public class CombatPanel : MonoBehaviour
 	{
 		playerHealthText.text = CombatHandler.playerArmy.health.ToString();
 		playerHealthBar.fillAmount = (float)CombatHandler.playerArmy.health / (float)CombatHandler.playerArmy.maxHealth;
+		playerArmiesText.text = CombatHandler.tileFoughtOn.units
+			.Where(unit => unit.affiliation == Affiliation.Player).ToList().Count.ToString()
+			+ "<sprite=" + IconIDs.quantityToIconID[(CombatAction.Quantity.Single, CombatAction.Target.Ally)] + ">";
 		foreach (StatusSlot status in playerStatuses)
 		{
 			status.text.text = CombatHandler.playerArmy.GetStatusAmount(status.status).ToString();
@@ -90,6 +112,9 @@ public class CombatPanel : MonoBehaviour
 
 		opponentHealthText.text = CombatHandler.opponentArmy.health.ToString();
 		opponentHealthBar.fillAmount = (float)CombatHandler.opponentArmy.health / (float)CombatHandler.opponentArmy.maxHealth;
+		opponentArmiesText.text = CombatHandler.tileFoughtOn.units
+			.Where(unit => unit.affiliation != Affiliation.Player).ToList().Count.ToString()
+			+ "<sprite=" + IconIDs.quantityToIconID[(CombatAction.Quantity.Single, CombatAction.Target.Opponent)] + ">";
 		foreach (StatusSlot status in opponentStatuses)
 		{
 			status.text.text = CombatHandler.opponentArmy.GetStatusAmount(status.status).ToString();
@@ -160,16 +185,19 @@ public class CombatPanel : MonoBehaviour
 		}
 	}
 
+	void ClearActions()
+	{
+		opponentActions.ForEach(action => action.ClearActions());
+		playerActions.ForEach(action => action.ClearActions());
+	}
+
 	IEnumerator ResolveEnemyActions()
 	{
-		var waiter = new WaitForSecondsRealtime(1);
-
-		yield return waiter;
+		yield return new WaitForSecondsRealtime(1);
 
 		foreach (var action in opponentActions)
 		{
-			if(action.HandleEnemyAction())
-				yield return waiter;
+			yield return new WaitForSecondsRealtime(action.HandleEnemyActions() / 2);
 		}
 
 		CombatHandler.EndRound();
@@ -190,5 +218,26 @@ public class CombatPanel : MonoBehaviour
 		}
 
 		yield return null;
+	}
+
+	public void GoToFight()
+	{
+		CameraController.Instance.MoveToTile(CombatHandler.tileFoughtOn.transform.position);
+	}
+
+	public void StartCombat()
+	{
+		CombatHandler.PrepareCombat();
+		SwitchCombatStartPromptState(false);
+	}
+	public void StartFirstRound()
+	{
+		CombatHandler.StartFirstRound();
+		speedPrompt.gameObject.SetActive(false);
+	}
+
+	public void PlayClickSound()
+	{
+		AudioManager.Instance.Play(Sound.Name.Click);
 	}
 }

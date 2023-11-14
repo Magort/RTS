@@ -15,7 +15,7 @@ MonoBehaviour:
   recruitCost: []
   upkeepCost: []
   health: 25
-  speed: 20
+  speed: 15
   dice: {fileID: 11400000, guid: 4682bd19eb4c7154ab2dbcae112d2ab1, type: 2}
   unitName: Wild Wolf
   icon: {fileID: 0}

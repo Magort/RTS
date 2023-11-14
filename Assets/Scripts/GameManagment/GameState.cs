@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public static class GameState
 {
@@ -27,9 +28,10 @@ public static class GameState
 		ScoutsAvailable += amount;
 	}
 
-	public static void AddResource(Resource resource, int amount)
+	public static void AddResource(Resource resource, float amount)
 	{
-		Resources[resource] += amount;
+		int intAmount = Mathf.RoundToInt(amount);
+		Resources[resource] += intAmount;
 		ResourcesPanel.Instance.UpdateDisplay();
 	}
 	public static void AddResourceGrowth(Resource resource, float amount)

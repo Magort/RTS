@@ -11,6 +11,8 @@ public class BuildingSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         if(BuildingHandler.Instance.TryBuild(building))
         {
             BuildingHandler.Instance.PopulateBuildingsList(true);
+			AudioManager.Instance.Play(Sound.Name.Click);
+			AudioManager.Instance.Play(Sound.Name.Build);
 		}
     }
 

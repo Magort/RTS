@@ -5,7 +5,7 @@ using UnityEngine;
 public class ResourceExtractor : Building
 {
     public Resource resourceToExtract;
-	public float extractSpeed;
+	public float extractInterval;
     private Dictionary<Resource, TileArea.Type> resourceToArea = new()
     {
         {Resource.Food, TileArea.Type.FoodSource },
@@ -22,7 +22,7 @@ public class ResourceExtractor : Building
 	{
 		return "Extracts 1<sprite="
 			+ IconIDs.resourceToIconID[resourceToExtract]
-			+ "> from the tile every <b>" + extractSpeed + "</b> seconds.";
+			+ "> from the tile every <b>" + extractInterval + "</b> seconds.";
 	}
 
 	public override void SpecialOnBuild(Tile tile, TileArea area)
@@ -31,9 +31,9 @@ public class ResourceExtractor : Building
 
 	private void Start()
 	{
-		extractionPeriod = new(extractSpeed);
+		extractionPeriod = new(extractInterval);
 		StartCoroutine(TryExtract());
-		GameState.AddResourceGrowth(resourceToExtract, 1 / extractSpeed);
+		GameState.AddResourceGrowth(resourceToExtract, 1 / extractInterval);
 	}
 
 	IEnumerator TryExtract()
@@ -57,8 +57,8 @@ public class ResourceExtractor : Building
 			}
 			else
 			{
-				GameState.AddResourceGrowth(resourceToExtract, -1 / extractSpeed);
-				builtOn.areas.Find(area => area.building == code).RemoveBuilding();
+				GameState.AddResourceGrowth(resourceToExtract, -1 / extractInterval);
+				builtOn.areas.Find(area => area.building == code && area.type == TileArea.Type.Building).RemoveBuilding();
 				yield break;
 			}
 		}

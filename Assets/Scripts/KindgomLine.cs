@@ -10,23 +10,23 @@ public class KindgomLine : MonoBehaviour
     {
         Instance = this;
     }
-    public void AddTileToBorder(Tile tile)
+    public void ChangeKingdomLine(Tile tile, bool add)
     {
         List<Tile> tilesToUpdate = TileGrid.GetNeighbouringTiles(tile)
-            .Where(tile => tile.affiliation == Affiliation.Player).ToList();
+            .Where(neighbourTile => neighbourTile.affiliation == tile.affiliation).ToList();
 
         foreach(TileArea area in tile.areas)
         {
-            area.lineRenderer.enabled = true;
+            area.lineRenderer.enabled = add;
         }
 
         foreach(Tile nTile in tilesToUpdate)
         {
             tile.areas[TileGrid.NeighbouringCoordinates.IndexOf(nTile.coordinates - tile.coordinates)]
-                .lineRenderer.enabled = false;
+                .lineRenderer.enabled = !add;
 
 			nTile.areas[TileGrid.NeighbouringCoordinates.IndexOf(tile.coordinates - nTile.coordinates)]
-				.lineRenderer.enabled = false;
+				.lineRenderer.enabled = !add;
 		}
     }
 }

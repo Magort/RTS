@@ -5,6 +5,8 @@ using UnityEngine;
 public static class TileGrid
 {
 	public static int Size;
+	public static Tile MainTile;
+	public static List<Tile> WinTargetTiles = new();
 	public static List<Tile> Tiles = new();
 	public static List<Vector3Int> NeighbouringCoordinates = new()
 	{
@@ -34,7 +36,7 @@ public static class TileGrid
 	}
 	public static bool IsNextToPlyerKingdom(Tile tile)
 	{
-		return TileGrid.GetNeighbouringTiles(tile)
+		return GetNeighbouringTiles(tile)
 			.Where(tile => tile.affiliation == Affiliation.Player).ToList().Count == 0;
 	}
 

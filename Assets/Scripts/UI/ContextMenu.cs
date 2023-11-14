@@ -46,10 +46,12 @@ public class ContextMenu : MonoBehaviour
         else
 			unitRecruitmentPanel.ClearSlots();
 
-		if (affiliation != Affiliation.Enemy && SelectedTile.units.Find(unit => unit.affiliation != Affiliation.Player) == null)
+        if (affiliation != Affiliation.Enemy && SelectedTile.units.Find(unit => unit.affiliation != Affiliation.Player) == null)
         {
-			buildingPanel.PopulateBuildingsList(discovered);
-		}
+            buildingPanel.PopulateBuildingsList(discovered);
+        }
+        else
+            buildingPanel.ClearBuildingsList();
 	}
 
     public void CloseAll()

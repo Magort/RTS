@@ -31,12 +31,8 @@ MonoBehaviour:
       effect: 1
       quantity: 0
     - value: 1
-      target: 1
-      effect: 6
-      quantity: 0
-    - value: 1
-      target: 1
-      effect: 9
+      target: 0
+      effect: 7
       quantity: 0
     name: Riposte
   - subActions:
@@ -50,11 +46,11 @@ MonoBehaviour:
       quantity: 0
     name: Feint
   - subActions:
-    - value: 4
+    - value: 5
       target: 1
       effect: 1
       quantity: 0
-    - value: 4
+    - value: 3
       target: 1
       effect: 9
       quantity: 0

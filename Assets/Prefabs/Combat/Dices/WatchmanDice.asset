@@ -18,11 +18,19 @@ MonoBehaviour:
       target: 0
       effect: 7
       quantity: 0
+    - value: 1
+      target: 0
+      effect: 10
+      quantity: 0
     name: Shields Up!
   - subActions:
     - value: 5
       target: 0
       effect: 7
+      quantity: 0
+    - value: 1
+      target: 0
+      effect: 10
       quantity: 0
     name: Shields Up!
   - subActions:

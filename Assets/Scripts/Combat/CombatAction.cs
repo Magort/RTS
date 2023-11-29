@@ -62,6 +62,7 @@ public class CombatAction
         Disarm,
         Block,
         Shatter,
-        Wound
+        Wound,
+        Focus
     }
 }

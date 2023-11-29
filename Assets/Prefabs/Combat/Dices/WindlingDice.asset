@@ -29,10 +29,10 @@ MonoBehaviour:
       effect: 1
       quantity: 0
     - value: 1
-      target: 1
-      effect: 6
+      target: 0
+      effect: 10
       quantity: 0
-    name: Sweeping Winds
+    name: Rising Winds
   - subActions:
     - value: 3
       target: 1
@@ -46,17 +46,17 @@ MonoBehaviour:
       quantity: 1
     name: Whirling Gust
   - subActions:
-    - value: 5
+    - value: 3
       target: 0
       effect: 7
       quantity: 0
     name: Incorporeal
   - subActions:
-    - value: 2
+    - value: 1
       target: 0
       effect: 0
       quantity: 1
-    - value: 2
+    - value: 1
       target: 0
       effect: 5
       quantity: 0

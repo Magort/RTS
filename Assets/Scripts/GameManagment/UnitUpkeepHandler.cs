@@ -83,8 +83,7 @@ public class UnitUpkeepHandler : MonoBehaviour
 
         var randomTile = tilesWithPlayerUnits[Random.Range(0, tilesWithPlayerUnits.Count)];
         var randomMapUnit = randomTile.units[Random.Range(0, randomTile.units.Count)];
-        var randomUnit = randomMapUnit.units[Random.Range(0, randomMapUnit.units.Count)];
 
-		randomMapUnit.KillUnit(randomUnit);
+		randomMapUnit.KillRandomUnit();
     }
 }

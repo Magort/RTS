@@ -7,7 +7,7 @@ public class DebugStick : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            ContextMenu.Instance.SelectedTile.AddUnit(unit);
-        }
+            Debug.Log(TileGrid.MainTile.coordinates);
+		}
     }
 }

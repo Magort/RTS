@@ -13,6 +13,8 @@ public class GameEndPrompt : MonoBehaviour
 
     public void PopulatePrompt(bool win)
     {
+        gameObject.SetActive(true);
+        GameManager.SwitchPauseState(true);
         if(win)
         {
             title.text = winTitle;
@@ -21,7 +23,7 @@ public class GameEndPrompt : MonoBehaviour
         else
         {
             title.text = loseTitle;
-            title.text = loseBody;
+            body.text = loseBody;
         }
     }
 }

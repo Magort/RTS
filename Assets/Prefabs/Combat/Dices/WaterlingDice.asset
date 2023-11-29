@@ -38,19 +38,11 @@ MonoBehaviour:
       target: 0
       effect: 7
       quantity: 0
-    - value: 1
-      target: 1
-      effect: 4
-      quantity: 0
     name: Solidify
   - subActions:
     - value: 3
       target: 0
       effect: 7
-      quantity: 0
-    - value: 1
-      target: 1
-      effect: 4
       quantity: 0
     name: Solidify
   - subActions:

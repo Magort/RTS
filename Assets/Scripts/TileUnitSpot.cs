@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TileUnitSpot : MonoBehaviour
 {
+    public Tile tile;
     public GameObject unitModel;
     public MeshRenderer hatMeshRenderer;
     [Header("Materials")]
@@ -25,6 +26,9 @@ public class TileUnitSpot : MonoBehaviour
 
     public void ShowUnitModel(Affiliation affiliation)
     {
+        if (!tile.discovered)
+            return;
+
         unitModel.SetActive(true);
         hatMeshRenderer.material = affiliationToMaterial[affiliation];
     }

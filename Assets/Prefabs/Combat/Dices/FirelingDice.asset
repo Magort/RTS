@@ -48,27 +48,19 @@ MonoBehaviour:
       target: 1
       effect: 1
       quantity: 1
-    - value: 2
-      target: 1
-      effect: 3
-      quantity: 0
     name: Radiating Heat
   - subActions:
     - value: 1
       target: 1
       effect: 1
       quantity: 1
-    - value: 2
-      target: 1
-      effect: 3
-      quantity: 0
     name: Radiating Heat
   - subActions:
-    - value: 10
+    - value: 8
       target: 0
       effect: 0
       quantity: 0
-    - value: 1
+    - value: 2
       target: 1
       effect: 3
       quantity: 0

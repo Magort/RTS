@@ -76,7 +76,7 @@ public class MapUnitWindow : MonoBehaviour
         if (typeToArea[destination].mapUnit.affiliation != Affiliation.Player)
             return;
 
-        if (typeToArea[destination].mapUnit.units.Count >= MapUnit.armylimit)
+        if (typeToArea[destination].mapUnit.units.Count >= MapUnit.playerArmylimit)
             return;
 
 		typeToArea[destination].mapUnit.AddToArmy(unit);

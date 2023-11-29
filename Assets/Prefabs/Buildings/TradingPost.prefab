@@ -152,7 +152,7 @@ MonoBehaviour:
       amount: 50
     requiredArea: 0
     requiredBuilding: 0
-  code: 0
+  code: 12
   isUpgrade: 0
   resourcesToGain: 02000000
   resourcesToLose: 0100000000000000

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recruitCost: []
   upkeepCost: []
-  health: 75
+  health: 85
   speed: 2
   dice: {fileID: 11400000, guid: 16f83b9630b93db4c8ee5b0849bc7a38, type: 2}
   unitName: Frenzied Sandworm

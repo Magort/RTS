@@ -158,7 +158,7 @@ MonoBehaviour:
       amount: 10
     requiredArea: 1
     requiredBuilding: 0
-  code: 0
+  code: 15
   isUpgrade: 0
   resourceToSpawn: 0
   spawnInterval: 2

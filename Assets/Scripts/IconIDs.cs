@@ -13,7 +13,8 @@ public static class IconIDs
 		{ CombatAction.Effect.Haste, 12 },
 		{ CombatAction.Effect.Freeze, 13 },
 		{ CombatAction.Effect.Wound, 14 },
-		{ CombatAction.Effect.Shatter, 15 }
+		{ CombatAction.Effect.Shatter, 15 },
+		{ CombatAction.Effect.Focus, 18 }
 	};
 
 	public static Dictionary<(CombatAction.Quantity, CombatAction.Target), int> quantityToIconID = new()

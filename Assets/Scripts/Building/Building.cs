@@ -35,7 +35,10 @@ public abstract class Building : MonoBehaviour
 		Traders,
 		Farmers,
 		Watchmen,
-		GroveTenders
+		GroveTenders,
+		Elementalists,
+		SoulMasters,
+		Altar
 	}
 
 	public string RequirementsToString()

@@ -30,10 +30,18 @@ public class ContextMenu : MonoBehaviour
 
         if (timer > refreshTime)
         {
-            ShowTileInfo(SelectedTile.discovered, SelectedTile.affiliation);
-            timer = 0;
+            UpdatePanel();
+			timer = 0;
         }
     }
+
+    public void UpdatePanel()
+    {
+        if (SelectedTile == null)
+            return;
+
+		ShowTileInfo(SelectedTile.discovered, SelectedTile.affiliation);
+	}
 
     public void ShowTileInfo(bool discovered, Affiliation affiliation)
     {

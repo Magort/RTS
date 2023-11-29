@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recruitCost: []
   upkeepCost: []
-  health: 45
+  health: 30
   speed: 7
   dice: {fileID: 11400000, guid: c141c47bf6f72444799c310d50629efa, type: 2}
   unitName: Fireling

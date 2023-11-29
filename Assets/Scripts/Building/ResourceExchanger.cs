@@ -12,6 +12,14 @@ public class ResourceExchanger : Building
 	void Start()
 	{
 		StartCoroutine(Exchange());
+		foreach(var resource in resourcesToGain)
+		{
+			GameState.AddResourceGrowth(resource, 1/productionSpeed);
+		}
+		foreach(var resource in resourcesToLose)
+		{
+			GameState.AddResourceGrowth(resource, -1/productionSpeed);
+		}
 	}
 
 	IEnumerator Exchange()
@@ -62,7 +70,7 @@ public class ResourceExchanger : Building
 			   + IconIDs.resourceToIconID[resourcesToLose[i]] + ">/";
 		}
         description += "\nFor: ";
-		for (int i = 0; i < resourcesToLose.Count; i++)
+		for (int i = 0; i < resourcesToGain.Count; i++)
 		{
 			description += "1<sprite="
 			   + IconIDs.resourceToIconID[resourcesToGain[i]] + ">/";
@@ -72,7 +80,7 @@ public class ResourceExchanger : Building
 		return description;
 	}
 
-    public override void SpecialOnBuild(Tile tile, TileArea area)
+	public override void SpecialOnBuild(Tile tile, TileArea area)
     {
         
     }

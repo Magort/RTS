@@ -50,7 +50,7 @@ public class CombatPanel : MonoBehaviour
 		gameObject.SetActive(true);
 		ClearActions();
 		ShowUnits();
-		SwitchRollButton(true);
+		SwitchRollButton(false);
 		UpdateStats();
 	}
 
@@ -71,7 +71,7 @@ public class CombatPanel : MonoBehaviour
 		rollButton.interactable = status;
 	}
 
-	void ShowUnits()
+	public void ShowUnits()
 	{
 		ClearUnits();
 

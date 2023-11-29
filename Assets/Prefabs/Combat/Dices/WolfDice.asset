@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actions:
   - subActions:
-    - value: 10
+    - value: 7
       target: 1
       effect: 1
       quantity: 0
@@ -24,7 +24,7 @@ MonoBehaviour:
       quantity: 0
     name: Bite
   - subActions:
-    - value: 10
+    - value: 7
       target: 1
       effect: 1
       quantity: 0
@@ -38,7 +38,7 @@ MonoBehaviour:
       target: 1
       effect: 1
       quantity: 0
-    - value: 3
+    - value: 2
       target: 1
       effect: 9
       quantity: 0
@@ -50,7 +50,7 @@ MonoBehaviour:
       quantity: 0
     name: Fearsome Howl
   - subActions:
-    - value: 3
+    - value: 2
       target: 0
       effect: 0
       quantity: 1
@@ -63,9 +63,5 @@ MonoBehaviour:
     - value: 4
       target: 1
       effect: 1
-      quantity: 1
-    - value: 1
-      target: 1
-      effect: 9
       quantity: 1
     name: Ravage

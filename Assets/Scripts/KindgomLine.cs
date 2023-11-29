@@ -6,7 +6,7 @@ public class KindgomLine : MonoBehaviour
 {
     public static KindgomLine Instance;
 
-    private void Start()
+    private void Awake()
     {
         Instance = this;
     }
@@ -15,18 +15,18 @@ public class KindgomLine : MonoBehaviour
         List<Tile> tilesToUpdate = TileGrid.GetNeighbouringTiles(tile)
             .Where(neighbourTile => neighbourTile.affiliation == tile.affiliation).ToList();
 
-        foreach(TileArea area in tile.areas)
-        {
-            area.lineRenderer.enabled = add;
-        }
+		foreach (TileArea area in tile.areas)
+		{
+			area.lineRenderer.enabled = add;
+		}
 
-        foreach(Tile nTile in tilesToUpdate)
+		foreach (Tile nTile in tilesToUpdate)
         {
             tile.areas[TileGrid.NeighbouringCoordinates.IndexOf(nTile.coordinates - tile.coordinates)]
-                .lineRenderer.enabled = !add;
+                .lineRenderer.enabled = false;
 
 			nTile.areas[TileGrid.NeighbouringCoordinates.IndexOf(tile.coordinates - nTile.coordinates)]
 				.lineRenderer.enabled = !add;
 		}
-    }
+	}
 }

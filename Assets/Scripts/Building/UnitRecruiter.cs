@@ -7,7 +7,7 @@ public class UnitRecruiter : Building
 	public override void SpecialOnBuild(Tile tile, TileArea area)
     {
         tile.unitRecruiters.Add(this);
-        ContextMenu.Instance.unitRecruitmentPanel.PopulateUnitSlots();
+        ContextMenu.Instance.UpdatePanel();
     }
 
     public void Recruit()

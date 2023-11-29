@@ -17,12 +17,16 @@ public class MapUnitSlot : MonoBehaviour
 
     public void PopulateSlot(MapUnit mapUnit)
     {
-        text.text = mapUnit.customName + " " + mapUnit.units.Count + "/" + MapUnit.armylimit;
+        text.text = mapUnit.customName + " " + mapUnit.units.Count;
         image.color = affiliationToColor[mapUnit.affiliation];
         if(mapUnit.affiliation != Affiliation.Player)
         {
             button.interactable = false;
-        }    
+        }
+        else
+        {
+            text.text += "/" + MapUnit.playerArmylimit;
+		}
         gameObject.SetActive(true);
     }
 

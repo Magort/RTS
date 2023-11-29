@@ -46,7 +46,7 @@ public class ProgressBar : MonoBehaviour
 		gameObject.SetActive(true);
 	}
 
-	void ClearBar()
+	public void ClearBar()
 	{
 		timer = 0;
 		target = null;

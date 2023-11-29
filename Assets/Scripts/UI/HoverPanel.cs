@@ -55,10 +55,13 @@ public class HoverPanel : MonoBehaviour
     {
         RectTransform rectTransform = GetComponent<RectTransform>();
 
-		if (rectTransform.position.x + (rectTransform.rect.width / 2) > Camera.main.scaledPixelWidth)
+        if (rectTransform.position.x + (rectTransform.rect.width / 2) > Camera.main.scaledPixelWidth)
+        {
             transform.position = new(Camera.main.scaledPixelWidth - (rectTransform.rect.width / 2) - screenEdgeOffset, transform.position.y, transform.position.z);
-
-		if (rectTransform.position.x - (rectTransform.rect.width / 2) < Camera.main.scaledPixelWidth)
-			transform.position = new(0 + (rectTransform.rect.width / 2) + screenEdgeOffset, transform.position.y, transform.position.z);
-	}
+        }
+        if (rectTransform.position.x - (rectTransform.rect.width / 2) < 0)
+        {
+            transform.position = new(0 + (rectTransform.rect.width / 2) + screenEdgeOffset, transform.position.y, transform.position.z);
+		}
+    }
 }

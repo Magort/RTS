@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recruitCost: []
   upkeepCost: []
-  health: 55
+  health: 35
   speed: 10
   dice: {fileID: 11400000, guid: ae0478da5bce08d4fb6319c7e23f5a39, type: 2}
   unitName: Windling

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System.Linq;
 
 public class Tile : MonoBehaviour, IPointerUpHandler
 {
@@ -22,15 +23,37 @@ public class Tile : MonoBehaviour, IPointerUpHandler
     public Dictionary<TileArea.Type, GameObject> typeToDecoration = new();
     public TileUnitSpot unitSpot;
     public List<UnitRecruiter> unitRecruiters;
+    [Header("Occupation")]
+    public bool contested;
+    public float contestPoints;
+    public float maxContestPoints;
+    private ProgressBar contestProgressBar;
 
     //Navigation
     public int g, h, F;
+
+    private void Update()
+    {
+        if (!discovered)
+            return;
+
+        if (contested)
+        {
+            contestPoints += Time.deltaTime;
+
+            if (contestPoints > maxContestPoints)
+            {
+                CaptureTile();
+            }
+        }
+    }
 
     public void InitializeTile(Vector3Int coordinates)
     {
         this.coordinates = coordinates;
 		RollAreas();
     }
+
     public void TransformIntoTile(Tile tile)
     {
         for(int i = 0; i < areas.Count; i++)
@@ -95,9 +118,62 @@ public class Tile : MonoBehaviour, IPointerUpHandler
             unitSpot.ShowUnitModel(unit.affiliation);
         }
 
-        ContextMenu.Instance.tileInfoPanel.PopulatePanel(true);
+        ContextMenu.Instance.UpdatePanel();
 
-        CombatHandler.CheckForCombat(this);
+        if (CombatHandler.CheckForCombat(this))
+            return;
+
+        if (unit.affiliation == Affiliation.Neutral && affiliation == Affiliation.Enemy)
+            return;
+
+        CheckForOccupation();
+    }
+
+    void CheckForOccupation()
+    {
+        if (affiliation == Affiliation.Neutral || units.Count == 0)
+            return;
+
+        foreach(var mapUnit in units)
+        {
+            if (mapUnit.affiliation == affiliation)
+            {
+                if(contested)
+                {
+                    contested = false;
+                    contestPoints = 0;
+                    contestProgressBar.ClearBar();
+                    contestProgressBar = null;
+                }
+
+				return;
+            }
+        }
+
+		contested = true;
+        contestProgressBar = ProgressBarManager.Instance.GetProgressBar();
+        contestProgressBar.ShowProgress(transform, maxContestPoints, "Contesting...");
+    }
+
+    public void CaptureTile()
+    {
+		contested = false;
+        contestPoints = 0;
+        KindgomLine.Instance.ChangeKingdomLine(this, false);
+		affiliation = Affiliation.Neutral;
+		areas.Where(area => area.type == TileArea.Type.Building).ToList().ForEach(area => area.RemoveBuilding());
+        CheckGameObjectives();
+	}
+
+    void CheckGameObjectives()
+    {
+        if (coordinates == TileGrid.MainTile.coordinates)
+        {
+            GameEndHandler.Instance.LoseGame();
+        }
+
+        if (TileGrid.WinTargetTiles.Contains(this))
+            GameEndHandler.Instance.ProgressWinCon(this);
     }
 
     public void RemoveUnit(MapUnit unit)
@@ -114,6 +190,8 @@ public class Tile : MonoBehaviour, IPointerUpHandler
         }
 
 		ContextMenu.Instance.tileInfoPanel.PopulatePanel(true);
+
+        //CheckForOccupation();
 	}
 
     public void ChangeAffiliation(Affiliation affiliation)
@@ -147,7 +225,6 @@ public class Tile : MonoBehaviour, IPointerUpHandler
         WaitForSeconds waiter = new(0.01f);
 
         container.SetActive(true);
-        //containerAnimator.Play("Show");
 
 		while (lighting.intensity < maxIntensity/5)
 		{

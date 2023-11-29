@@ -62,10 +62,6 @@ MonoBehaviour:
       quantity: 0
     name: Diffuse
   - subActions:
-    - value: 0
-      target: 0
-      effect: 0
-      quantity: 0
     - value: 14
       target: 1
       effect: 1

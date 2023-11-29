@@ -7,7 +7,8 @@ public class MapUnit
     public string customName = "Army";
     public List<Unit> units = new();
     public Affiliation affiliation;
-    public static float armylimit = 10;
+    public static float playerArmylimit = 5;
+	[HideInInspector] public ProgressBar movementProgressBar = null;
     [HideInInspector] public Tile currentTile;
 	[HideInInspector] public List<Tile> path = new();
 
@@ -42,7 +43,7 @@ public class MapUnit
 
     public bool CanAddToArmy()
     {
-        return units.Count < armylimit;
+        return units.Count < playerArmylimit;
     }
 
     public void AddToArmy(Unit unit)
@@ -61,6 +62,21 @@ public class MapUnit
 		}
 
         RemoveFromArmy(unit);
+	}
+
+    public void KillRandomUnit()
+    {
+        var unit = units[Random.Range(0, units.Count)];
+
+		if (affiliation == Affiliation.Player)
+		{
+			foreach (var requirement in unit.upkeepCost)
+			{
+				UnitUpkeepHandler.Instance.RemoveUpkeep(requirement.amount, requirement.resource);
+			}
+		}
+
+		RemoveFromArmy(unit);
 	}
 
     public void RemoveFromArmy(Unit unit)

@@ -48,7 +48,7 @@ MonoBehaviour:
       quantity: 0
     name: Slicing Tornado
   - subActions:
-    - value: 10
+    - value: 8
       target: 1
       effect: 1
       quantity: 1
@@ -58,7 +58,7 @@ MonoBehaviour:
       quantity: 1
     name: Fire Storm
   - subActions:
-    - value: 10
+    - value: 8
       target: 1
       effect: 1
       quantity: 1

@@ -58,6 +58,7 @@ public class ScoutingHandler : MonoBehaviour
         }
 
         scoutedTile.Reveal();
+        ContextMenu.Instance.UpdatePanel();
 
 		GameState.ScoutsAvailable++;
 	}

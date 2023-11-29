@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using System.IO;
 
 public class UnitMovementHandler : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class UnitMovementHandler : MonoBehaviour
 	public LineRenderer pathLine;
 	List<MapUnit> selectedUnits = new();
 
-	int stepTime = 3;
+	int stepTime = 4;
 
 	Dictionary<MapUnit, Coroutine> movementDictionary = new();
 
@@ -39,7 +40,7 @@ public class UnitMovementHandler : MonoBehaviour
 			return;
 
 		AudioManager.Instance.Play(Sound.Name.Click);
-		var path = CreatePath(destinationTile);
+		var path = CreatePath(destinationTile, Affiliation.Player);
 		
 		foreach (var unit in selectedUnits)
 		{ 	
@@ -48,6 +49,7 @@ public class UnitMovementHandler : MonoBehaviour
 			if (movementDictionary.ContainsKey(unit))
 			{
 				StopCoroutine(movementDictionary[unit]);
+				unit.movementProgressBar.ClearBar();
 				movementDictionary[unit] = StartCoroutine(Move(unit));
 			}
 			else
@@ -57,9 +59,40 @@ public class UnitMovementHandler : MonoBehaviour
 		ShowPath(path);
 	}
 
+	public void MoveEnemyUnit(MapUnit unit, int maxStep)
+	{
+		var wholePath = CreatePath(unit.currentTile, TileGrid.GetClosestTileOfType(unit.currentTile, Affiliation.Player), unit.affiliation);
+
+		if (wholePath.Count <= maxStep)
+		{
+			unit.path = wholePath;
+		}
+		else
+		{
+			List<Tile> finalPath = new();
+
+			for (int i = 0; i < maxStep; i++)
+			{
+				finalPath.Add(wholePath[i]);
+			}
+
+			unit.path = finalPath;
+		}
+
+		if (movementDictionary.ContainsKey(unit))
+		{
+			StopCoroutine(movementDictionary[unit]);
+			unit.movementProgressBar.ClearBar();
+			movementDictionary[unit] = StartCoroutine(Move(unit));
+		}
+		else
+			movementDictionary.Add(unit, StartCoroutine(Move(unit)));
+	}
+
 	public void StopMovement(MapUnit unit)
 	{
 		StopCoroutine(movementDictionary[unit]);
+		unit.movementProgressBar.ClearBar();
 		movementDictionary.Remove(unit);
 	}
 
@@ -69,6 +102,15 @@ public class UnitMovementHandler : MonoBehaviour
 
 		while(true)
 		{
+			if (unit.path.Count == 0)
+				break;
+
+			if (unit.currentTile.discovered)
+			{
+				unit.movementProgressBar = ProgressBarManager.Instance.GetProgressBar();
+				unit.movementProgressBar.ShowProgress(unit.currentTile.transform, stepTime, "Moving...");
+			}
+
 			yield return waiter;
 
 
@@ -97,15 +139,25 @@ public class UnitMovementHandler : MonoBehaviour
 		movementDictionary.Remove(unit);
 	}
 
-	public List<Tile> CreatePath(Tile destinationTile)
+	public List<Tile> CreatePath(Tile destinationTile, Affiliation affiliation)
 	{
 		if (ContextMenu.Instance.SelectedTile == null)
 			return new();
 
 		ClearNavigationParameters();
 
-		return FindPath(selectedUnits[0].currentTile, destinationTile);
+		return FindPath(selectedUnits[0].currentTile, destinationTile, affiliation);
     }
+
+	public List<Tile> CreatePath(Tile startingTile, Tile destinationTile, Affiliation affiliation)
+	{
+		if (ContextMenu.Instance.SelectedTile == null && affiliation == Affiliation.Player)
+			return new();
+
+		ClearNavigationParameters();
+
+		return FindPath(startingTile, destinationTile, affiliation);
+	}
 
 	public void ShowPath(List<Tile> path)
 	{
@@ -135,7 +187,7 @@ public class UnitMovementHandler : MonoBehaviour
 		}
 	}
 
-	public static List<Tile> FindPath(Tile startPoint, Tile endPoint)
+	public static List<Tile> FindPath(Tile startPoint, Tile endPoint, Affiliation affiliation)
 	{
 		List<Tile> openPathTiles = new List<Tile>();
 		List<Tile> closedPathTiles = new List<Tile>();
@@ -143,7 +195,7 @@ public class UnitMovementHandler : MonoBehaviour
 		Tile currentTile = startPoint;
 
 		currentTile.g = 0;
-		currentTile.h = (int)GetEstimatedPathCost(startPoint.coordinates, endPoint.coordinates);
+		currentTile.h = GetEstimatedPathCost(startPoint.coordinates, endPoint.coordinates);
 
 		openPathTiles.Add(currentTile);
 
@@ -166,7 +218,7 @@ public class UnitMovementHandler : MonoBehaviour
 
 			foreach (Tile adjacentTile in TileGrid.GetNeighbouringTiles(currentTile))
 			{
-				if (!adjacentTile.neighbour)
+				if (!adjacentTile.neighbour && affiliation == Affiliation.Player)
 				{
 					continue;
 				}

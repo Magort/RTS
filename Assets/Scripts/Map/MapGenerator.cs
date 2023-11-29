@@ -11,6 +11,7 @@ public class MapGenerator : MonoBehaviour
 	public Tile startingFoodTile;
 	public Tile startingWoodTile;
 	public Tile startingGoldTile;
+	public Tile startingEssenceTile;
 	public List<NeutralMapUnitSpawnData> neutralMapUnits = new();
 	public List<Tile> enemyTiles = new();
 
@@ -104,12 +105,20 @@ public class MapGenerator : MonoBehaviour
 		potentialTiles.Remove(goldTile);
 
 		TileGrid.Tiles.Find(tile => tile == goldTile).TransformIntoTile(startingGoldTile);
+
+		var roll = Random.Range(0, TileGrid.NeighbouringCoordinates.Count);
+
+		TileGrid.Tiles.Find(tile =>
+			tile.coordinates ==
+			mainTile.coordinates + TileGrid.NeighbouringCoordinates[roll] * 2)
+			.TransformIntoTile(startingEssenceTile);
 	}
 
 	void GenerateNeutralUnits()
 	{
 		List<Tile> availableTiles = TileGrid.Tiles.ToList();
 		availableTiles.Remove(mainTile);
+		availableTiles = availableTiles.Except(TileGrid.GetNeighbouringTiles(mainTile)).ToList();
 
 		var neutralsToSpawn = 0;
 
@@ -122,9 +131,12 @@ public class MapGenerator : MonoBehaviour
 		{
 			Tile selectedTile = availableTiles[Random.Range(0, availableTiles.Count)];
 
-			selectedTile.MapGenerationAddUnit(GetNeutralUnit(
+			var unit = GetNeutralUnit(
 				Mathf.Max(Mathf.Abs(selectedTile.coordinates.x - TileGrid.Size),
-				Mathf.Abs(selectedTile.coordinates.y - TileGrid.Size))));
+				Mathf.Abs(selectedTile.coordinates.y - TileGrid.Size)));
+
+			selectedTile.MapGenerationAddUnit(unit);
+			EnemyBehaviourHandler.Instance.AddUnit(unit);
 
 			availableTiles.Remove(selectedTile);
 		}
@@ -141,25 +153,32 @@ public class MapGenerator : MonoBehaviour
 	{
 		List<Vector3> validCoordinates = new()
 		{
-			new(11, 2, -13), 
-			new(1, 12, -13),
-			new(14, 14, -28),
-			new(4, 18, -22),
-			new(18, 6, -24),
-			new(18, 1, -19)
+			new(9, 2, -11), 
+			new(1, 10, -11),
+			new(11, 12, -23),
+			new(4, 16, -20),
+			new(16, 4, -20),
+			new(16, 2, -18)
 		};
 
 		List<Tile> validTiles = TileGrid.Tiles.Where(tile => validCoordinates.Contains(tile.coordinates)).ToList();
 
 		for(int i = 0; i < enemyTiles.Count; i++)
 		{
-			var roll = Random.Range(0, validCoordinates.Count);
+			var roll = Random.Range(0, validTiles.Count);
 
-			validTiles[roll].TransformIntoTile(enemyTiles[i]);
+			var worldCoordinates = validTiles[roll].transform.position;
+			var coodrdinates = validTiles[roll].coordinates;
+			TileGrid.Tiles.Remove(validTiles[i]);
+			Destroy(validTiles[i].gameObject);
 
-			KindgomLine.Instance.ChangeKingdomLine(validTiles[roll], true);
-			TileGrid.GetNeighbouringTiles(validTiles[roll])
-				.ForEach(tile => KindgomLine.Instance.ChangeKingdomLine(tile, true));
+			var newTile = Instantiate(enemyTiles[i], worldCoordinates, Quaternion.identity);
+			newTile.coordinates = coodrdinates;
+			TileGrid.AddTile(newTile);
+			newTile.ChangeAffiliation(Affiliation.Enemy);
+
+			TileGrid.GetNeighbouringTiles(newTile)
+				.ForEach(tile => tile.ChangeAffiliation(Affiliation.Enemy));
 
 			validTiles.RemoveAt(roll);
 		}

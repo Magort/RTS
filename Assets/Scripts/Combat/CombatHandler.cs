@@ -8,10 +8,13 @@ public static class CombatHandler
     public static Army playerArmy = new();
     public static Army opponentArmy = new();
     public static List<MapUnit> presentMapUnits = new();
+    public static List<MapUnit> survivingMapUnits = new();
     public static Tile tileFoughtOn = null;
     
     public static int actionsMade = 0;
     public static int maxPlayerActions = 0;
+
+    static float survivalRate = 3f;
 
     public class Army
     {
@@ -49,7 +52,7 @@ public static class CombatHandler
         {
             health -= Mathf.Max(0, value - GetStatusAmount(CombatStatus.Block) + GetStatusAmount(CombatStatus.Wound));
         }
-        public void TakeDamageNoWounds(int value)
+        public void TakeDamageNoModifiers(int value)
         {
             health -= value;
         }
@@ -129,7 +132,7 @@ public static class CombatHandler
         }
     }
 
-    public static void CheckForCombat(Tile tile)
+    public static bool CheckForCombat(Tile tile)
     {
         if (tile.units.Find(unit => unit.affiliation == Affiliation.Player) != null
             && tile.units.Find(unit => unit.affiliation != Affiliation.Player) != null)
@@ -137,7 +140,10 @@ public static class CombatHandler
 			GameManager.SwitchPauseState(true);
             tileFoughtOn = tile;
 			CombatPanel.Instance.SwitchCombatStartPromptState(true);
+            return true;
         }
+
+        return false;
     }
 
     public static void CheckForPlayerTurnEnd()
@@ -260,15 +266,15 @@ public static class CombatHandler
         {
             if(army.mapUnit.affiliation == Affiliation.Player)
             {
-                List<Unit> toRemove = new();
-                foreach(var unit in army.mapUnit.units)
+                int unitsToKill = Mathf.RoundToInt(army.mapUnit.units.Count * 0.8f);
+
+                for(int i = 0; i < unitsToKill; i++)
                 {
-                    toRemove.Add(unit);
+                    army.mapUnit.KillRandomUnit();
                 }
-                foreach(Unit unit in toRemove)
-                {
-					army.mapUnit.KillUnit(unit);
-				}
+
+                if(army.mapUnit.units.Count > 0)
+                    survivingMapUnits.Add(army.mapUnit);
             }
 
             presentMapUnits.Remove(army.mapUnit);
@@ -292,11 +298,13 @@ public static class CombatHandler
         {
             playerArmy.InitializeArmy(newUnit);
             HandlePlayerTurn();
+            CombatPanel.Instance.ShowUnits();
         }
         else
         {
 			opponentArmy.InitializeArmy(newUnit);
-            HandleEnemyTurn();
+			CombatPanel.Instance.ShowUnits();
+			HandleEnemyTurn();
 		}
 	}
 
@@ -304,12 +312,27 @@ public static class CombatHandler
     {
         CombatPanel.Instance.ShowCombatEndPrompt(looser);
 
+        if(looser != Affiliation.Player)
+        {
+            float healthLeft = playerArmy.health / playerArmy.maxHealth;
+            int unitsToKill = Mathf.RoundToInt((1 - healthLeft) / survivalRate * playerArmy.mapUnit.units.Count);
+            for(int i = 0; i < unitsToKill; i++)
+            {
+                playerArmy.mapUnit.KillRandomUnit();
+            }
+        }
+
         tileFoughtOn.units = new();
 
         foreach(var unit in presentMapUnits)
         {
 			tileFoughtOn.AddUnit(unit);
 		}
+
+        foreach(var unit in survivingMapUnits)
+        {
+            TileGrid.MainTile.AddUnit(unit);
+        }
         
 		GameManager.SwitchPauseState(false);
 	}
@@ -342,6 +365,7 @@ public static class CombatHandler
 
         int freezeCount = army.GetStatusAmount(CombatStatus.Freeze);
 		int disarmCount = army.GetStatusAmount(CombatStatus.Disarm);
+        int hasteCount = army.GetStatusAmount(CombatStatus.Haste);
 
 		for (int i = 0; i < freezeCount; i++)
 		{
@@ -357,15 +381,15 @@ public static class CombatHandler
 			army.RemoveCombatStatus(CombatStatus.Disarm, 1);
 			availableUnits.Remove(roll);
 		}
-		for (int i = 0; i < army.GetStatusAmount(CombatStatus.Haste); i++)
+		for (int i = 0; i < hasteCount; i++)
 		{
 			var roll = Random.Range(0, availableUnits.Count);
 			army.hasted.Add(roll);
 			army.RemoveCombatStatus(CombatStatus.Haste, 1);
 		}
 
-        army.TakeDamageNoWounds(army.GetStatusAmount(CombatStatus.Poison));
-        army.TakeDamageNoWounds(army.GetStatusAmount(CombatStatus.Burn) * army.mapUnit.units.Count);
+        army.TakeDamageNoModifiers(army.GetStatusAmount(CombatStatus.Poison));
+        army.TakeDamageNoModifiers(army.GetStatusAmount(CombatStatus.Burn) * army.mapUnit.units.Count);
 
         army.RemoveCombatStatus(CombatStatus.Burn, Mathf.RoundToInt(army.GetStatusAmount(CombatStatus.Burn) * 0.75f));
 		army.RemoveCombatStatus(CombatStatus.Block, army.GetStatusAmount(CombatStatus.Block));
@@ -460,8 +484,16 @@ public static class CombatHandler
 			case Effect.Damage:
 				if (!OtherArmy(target).disarmed.Contains(unitID))
 				{
-					for (int i = 0; i < multiplier; i++)
-						target.TakeDamage(subAction.value);
+                    for (int i = 0; i < multiplier; i++)
+                    {
+                        if (subAction.target == Target.Opponent && OtherArmy(target).GetStatusAmount(CombatStatus.Focus) > 0)
+                        {
+							target.TakeDamage(Mathf.RoundToInt(subAction.value * 1.5f));
+                            OtherArmy(target).RemoveCombatStatus(CombatStatus.Focus, 1);
+						}
+                        else
+							target.TakeDamage(subAction.value);
+					}
 				}
 				AudioManager.Instance.Play(Sound.Name.CombatDamage);
 				break;
@@ -492,6 +524,9 @@ public static class CombatHandler
 			case Effect.Haste:
 				target.AddCombatStatus(CombatStatus.Haste, subAction.value * multiplier);
 				AudioManager.Instance.Play(Sound.Name.CombatHaste);
+				break;
+			case Effect.Focus:
+				target.AddCombatStatus(CombatStatus.Focus, subAction.value * multiplier);
 				break;
 			case Effect.Shatter:
 				target.ChangeBlock(-subAction.value * multiplier);

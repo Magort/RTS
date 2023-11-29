@@ -6,5 +6,6 @@ public enum CombatStatus
 	Poison,
 	Haste,
 	Wound,
-	Block
+	Block,
+	Focus
 }

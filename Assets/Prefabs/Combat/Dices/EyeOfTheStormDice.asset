@@ -50,7 +50,7 @@ MonoBehaviour:
       quantity: 0
     name: Harsh Winds
   - subActions:
-    - value: 12
+    - value: 11
       target: 1
       effect: 1
       quantity: 1

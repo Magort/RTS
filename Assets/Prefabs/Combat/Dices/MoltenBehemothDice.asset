@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f7ad3c37f7602a46879781f8cd1b208, type: 3}
+  m_Name: MoltenBehemothDice
+  m_EditorClassIdentifier: 
+  actions:
+  - subActions:
+    - value: 5
+      target: 1
+      effect: 8
+      quantity: 0
+    - value: 40
+      target: 1
+      effect: 1
+      quantity: 0
+    - value: 1
+      target: 0
+      effect: 7
+      quantity: 0
+    name: Chaaarge!
+  - subActions:
+    - value: 5
+      target: 1
+      effect: 8
+      quantity: 0
+    - value: 40
+      target: 1
+      effect: 8
+      quantity: 0
+    - value: 1
+      target: 0
+      effect: 7
+      quantity: 0
+    name: Chaaarge!
+  - subActions:
+    - value: 50
+      target: 1
+      effect: 1
+      quantity: 0
+    name: Smash!
+  - subActions:
+    - value: 50
+      target: 1
+      effect: 1
+      quantity: 0
+    name: Smash!
+  - subActions:
+    - value: 25
+      target: 1
+      effect: 1
+      quantity: 0
+    - value: 1
+      target: 1
+      effect: 8
+      quantity: 0
+    - value: 25
+      target: 1
+      effect: 6
+      quantity: 0
+    name: Grab And Crush!
+  - subActions:
+    - value: 30
+      target: 1
+      effect: 1
+      quantity: 0
+    - value: 5
+      target: 1
+      effect: 3
+      quantity: 0
+    name: Hot Boulder Hurl!

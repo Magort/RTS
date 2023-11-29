@@ -51,6 +51,7 @@ MonoBehaviour:
   discovered: 0
   neighbour: 0
   beingScouted: 0
+  constested: 0
   units: []
   affiliation: 0
   coordinates: {x: 0, y: 0, z: 0}
@@ -67,6 +68,9 @@ MonoBehaviour:
   - {fileID: 4557752062718946204}
   unitSpot: {fileID: 9128213937241333654}
   unitRecruiters: []
+  contested: 0
+  contestPoints: 0
+  maxContestPoints: 20
   g: 0
   h: 0
   F: 0
@@ -355,6 +359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 825438762bc8e0d4b9164d480c7cc1e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tile: {fileID: 2278274184533405709}
   unitModel: {fileID: 8236523139446241178}
   hatMeshRenderer: {fileID: 2124837296658643988}
   playerMaterial: {fileID: 2100000, guid: f8ba13d94cea67d4f809cdced09beeca, type: 2}

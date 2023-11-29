@@ -12,7 +12,7 @@ public class MainBase : ResourceProducer
 			   + IconIDs.resourceToIconID[resource] + "> ";
 		}
 
-		description += "every ";
+		description += "every <b>";
 
 		foreach (var time in productionSpeeds)
 		{
@@ -21,7 +21,7 @@ public class MainBase : ResourceProducer
 
 		description = description.Remove(description.Length - 1);
 
-		description += " seconds. Unlocks new buildings. Grants one more Scout.";
+		description += "</b> seconds. Unlocks new buildings. Grants 1 more Scout. Increases max army size by 1.";
 
 		return description;
 	}
@@ -36,5 +36,6 @@ public class MainBase : ResourceProducer
 		}
 
 		GameState.AddScouts(1);
+		MapUnit.playerArmylimit++;
 	}
 }

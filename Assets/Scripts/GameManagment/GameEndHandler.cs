@@ -14,9 +14,10 @@ public class GameEndHandler : MonoBehaviour
         Instance = this;
     }
 
-    public void ProgressWinCon()
+    public void ProgressWinCon(Tile tile)
     {
         winConCounter++;
+        TileGrid.WinTargetTiles.Remove(tile);
         if (winConCounter >= winConRequired)
             WinGame();
     }

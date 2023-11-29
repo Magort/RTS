@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public static class TileGrid
@@ -40,10 +41,35 @@ public static class TileGrid
 			.Where(tile => tile.affiliation == Affiliation.Player).ToList().Count == 0;
 	}
 
+	public static Tile GetClosestTileOfType(Tile startingTile, Affiliation targetAffiliation)
+	{
+		return GetClosest(startingTile, Tiles.Where(tile => tile.affiliation == targetAffiliation).ToList());
+	}
+
+	static Tile GetClosest(Tile startingTile, List<Tile> availableTiles)
+	{
+		int minDistance = 100;
+		Tile closestTile = null;
+
+		foreach(Tile tile in availableTiles)
+		{
+			int estimatedDistance =
+				Mathf.Max(Mathf.Abs(startingTile.coordinates.z - tile.coordinates.z),
+				Mathf.Abs(startingTile.coordinates.x - tile.coordinates.x),
+				Mathf.Abs(startingTile.coordinates.y - tile.coordinates.y));
+
+			if(estimatedDistance < minDistance)
+			{
+				closestTile = tile;
+				minDistance = estimatedDistance;
+			}
+		}
+
+		return closestTile;
+	}
 	public static List<Tile> GetNeighbouringTiles(Tile tile)
 	{
 		List<Tile> neighbouringTiles = new();
-
 		foreach(Vector3Int coords in NeighbouringCoordinates)
 		{
 			var potentialTile = Tiles.Find(nTile => nTile.coordinates == tile.coordinates + coords);

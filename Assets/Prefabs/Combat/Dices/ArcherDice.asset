@@ -14,13 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actions:
   - subActions:
-    - value: 5
-      target: 1
-      effect: 8
+    - value: 2
+      target: 0
+      effect: 10
       quantity: 0
     - value: 1
       target: 0
       effect: 5
+      quantity: 0
+    - value: 2
+      target: 1
+      effect: 8
       quantity: 0
     name: Steady, Aim...
   - subActions:

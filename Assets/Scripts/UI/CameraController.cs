@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [Range(1, 10)] public float intensity;
+    [Range(0.25f, 1)] public float intensity;
 	public bool dragged;
     public float minZoom;
     public float maxZoom;

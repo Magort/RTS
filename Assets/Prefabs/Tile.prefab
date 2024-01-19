@@ -51,7 +51,6 @@ MonoBehaviour:
   discovered: 0
   neighbour: 0
   beingScouted: 0
-  constested: 0
   units: []
   affiliation: 0
   coordinates: {x: 0, y: 0, z: 0}

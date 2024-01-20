@@ -275,9 +275,12 @@ public class Tile : MonoBehaviour, IPointerUpHandler
 			return;
 		}
 
+        if (CameraController.Instance.tapLocked)
+            return;
+
 		if (eventData.button == PointerEventData.InputButton.Right)
 		{
-			if (!discovered || CameraController.Instance.dragged)
+			if (!discovered)
 				return;
 
 			UnitMovementHandler.Instance.TryMove(this);

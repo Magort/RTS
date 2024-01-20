@@ -12,8 +12,11 @@ public class DebugStick : MonoBehaviour
         //    Debug.Log(TileGrid.MainTile.coordinates);
         //}
 
-        UpdateFPS();
-    }
+        //UpdateFPS();
+        //if (Input.touchCount > 0)
+        //    fpsCounter.text = Input.GetTouch(0).rawPosition.ToString();
+        fpsCounter.text = CameraController.Instance.tapLocked.ToString();
+	}
 
     public void UpdateFPS()
     {

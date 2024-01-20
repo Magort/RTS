@@ -3,20 +3,20 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [Range(0.25f, 1)] public float intensity;
-	public bool dragged;
+    [Range(0.1f, 0.3f)] public float intensity;
     public float minZoom;
     public float maxZoom;
     public float currentZoom;
+    public bool tapLocked;
 
-	bool dragging;
-
-    WaitForSeconds draggedWaiter = new(0.4f);
-
-    Vector3 lastMousePos = new();
     Vector3 moveToTileOffset = new(0, 0, -1.5f);
+    float lastTouchDistance = 0;
 
-    public static CameraController Instance;
+    WaitForSeconds tapLockWaiter = new(0.1f);
+    float tapLockTimer = 0;
+    float tapLockTime = 0.2f;
+
+	public static CameraController Instance;
 
     private void Start()
     {
@@ -26,48 +26,74 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        UpdateZoom();
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            dragging = true;
-            lastMousePos = Input.mousePosition;
-        }
-
-		if (Input.GetMouseButtonUp(1))
-            dragging = false;
-
-        if (!dragging)
+        if(Input.touchCount == 0)
             return;
 
-        Camera.main.transform.position
-            -= (new Vector3(Input.mousePosition.x - lastMousePos.x, 0, Input.mousePosition.y - lastMousePos.y) / 100 )
-            * intensity * Time.timeScale;
-
-        if(!dragged)
+        if (Input.touchCount >= 2)
         {
-            if(Input.mousePosition != lastMousePos)
-            {
-                StartCoroutine(Dragged());
-            }
+            UpdateZoom();
+            return;
         }
 
-        lastMousePos = Input.mousePosition;
+        var touch = Input.GetTouch(0);
+
+        if (touch.phase == TouchPhase.Moved)
+        {
+            transform.position -= intensity * Time.deltaTime * new Vector3(touch.deltaPosition.x, 0, touch.deltaPosition.y);
+
+            if(!tapLocked)
+            {
+                StartCoroutine(TapLock());
+            }
+            else
+            {
+                tapLockTimer = 0;
+            }
+        }
     }
 
     void UpdateZoom()
     {
-		currentZoom = Mathf.Clamp(currentZoom - Input.GetAxis("Mouse ScrollWheel"), minZoom, maxZoom);
+        var touch1 = Input.GetTouch(0);
+        var touch2 = Input.GetTouch(1);
+
+        if (touch1.phase != TouchPhase.Moved && touch2.phase != TouchPhase.Moved)
+            return;
+
+		if (touch1.deltaPosition.x * touch2.deltaPosition.x >= 0)
+            return;
+
+        var currentDistance = Vector2.Distance(touch1.position, touch2.position);
+
+		currentZoom = Mathf.Clamp(currentZoom + lastTouchDistance - currentDistance, minZoom, maxZoom);
 
 		var tf = transform;
 		var pos = tf.position;
 		pos = new Vector3(pos.x, Mathf.Lerp(pos.y, currentZoom, Time.deltaTime * 5), pos.z);
 		tf.position = pos;
+
+		lastTouchDistance = Vector2.Distance(touch1.position, touch2.position);
 	}
 
     public void MoveToTile(Vector3 spot)
     {
         StartCoroutine(MoveTo(spot + moveToTileOffset));
+    }
+
+    IEnumerator TapLock()
+    {
+        tapLocked = true;
+
+        tapLockTimer = 0;
+
+        while(tapLockTimer < tapLockTime)
+        {
+            yield return tapLockWaiter;
+
+            tapLockTimer += 0.1f;
+        }
+
+        tapLocked = false;
     }
 
     IEnumerator MoveTo(Vector3 spot)
@@ -83,14 +109,5 @@ public class CameraController : MonoBehaviour
             step += 0.01f;
             yield return waiter;
         }
-    }
-
-    IEnumerator Dragged()
-    {
-        dragged = true;
-
-        yield return draggedWaiter;
-
-        dragged = false;
-    }    
+    }  
 }

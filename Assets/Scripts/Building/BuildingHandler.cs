@@ -18,7 +18,7 @@ public class BuildingHandler : MonoBehaviour
     public void PopulateBuildingsList(bool discovered)
     {
         if (TileGrid.IsNextToPlyerKingdom(ContextMenu.Instance.SelectedTile)
-            && ContextMenu.Instance.SelectedTile.affiliation != Affiliation.Player)
+            && ContextMenu.Instance.SelectedTile.data.affiliation != Affiliation.Player)
         { 
             panel.SetActive(false);
             return;
@@ -28,7 +28,7 @@ public class BuildingHandler : MonoBehaviour
 
 		ClearBuildingsList();
 
-		if (ContextMenu.Instance.SelectedTile.areas.Find(area => area.type == TileArea.Type.Empty) == null)
+		if (ContextMenu.Instance.SelectedTile.areas.Find(area => area.data.type == TileArea.Type.Empty) == null)
             return;
 
 		foreach (BuildingSlot slot in buildingSlots)
@@ -58,7 +58,7 @@ public class BuildingHandler : MonoBehaviour
         if(!building.SufficientResources())
             return false;
 
-        if (ContextMenu.Instance.SelectedTile.affiliation == Affiliation.Enemy)
+        if (ContextMenu.Instance.SelectedTile.data.affiliation == Affiliation.Enemy)
             return false;
 
         if(building.isUpgrade)
@@ -73,20 +73,20 @@ public class BuildingHandler : MonoBehaviour
     void Upgrade(Building building)
     {
 		var currentBuildingArea = ContextMenu.Instance.SelectedTile.areas
-            .Where(area => area.type == TileArea.Type.Building).ToList()
-            .Find(area => area.building == building.requirements.requiredBuilding);
+            .Where(area => area.data.type == TileArea.Type.Building).ToList()
+            .Find(area => area.data.building == building.requirements.requiredBuilding);
 
-		currentBuildingArea.building = building.code;
+		currentBuildingArea.data.building = building.code;
 		StartCoroutine(DelayUpgrade(building, currentBuildingArea, ContextMenu.Instance.SelectedTile));
 	}
 
     void Build(Building building)
     {
-        var freeArea = ContextMenu.Instance.SelectedTile.areas.Find(area => area.type == TileArea.Type.Empty);
-        freeArea.type = TileArea.Type.Building;
+        var freeArea = ContextMenu.Instance.SelectedTile.areas.Find(area => area.data.type == TileArea.Type.Empty);
+        freeArea.data.type = TileArea.Type.Building;
 
         StartCoroutine(DelayBuild(building, freeArea, ContextMenu.Instance.SelectedTile));
-		freeArea.building = building.code;
+		freeArea.data.building = building.code;
 	}
 
 	IEnumerator DelayUpgrade(Building building, TileArea tileArea, Tile tile)
@@ -101,7 +101,7 @@ public class BuildingHandler : MonoBehaviour
 			.GetComponent<Building>().OnBuildingComplete(tile, tileArea);
 
 		tile.ChangeAffiliation(Affiliation.Player);
-        tileArea.type = TileArea.Type.Building;
+        tileArea.data.type = TileArea.Type.Building;
 	}
 
 	IEnumerator DelayBuild(Building building, TileArea tileArea, Tile tile)

@@ -102,7 +102,7 @@ public class CombatPanel : MonoBehaviour
 	{
 		playerHealthText.text = CombatHandler.playerArmy.health.ToString();
 		playerHealthBar.fillAmount = (float)CombatHandler.playerArmy.health / (float)CombatHandler.playerArmy.maxHealth;
-		playerArmiesText.text = CombatHandler.tileFoughtOn.units
+		playerArmiesText.text = CombatHandler.tileFoughtOn.data.units
 			.Where(unit => unit.affiliation == Affiliation.Player).ToList().Count.ToString()
 			+ "<sprite=" + IconIDs.quantityToIconID[(CombatAction.Quantity.Single, CombatAction.Target.Ally)] + ">";
 		foreach (StatusSlot status in playerStatuses)
@@ -112,7 +112,7 @@ public class CombatPanel : MonoBehaviour
 
 		opponentHealthText.text = CombatHandler.opponentArmy.health.ToString();
 		opponentHealthBar.fillAmount = (float)CombatHandler.opponentArmy.health / (float)CombatHandler.opponentArmy.maxHealth;
-		opponentArmiesText.text = CombatHandler.tileFoughtOn.units
+		opponentArmiesText.text = CombatHandler.tileFoughtOn.data.units
 			.Where(unit => unit.affiliation != Affiliation.Player).ToList().Count.ToString()
 			+ "<sprite=" + IconIDs.quantityToIconID[(CombatAction.Quantity.Single, CombatAction.Target.Opponent)] + ">";
 		foreach (StatusSlot status in opponentStatuses)

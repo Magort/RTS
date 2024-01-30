@@ -43,13 +43,13 @@ public class ResourceExtractor : Building
 			yield return extractionPeriod;
 
 			if(currentTarget == null)
-				currentTarget = builtOn.areas.Find(area => area.type == resourceToArea[resourceToExtract]);
+				currentTarget = builtOn.areas.Find(area => area.data.type == resourceToArea[resourceToExtract]);
 
 			if(currentTarget != null)
 			{
-				currentTarget.resourceAmount--;
+				currentTarget.data.resourceAmount--;
 				GameState.AddResource(resourceToExtract, 1);
-				if(currentTarget.resourceAmount <= 0)
+				if(currentTarget.data.resourceAmount <= 0)
 				{
 					currentTarget.DepleteResources();
 					currentTarget = null;
@@ -58,7 +58,7 @@ public class ResourceExtractor : Building
 			else
 			{
 				GameState.AddResourceGrowth(resourceToExtract, -1 / extractInterval);
-				builtOn.areas.Find(area => area.building == code && area.type == TileArea.Type.Building).RemoveBuilding();
+				builtOn.areas.Find(area => area.data.building == code && area.data.type == TileArea.Type.Building).RemoveBuilding();
 				yield break;
 			}
 		}

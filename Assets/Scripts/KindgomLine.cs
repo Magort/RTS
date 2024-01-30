@@ -13,7 +13,7 @@ public class KindgomLine : MonoBehaviour
     public void ChangeKingdomLine(Tile tile, bool add)
     {
         List<Tile> tilesToUpdate = TileGrid.GetNeighbouringTiles(tile)
-            .Where(neighbourTile => neighbourTile.affiliation == tile.affiliation).ToList();
+            .Where(neighbourTile => neighbourTile.data.affiliation == tile.data.affiliation).ToList();
 
 		foreach (TileArea area in tile.areas)
 		{
@@ -22,10 +22,10 @@ public class KindgomLine : MonoBehaviour
 
 		foreach (Tile nTile in tilesToUpdate)
         {
-            tile.areas[TileGrid.NeighbouringCoordinates.IndexOf(nTile.coordinates - tile.coordinates)]
+            tile.areas[TileGrid.NeighbouringCoordinates.IndexOf(nTile.data.navigationCoordinates - tile.data.navigationCoordinates)]
                 .lineRenderer.enabled = false;
 
-			nTile.areas[TileGrid.NeighbouringCoordinates.IndexOf(tile.coordinates - nTile.coordinates)]
+			nTile.areas[TileGrid.NeighbouringCoordinates.IndexOf(tile.data.navigationCoordinates - nTile.data.navigationCoordinates)]
 				.lineRenderer.enabled = !add;
 		}
 	}

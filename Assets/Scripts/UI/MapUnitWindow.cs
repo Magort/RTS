@@ -35,13 +35,13 @@ public class MapUnitWindow : MonoBehaviour
 
 		List<MapUnit> toRemove = new();
 
-        foreach(var mapUnit in selectedTile.units)
+        foreach(var mapUnit in selectedTile.data.units)
         {
             if(mapUnit.units.Count == 0)
                 toRemove.Add(mapUnit);
         }
 
-        toRemove.ForEach(unit => selectedTile.units.Remove(unit));
+        toRemove.ForEach(unit => selectedTile.data.units.Remove(unit));
         selectedTile = null;
 		blockingPanel.SetActive(false);
 
@@ -50,7 +50,7 @@ public class MapUnitWindow : MonoBehaviour
 
     public void PopulateWindow()
     {
-        foreach(var mapUnit in ContextMenu.Instance.SelectedTile.units)
+        foreach(var mapUnit in ContextMenu.Instance.SelectedTile.data.units)
         {
             if (mapUnit.affiliation == Affiliation.Player)
                 mapUnitsArea1.ShowSlot(mapUnit);

@@ -62,12 +62,12 @@ public abstract class Building : MonoBehaviour
 	{
 		if (isUpgrade)
 			return ContextMenu.Instance.SelectedTile.areas
-				.Where(area => area.type == TileArea.Type.Building).ToList()
-				.Find(area => area.building == requirements.requiredBuilding) != null;
+				.Where(area => area.data.type == TileArea.Type.Building).ToList()
+				.Find(area => area.data.building == requirements.requiredBuilding) != null;
 
-		return ContextMenu.Instance.SelectedTile.areas.Find(area => area.type == requirements.requiredArea)
-				&& ContextMenu.Instance.SelectedTile.areas.Where(area => area.type == TileArea.Type.Building)
-					.ToList().Find(area => area.building == code) == null;
+		return ContextMenu.Instance.SelectedTile.areas.Find(area => area.data.type == requirements.requiredArea)
+				&& ContextMenu.Instance.SelectedTile.areas.Where(area => area.data.type == TileArea.Type.Building)
+					.ToList().Find(area => area.data.building == code) == null;
 	}
 
 	public bool SufficientResources()

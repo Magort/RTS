@@ -134,8 +134,8 @@ public static class CombatHandler
 
     public static bool CheckForCombat(Tile tile)
     {
-        if (tile.units.Find(unit => unit.affiliation == Affiliation.Player) != null
-            && tile.units.Find(unit => unit.affiliation != Affiliation.Player) != null)
+        if (tile.data.units.Find(unit => unit.affiliation == Affiliation.Player) != null
+            && tile.data.units.Find(unit => unit.affiliation != Affiliation.Player) != null)
         {
 			GameManager.SwitchPauseState(true);
             tileFoughtOn = tile;
@@ -160,7 +160,7 @@ public static class CombatHandler
 
         presentMapUnits = new();
 
-        foreach (MapUnit unit in tileFoughtOn.units)
+        foreach (MapUnit unit in tileFoughtOn.data.units)
         {
             presentMapUnits.Add(unit);
         }    
@@ -174,7 +174,7 @@ public static class CombatHandler
         opponentArmy.InitializeArmy(GetNextMapUnit(Affiliation.Enemy));
 
 		CombatPanel.Instance.PopulatePanel();
-        UnitMovementHandler.Instance.Deselect();
+        UnitMovementHandler.Instance.DeselectAll();
 
         if(playerArmy.speed < opponentArmy.speed)
         {
@@ -322,7 +322,7 @@ public static class CombatHandler
             }
         }
 
-        tileFoughtOn.units = new();
+        tileFoughtOn.data.units = new();
 
         foreach(var unit in presentMapUnits)
         {

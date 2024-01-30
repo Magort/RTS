@@ -360,5 +360,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 7470067535904295655}
-  image: {fileID: 5258680839939823428}
+  affiliationImage: {fileID: 5258680839939823428}
+  backgroundImage: {fileID: 6170466152901615669}
   button: {fileID: 6170466152901615668}
+  notSelected: {r: 0.34117648, g: 0.34117648, b: 0.34117648, a: 0.7647059}
+  selected: {r: 1, g: 0.9745827, b: 0, a: 0.7647059}

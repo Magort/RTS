@@ -6,13 +6,7 @@ using System.Linq;
 
 public class Tile : MonoBehaviour, IPointerUpHandler
 {
-    [Header("Data")]
-    public bool discovered;
-    public bool neighbour;
-    public bool beingScouted;
-    public List<MapUnit> units;
-    public Affiliation affiliation;
-    public Vector3Int coordinates;
+    public TileData data;
 	[Header("Light")]
     public Light lighting;
     public float maxIntensity;
@@ -32,9 +26,19 @@ public class Tile : MonoBehaviour, IPointerUpHandler
     //Navigation
     public int g, h, F;
 
-    private void Update()
+	private void Start()
+	{
+        data.spaceCoordinates = transform.position;
+
+        foreach(var area in areas)
+        {
+            data.areas.Add(area.data);
+        }
+	}
+
+	private void Update()
     {
-        if (!discovered)
+        if (!data.discovered)
             return;
 
         if (contested)
@@ -50,7 +54,7 @@ public class Tile : MonoBehaviour, IPointerUpHandler
 
     public void InitializeTile(Vector3Int coordinates)
     {
-        this.coordinates = coordinates;
+        data.navigationCoordinates = coordinates;
 		RollAreas();
     }
 
@@ -58,16 +62,15 @@ public class Tile : MonoBehaviour, IPointerUpHandler
     {
         for(int i = 0; i < areas.Count; i++)
         {
-            areas[i].type = tile.areas[i].type;
-			areas[i].resourceAmount = tile.areas[i].resourceAmount;
+            areas[i].data.type = tile.areas[i].data.type;
+			areas[i].data.resourceAmount = tile.areas[i].data.resourceAmount;
 		}
-        affiliation = tile.affiliation;
-
+		data.affiliation = tile.data.affiliation;
     }
 
     public void RollAreas()
     {
-        List<TileArea.Type> rolledAreas = new() { TileArea.Type.Empty};
+        List<TileArea.Type> rolledAreas = new() { TileArea.Type.Empty };
 
         for(int i = 1; i < areas.Count; i++)
         {
@@ -82,18 +85,18 @@ public class Tile : MonoBehaviour, IPointerUpHandler
 
         for(int i = 0; i < rolledAreas.Count; i++)
         {
-            areas[i].type = rolledAreas[i];
-            areas[i].resourceAmount = TileArea.ResourceStartingAmount[rolledAreas[i]];
+            areas[i].data.type = rolledAreas[i];
+            areas[i].data.resourceAmount = TileArea.ResourceStartingAmount[rolledAreas[i]];
         }
 	}
-	private void ShowDecorations()
+	public void ShowDecorations()
     {
         foreach(TileArea area in areas)
         {
             area.ShowDecorations();
         }
     }
-	private void ClearDecorations()
+	public void ClearDecorations()
 	{
 		foreach (TileArea area in areas)
         {
@@ -103,17 +106,17 @@ public class Tile : MonoBehaviour, IPointerUpHandler
 
     public void MapGenerationAddUnit(MapUnit unit)
     {
-		units.Add(unit);
+		data.units.Add(unit);
 
 		unit.currentTile = this;
 	}
 
     public void AddUnit(MapUnit unit)
     {
-        units.Add(unit);
+		data.units.Add(unit);
         unit.currentTile = this;
 
-        if(units.Count == 1)
+        if(data.units.Count == 1)
         {
             unitSpot.ShowUnitModel(unit.affiliation);
         }
@@ -123,7 +126,7 @@ public class Tile : MonoBehaviour, IPointerUpHandler
         if (CombatHandler.CheckForCombat(this))
             return;
 
-        if (unit.affiliation == Affiliation.Neutral && affiliation == Affiliation.Enemy)
+        if (unit.affiliation == Affiliation.Neutral && data.affiliation == Affiliation.Enemy)
             return;
 
         CheckForOccupation();
@@ -131,12 +134,12 @@ public class Tile : MonoBehaviour, IPointerUpHandler
 
     void CheckForOccupation()
     {
-        if (affiliation == Affiliation.Neutral || units.Count == 0)
+        if (data.affiliation == Affiliation.Neutral || data.units.Count == 0)
             return;
 
-        foreach(var mapUnit in units)
+        foreach(var mapUnit in data.units)
         {
-            if (mapUnit.affiliation == affiliation)
+            if (mapUnit.affiliation == data.affiliation)
             {
                 if(contested)
                 {
@@ -160,14 +163,14 @@ public class Tile : MonoBehaviour, IPointerUpHandler
 		contested = false;
         contestPoints = 0;
         KindgomLine.Instance.ChangeKingdomLine(this, false);
-		affiliation = Affiliation.Neutral;
-		areas.Where(area => area.type == TileArea.Type.Building).ToList().ForEach(area => area.RemoveBuilding());
+		data.affiliation = Affiliation.Neutral;
+		areas.Where(area => area.data.type == TileArea.Type.Building).ToList().ForEach(area => area.RemoveBuilding());
         CheckGameObjectives();
 	}
 
     void CheckGameObjectives()
     {
-        if (coordinates == TileGrid.MainTile.coordinates)
+        if (data.navigationCoordinates == TileGrid.MainTile.data.navigationCoordinates)
         {
             GameEndHandler.Instance.LoseGame();
         }
@@ -178,9 +181,9 @@ public class Tile : MonoBehaviour, IPointerUpHandler
 
     public void RemoveUnit(MapUnit unit)
     {
-        units.Remove(unit);
+		data.units.Remove(unit);
 
-		if (units.Count == 0)
+		if (data.units.Count == 0)
 		{
 			unitSpot.HideUnitModel();
 		}
@@ -196,9 +199,9 @@ public class Tile : MonoBehaviour, IPointerUpHandler
 
     public void ChangeAffiliation(Affiliation affiliation)
     {
-        if(affiliation != this.affiliation)
+        if(affiliation != data.affiliation)
         {
-            this.affiliation = affiliation;
+			data.affiliation = affiliation;
 
             if(affiliation == Affiliation.Neutral)
             {
@@ -232,7 +235,7 @@ public class Tile : MonoBehaviour, IPointerUpHandler
 			yield return waiter;
 		}
 
-		neighbour = true;
+		data.neighbour = true;
 	}
 
 	public void Reveal()
@@ -251,43 +254,48 @@ public class Tile : MonoBehaviour, IPointerUpHandler
             yield return waiter;
         }
 
-		discovered = true;
-        beingScouted = false;
+		data.discovered = true;
+		data.beingScouted = false;
 
 		foreach (Tile tile in TileGrid.GetNeighbouringTiles(this))
 		{
-            if(!tile.neighbour)
+            if(!tile.data.neighbour)
 			    tile.BecomeNeighbour();
 		}
 
         ShowDecorations();
-        if(units.Count > 0)
+        if(data.units.Count > 0)
         {
-            unitSpot.ShowUnitModel(units[0].affiliation);
+            unitSpot.ShowUnitModel(data.units[0].affiliation);
         }    
 	}
 
-    public void OnPointerUp(PointerEventData eventData)
+	public void OnDestroy()
+	{
+		TileGrid.Tiles.Remove(this);
+	}
+
+	public void OnPointerUp(PointerEventData eventData)
     {
-		if (!neighbour)
+		if (!data.neighbour)
 		{
 			ContextMenu.Instance.CloseAll();
 			return;
 		}
 
-        if (CameraController.Instance.tapLocked)
+        if (GameState.TapLocked)
             return;
 
-		if (eventData.button == PointerEventData.InputButton.Right)
+		if (UnitMovementHandler.Instance.selectedUnits.Count > 0)
 		{
-			if (!discovered)
+			if (!data.discovered)
 				return;
 
 			UnitMovementHandler.Instance.TryMove(this);
 			return;
 		}
 
-        if (beingScouted)
+        if (data.beingScouted)
 		{
 			ContextMenu.Instance.CloseAll();
 			return;
@@ -295,7 +303,7 @@ public class Tile : MonoBehaviour, IPointerUpHandler
 
 		AudioManager.Instance.Play(Sound.Name.Click);
 		ContextMenu.Instance.SelectedTile = this;
-		ContextMenu.Instance.ShowTileInfo(discovered, affiliation);
-		UnitMovementHandler.Instance.Deselect();
+		ContextMenu.Instance.ShowTileInfo(data.discovered, data.affiliation);
+		UnitMovementHandler.Instance.DeselectAll();
 	}
 }

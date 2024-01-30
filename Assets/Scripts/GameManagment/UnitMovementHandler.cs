@@ -2,13 +2,12 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
-using System.IO;
 
 public class UnitMovementHandler : MonoBehaviour
 {
     public static UnitMovementHandler Instance;
 	public LineRenderer pathLine;
-	List<MapUnit> selectedUnits = new();
+	public List<MapUnit> selectedUnits = new();
 
 	int stepTime = 4;
 
@@ -28,7 +27,15 @@ public class UnitMovementHandler : MonoBehaviour
 		ShowPath(unit.path);
 	}
 
-	public void Deselect()
+	public void Deselect(MapUnit unit)
+	{
+		if (unit.affiliation != Affiliation.Player)
+			return;
+
+		selectedUnits.Remove(unit);
+	}
+
+	public void DeselectAll()
 	{
 		selectedUnits = new();
 		HidePath();
@@ -55,8 +62,8 @@ public class UnitMovementHandler : MonoBehaviour
 			else
 				movementDictionary.Add(unit, StartCoroutine(Move(unit)));
 		}
-
-		ShowPath(path);
+		DeselectAll();
+		ContextMenu.Instance.UpdatePanel();
 	}
 
 	public void MoveEnemyUnit(MapUnit unit, int maxStep)
@@ -105,7 +112,7 @@ public class UnitMovementHandler : MonoBehaviour
 			if (unit.path.Count == 0)
 				break;
 
-			if (unit.currentTile.discovered)
+			if (unit.currentTile.data.discovered)
 			{
 				unit.movementProgressBar = ProgressBarManager.Instance.GetProgressBar();
 				unit.movementProgressBar.ShowProgress(unit.currentTile.transform, stepTime, "Moving...");
@@ -179,7 +186,7 @@ public class UnitMovementHandler : MonoBehaviour
 
 	void ClearNavigationParameters()
 	{
-		foreach (Tile tile in TileGrid.Tiles.Where(tile => tile.neighbour))
+		foreach (Tile tile in TileGrid.Tiles.Where(tile => tile.data.neighbour))
 		{
 			tile.g = 0;
 			tile.h = 0;
@@ -195,7 +202,7 @@ public class UnitMovementHandler : MonoBehaviour
 		Tile currentTile = startPoint;
 
 		currentTile.g = 0;
-		currentTile.h = GetEstimatedPathCost(startPoint.coordinates, endPoint.coordinates);
+		currentTile.h = GetEstimatedPathCost(startPoint.data.navigationCoordinates, endPoint.data.navigationCoordinates);
 
 		openPathTiles.Add(currentTile);
 
@@ -218,7 +225,7 @@ public class UnitMovementHandler : MonoBehaviour
 
 			foreach (Tile adjacentTile in TileGrid.GetNeighbouringTiles(currentTile))
 			{
-				if (!adjacentTile.neighbour && affiliation == Affiliation.Player)
+				if (!adjacentTile.data.neighbour && affiliation == Affiliation.Player)
 				{
 					continue;
 				}
@@ -231,7 +238,7 @@ public class UnitMovementHandler : MonoBehaviour
 				if (!(openPathTiles.Contains(adjacentTile)))
 				{
 					adjacentTile.g = g;
-					adjacentTile.h = GetEstimatedPathCost(adjacentTile.coordinates, endPoint.coordinates);
+					adjacentTile.h = GetEstimatedPathCost(adjacentTile.data.navigationCoordinates, endPoint.data.navigationCoordinates);
 					openPathTiles.Add(adjacentTile);
 				}
 
@@ -242,7 +249,7 @@ public class UnitMovementHandler : MonoBehaviour
 			}
 		}
 
-		List<Tile> finalPathTiles = new List<Tile>();
+		List<Tile> finalPathTiles = new();
 
 		if (closedPathTiles.Contains(endPoint))
 		{

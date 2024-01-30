@@ -77,12 +77,12 @@ public class UnitUpkeepHandler : MonoBehaviour
     void RemoveRandomUnit()
     {
         var tilesWithPlayerUnits = TileGrid.Tiles
-            .Where(tile => tile.units.Count > 0)
-            .Where(tile => tile.units.Find(unit => unit.affiliation == Affiliation.Player) != null)
+            .Where(tile => tile.data.units.Count > 0)
+            .Where(tile => tile.data.units.Find(unit => unit.affiliation == Affiliation.Player) != null)
             .ToList();
 
         var randomTile = tilesWithPlayerUnits[Random.Range(0, tilesWithPlayerUnits.Count)];
-        var randomMapUnit = randomTile.units[Random.Range(0, randomTile.units.Count)];
+        var randomMapUnit = randomTile.data.units[Random.Range(0, randomTile.data.units.Count)];
 
 		randomMapUnit.KillRandomUnit();
     }

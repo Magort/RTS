@@ -39,9 +39,9 @@ public class TileInfoPanel : MonoBehaviour
         if (ContextMenu.Instance.SelectedTile == null)
             return;
 
-		for (int i = 0; i < ContextMenu.Instance.SelectedTile.units.Count; i++)
+		for (int i = 0; i < ContextMenu.Instance.SelectedTile.data.units.Count; i++)
 		{
-            mapUnitSlots[i].PopulateSlot(ContextMenu.Instance.SelectedTile.units[i]);
+            mapUnitSlots[i].PopulateSlot(ContextMenu.Instance.SelectedTile.data.units[i]);
 		}
 	}
 
@@ -67,19 +67,19 @@ public class TileInfoPanel : MonoBehaviour
 
         foreach(TileArea area in ContextMenu.Instance.SelectedTile.areas)
         {
-            switch(area.type)
+            switch(area.data.type)
             {
                 case TileArea.Type.EssenceSource:
-                    addedResources[Resource.Essence] += area.resourceAmount;
+                    addedResources[Resource.Essence] += area.data.resourceAmount;
                     break;
 				case TileArea.Type.WoodSource:
-                    addedResources[Resource.Wood] += area.resourceAmount;
+                    addedResources[Resource.Wood] += area.data.resourceAmount;
 					break;
 				case TileArea.Type.FoodSource:
-                    addedResources[Resource.Food] += area.resourceAmount;
+                    addedResources[Resource.Food] += area.data.resourceAmount;
 					break;
 				case TileArea.Type.GoldSource:
-                    addedResources[Resource.Gold] += area.resourceAmount;
+                    addedResources[Resource.Gold] += area.data.resourceAmount;
 					break;
                 default:
                     break;

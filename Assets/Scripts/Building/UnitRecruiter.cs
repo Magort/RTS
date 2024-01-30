@@ -19,7 +19,7 @@ public class UnitRecruiter : Building
 
     public void AddUnit()
     {
-        var alliedMapUnits = builtOn.units.FindAll(unit => unit.affiliation == builtOn.affiliation);
+        var alliedMapUnits = builtOn.data.units.FindAll(unit => unit.affiliation == builtOn.data.affiliation);
 
 		MapUnit mapUnitWithFreeSlots = null;
 
@@ -43,7 +43,7 @@ public class UnitRecruiter : Building
 
         mapUnitWithFreeSlots = new();
         mapUnitWithFreeSlots.SetCustomName("Army" + armyNumber++);
-        mapUnitWithFreeSlots.affiliation = builtOn.affiliation;
+        mapUnitWithFreeSlots.affiliation = builtOn.data.affiliation;
 
 		mapUnitWithFreeSlots.AddToArmy(unit);
 

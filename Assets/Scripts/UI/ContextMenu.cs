@@ -23,7 +23,7 @@ public class ContextMenu : MonoBehaviour
         if(SelectedTile == null)
             return;
 
-        if (SelectedTile.beingScouted)
+        if (SelectedTile.data.beingScouted)
             return;
 
         timer += Time.deltaTime;
@@ -40,7 +40,7 @@ public class ContextMenu : MonoBehaviour
         if (SelectedTile == null)
             return;
 
-		ShowTileInfo(SelectedTile.discovered, SelectedTile.affiliation);
+		ShowTileInfo(SelectedTile.data.discovered, SelectedTile.data.affiliation);
 	}
 
     public void ShowTileInfo(bool discovered, Affiliation affiliation)
@@ -54,7 +54,7 @@ public class ContextMenu : MonoBehaviour
         else
 			unitRecruitmentPanel.ClearSlots();
 
-        if (affiliation != Affiliation.Enemy && SelectedTile.units.Find(unit => unit.affiliation != Affiliation.Player) == null)
+        if (affiliation != Affiliation.Enemy && SelectedTile.data.units.Find(unit => unit.affiliation != Affiliation.Player) == null)
         {
             buildingPanel.PopulateBuildingsList(discovered);
         }

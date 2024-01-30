@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -35,7 +34,7 @@ public class ScoutingHandler : MonoBehaviour
 
     public float ScoutingTime()
     {
-        var selectedTileCoords = ContextMenu.Instance.SelectedTile.coordinates;
+        var selectedTileCoords = ContextMenu.Instance.SelectedTile.data.navigationCoordinates;
         var mainTileCoords = new Vector3Int(TileGrid.Size, TileGrid.Size, TileGrid.Size * -2);
         return defaultScoutingTime * Mathf.Max(Mathf.Abs(selectedTileCoords.x - mainTileCoords.x),
                          Mathf.Abs(selectedTileCoords.y - mainTileCoords.y),
@@ -48,7 +47,7 @@ public class ScoutingHandler : MonoBehaviour
         float scoutingTime = defaultScoutingTime + (ScoutingTime() / 3);
 
 		ProgressBarManager.Instance.GetProgressBar().ShowProgress(scoutedTile.transform, scoutingTime, scoutingText);
-        scoutedTile.beingScouted = true;
+        scoutedTile.data.beingScouted = true;
 
 		float timer = 0;
         while(timer < scoutingTime)

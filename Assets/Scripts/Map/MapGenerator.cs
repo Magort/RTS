@@ -5,7 +5,6 @@ using UnityEngine;
 public class MapGenerator : MonoBehaviour
 {
 	public Tile mainTile;
-	public int debugSize;
 	[Header("Prefabs")]
     public GameObject tilePrefab;
 	public Tile startingFoodTile;
@@ -22,25 +21,31 @@ public class MapGenerator : MonoBehaviour
 		public int tier;
 	}
 
-	float xOffsetFull = 1.73f;
-	float zOffsetFull = 1.5f;
+	readonly float xOffsetFull = 1.73f;
+	readonly float zOffsetFull = 1.5f;
 
     Vector3 startingPoint = Vector3.zero;
 
-	private void Start()
-    {
-        GenerateMap(debugSize);
-		TileGrid.Size = debugSize;
-		TileGrid.MainTile = mainTile;
-		GenerateNeutralUnits();
-		GenerateEnemyBases();
-    }
+	public void LoadMap(LevelData levelData)
+	{
+		Destroy(mainTile.gameObject);
 
-    void GenerateMap(int size)
+		foreach (var tileData in levelData.tiles)
+		{
+			var tile = Instantiate(tilePrefab, tileData.spaceCoordinates, Quaternion.identity).GetComponent<Tile>();
+			tile.data = tileData;
+			tile.ShowDecorations();
+			TileGrid.AddTile(tile);
+		}
+	}
+
+    public void GenerateRandomMap(int size)
     {
         var midRowSize = size * 2 + 1;
+		TileGrid.Size = size;
+		TileGrid.MainTile = mainTile;
 
-        for(int i = 0; i < midRowSize; i++)
+		for (int i = 0; i < midRowSize; i++)
         {
 			if (i != size)
 			{
@@ -51,7 +56,7 @@ public class MapGenerator : MonoBehaviour
 			else
 			{
 				TileGrid.AddTile(mainTile);
-				mainTile.coordinates = new Vector3Int(size, size, size * -2);
+				mainTile.data.navigationCoordinates = new Vector3Int(size, size, size * -2);
 			}
 		}
 
@@ -85,6 +90,8 @@ public class MapGenerator : MonoBehaviour
 
 		EnsureStartingResources();
 		EnableNeighbouringTiles();
+		GenerateNeutralUnits();
+		GenerateEnemyBases();
 	}
 
 	void EnsureStartingResources()
@@ -109,8 +116,8 @@ public class MapGenerator : MonoBehaviour
 		var roll = Random.Range(0, TileGrid.NeighbouringCoordinates.Count);
 
 		TileGrid.Tiles.Find(tile =>
-			tile.coordinates ==
-			mainTile.coordinates + TileGrid.NeighbouringCoordinates[roll] * 2)
+			tile.data.navigationCoordinates ==
+			mainTile.data.navigationCoordinates + TileGrid.NeighbouringCoordinates[roll] * 2)
 			.TransformIntoTile(startingEssenceTile);
 	}
 
@@ -132,8 +139,8 @@ public class MapGenerator : MonoBehaviour
 			Tile selectedTile = availableTiles[Random.Range(0, availableTiles.Count)];
 
 			var unit = GetNeutralUnit(
-				Mathf.Max(Mathf.Abs(selectedTile.coordinates.x - TileGrid.Size),
-				Mathf.Abs(selectedTile.coordinates.y - TileGrid.Size)));
+				Mathf.Max(Mathf.Abs(selectedTile.data.navigationCoordinates.x - TileGrid.Size),
+				Mathf.Abs(selectedTile.data.navigationCoordinates.y - TileGrid.Size)));
 
 			selectedTile.MapGenerationAddUnit(unit);
 			EnemyBehaviourHandler.Instance.AddUnit(unit);
@@ -161,19 +168,19 @@ public class MapGenerator : MonoBehaviour
 			new(16, 2, -18)
 		};
 
-		List<Tile> validTiles = TileGrid.Tiles.Where(tile => validCoordinates.Contains(tile.coordinates)).ToList();
+		List<Tile> validTiles = TileGrid.Tiles.Where(tile => validCoordinates.Contains(tile.data.navigationCoordinates)).ToList();
 
 		for(int i = 0; i < enemyTiles.Count; i++)
 		{
 			var roll = Random.Range(0, validTiles.Count);
 
 			var worldCoordinates = validTiles[roll].transform.position;
-			var coodrdinates = validTiles[roll].coordinates;
+			var coodrdinates = validTiles[roll].data.navigationCoordinates;
 			TileGrid.Tiles.Remove(validTiles[i]);
 			Destroy(validTiles[i].gameObject);
 
 			var newTile = Instantiate(enemyTiles[i], worldCoordinates, Quaternion.identity);
-			newTile.coordinates = coodrdinates;
+			newTile.data.navigationCoordinates = coodrdinates;
 			TileGrid.AddTile(newTile);
 			newTile.ChangeAffiliation(Affiliation.Enemy);
 

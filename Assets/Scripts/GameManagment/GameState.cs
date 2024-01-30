@@ -3,6 +3,9 @@ using UnityEngine;
 
 public static class GameState
 {
+	public static bool TapLocked;
+	public static bool DragLocked;
+
     public static Dictionary<Resource, int> Resources = new()
     {
         {Resource.Wood, 0 },

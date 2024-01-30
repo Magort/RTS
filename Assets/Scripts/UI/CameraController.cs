@@ -7,12 +7,11 @@ public class CameraController : MonoBehaviour
     public float minZoom;
     public float maxZoom;
     public float currentZoom;
-    public bool tapLocked;
 
     Vector3 moveToTileOffset = new(0, 0, -1.5f);
     float lastTouchDistance = 0;
 
-    WaitForSeconds tapLockWaiter = new(0.1f);
+	WaitForSecondsRealtime tapLockWaiter = new(0.1f);
     float tapLockTimer = 0;
     float tapLockTime = 0.2f;
 
@@ -39,16 +38,9 @@ public class CameraController : MonoBehaviour
 
         if (touch.phase == TouchPhase.Moved)
         {
-            transform.position -= intensity * Time.deltaTime * new Vector3(touch.deltaPosition.x, 0, touch.deltaPosition.y);
+            transform.position -= intensity * Time.unscaledDeltaTime * new Vector3(touch.deltaPosition.x, 0, touch.deltaPosition.y);
 
-            if(!tapLocked)
-            {
-                StartCoroutine(TapLock());
-            }
-            else
-            {
-                tapLockTimer = 0;
-            }
+            HandleTapLock();
         }
     }
 
@@ -69,10 +61,12 @@ public class CameraController : MonoBehaviour
 
 		var tf = transform;
 		var pos = tf.position;
-		pos = new Vector3(pos.x, Mathf.Lerp(pos.y, currentZoom, Time.deltaTime * 5), pos.z);
+		pos = new Vector3(pos.x, Mathf.Lerp(pos.y, currentZoom, Time.unscaledDeltaTime * 5), pos.z);
 		tf.position = pos;
 
 		lastTouchDistance = Vector2.Distance(touch1.position, touch2.position);
+
+		HandleTapLock();
 	}
 
     public void MoveToTile(Vector3 spot)
@@ -80,9 +74,21 @@ public class CameraController : MonoBehaviour
         StartCoroutine(MoveTo(spot + moveToTileOffset));
     }
 
+    void HandleTapLock()
+    {
+		if (!GameState.TapLocked)
+		{
+			StartCoroutine(TapLock());
+		}
+		else
+		{
+			tapLockTimer = 0;
+		}
+	}
+
     IEnumerator TapLock()
     {
-        tapLocked = true;
+        GameState.TapLocked = true;
 
         tapLockTimer = 0;
 
@@ -93,7 +99,7 @@ public class CameraController : MonoBehaviour
             tapLockTimer += 0.1f;
         }
 
-        tapLocked = false;
+		GameState.TapLocked = false;
     }
 
     IEnumerator MoveTo(Vector3 spot)

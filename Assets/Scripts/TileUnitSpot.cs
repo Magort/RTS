@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,7 +25,7 @@ public class TileUnitSpot : MonoBehaviour
 
     public void ShowUnitModel(Affiliation affiliation)
     {
-        if (!tile.discovered)
+        if (!tile.data.discovered)
             return;
 
         unitModel.SetActive(true);

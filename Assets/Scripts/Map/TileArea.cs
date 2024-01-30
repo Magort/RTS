@@ -29,9 +29,7 @@ public class TileArea : MonoBehaviour
 		{ Affiliation.Neutral, Color.green }
 	};
 
-	public Type type;
-    public int resourceAmount = 0;
-    public Building.Code building;
+    public TileAreaData data = new();
 
 	public GameObject woodDecorations;
 	public GameObject foodDecorations;
@@ -57,28 +55,28 @@ public class TileArea : MonoBehaviour
     public void DepleteResources()
     {
 		HideDecorations();
-		type = Type.Empty;
+		data.type = Type.Empty;
     }
 
     public void RemoveBuilding()
     {
         Destroy(buildingSlot.transform.GetChild(0).gameObject);
-        type = Type.Empty;
+		data.type = Type.Empty;
     }
 
     public void ShowDecorations()
     {
-        if(type != Type.Empty)
+        if(data.type != Type.Empty)
         {
-            typeToDecoration[type].SetActive(true);
+            typeToDecoration[data.type].SetActive(true);
         }
     }
 
     public void HideDecorations()
     {
-        if (type != Type.Empty)
+        if (data.type != Type.Empty)
         {
-            typeToDecoration[type].SetActive(false);
+            typeToDecoration[data.type].SetActive(false);
         }
 	}
 

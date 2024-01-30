@@ -10,7 +10,7 @@ public class HoverPanel : MonoBehaviour
 
     int screenEdgeOffset = 15;
 
-    Vector3 offset = new(0, 100, 0);
+    Vector3 offset = new(0, 175, 0);
 
     GameObject target;
 

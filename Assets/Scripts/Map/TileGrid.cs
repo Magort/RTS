@@ -38,12 +38,12 @@ public static class TileGrid
 	public static bool IsNextToPlyerKingdom(Tile tile)
 	{
 		return GetNeighbouringTiles(tile)
-			.Where(tile => tile.affiliation == Affiliation.Player).ToList().Count == 0;
+			.Where(tile => tile.data.affiliation == Affiliation.Player).ToList().Count == 0;
 	}
 
 	public static Tile GetClosestTileOfType(Tile startingTile, Affiliation targetAffiliation)
 	{
-		return GetClosest(startingTile, Tiles.Where(tile => tile.affiliation == targetAffiliation).ToList());
+		return GetClosest(startingTile, Tiles.Where(tile => tile.data.affiliation == targetAffiliation).ToList());
 	}
 
 	static Tile GetClosest(Tile startingTile, List<Tile> availableTiles)
@@ -54,9 +54,9 @@ public static class TileGrid
 		foreach(Tile tile in availableTiles)
 		{
 			int estimatedDistance =
-				Mathf.Max(Mathf.Abs(startingTile.coordinates.z - tile.coordinates.z),
-				Mathf.Abs(startingTile.coordinates.x - tile.coordinates.x),
-				Mathf.Abs(startingTile.coordinates.y - tile.coordinates.y));
+				Mathf.Max(Mathf.Abs(startingTile.data.navigationCoordinates.z - tile.data.navigationCoordinates.z),
+				Mathf.Abs(startingTile.data.navigationCoordinates.x - tile.data.navigationCoordinates.x),
+				Mathf.Abs(startingTile.data.navigationCoordinates.y - tile.data.navigationCoordinates.y));
 
 			if(estimatedDistance < minDistance)
 			{
@@ -72,7 +72,7 @@ public static class TileGrid
 		List<Tile> neighbouringTiles = new();
 		foreach(Vector3Int coords in NeighbouringCoordinates)
 		{
-			var potentialTile = Tiles.Find(nTile => nTile.coordinates == tile.coordinates + coords);
+			var potentialTile = Tiles.Find(nTile => nTile.data.navigationCoordinates == tile.data.navigationCoordinates + coords);
 
 			if (potentialTile != null)
 				neighbouringTiles.Add(potentialTile);

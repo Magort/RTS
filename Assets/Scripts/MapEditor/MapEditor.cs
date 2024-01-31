@@ -8,9 +8,10 @@ public class MapEditor : MonoBehaviour
     {
         var levelData = ScriptableObject.CreateInstance<LevelData>();
         levelData.tiles = CreateList();
-
-		AssetDatabase.CreateAsset(levelData, "Assets/LevelData/NewLevelData.asset");
-        AssetDatabase.SaveAssets();
+#if UNITY_EDITOR
+        AssetDatabase.CreateAsset(levelData, "Assets/LevelData/NewLevelData.asset");
+        AssetDatabase.SaveAssets(); 
+#endif
     }
 
     List<TileData> CreateList()

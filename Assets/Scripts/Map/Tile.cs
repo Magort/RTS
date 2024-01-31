@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Linq;
+using System.Diagnostics.Contracts;
 
 public class Tile : MonoBehaviour, IPointerUpHandler
 {
@@ -30,10 +31,16 @@ public class Tile : MonoBehaviour, IPointerUpHandler
 	{
         data.spaceCoordinates = transform.position;
 
-        foreach(var area in areas)
+        foreach (var area in areas)
         {
             data.areas.Add(area.data);
         }
+
+        if (data.neighbour)
+            BecomeNeighbour();
+
+        if (data.discovered)
+            Reveal();
 	}
 
 	private void Update()
@@ -56,6 +63,18 @@ public class Tile : MonoBehaviour, IPointerUpHandler
     {
         data.navigationCoordinates = coordinates;
 		RollAreas();
+    }
+
+    public void LoadFromData(TileData loadData)
+    {
+        data.affiliation = loadData.affiliation;
+        data.discovered = loadData.discovered;
+        data.neighbour = loadData.neighbour;
+
+       for(int i = 0; i < data.areas.Count; i++)
+        {
+            areas[i].data.type = loadData.areas[i].type;
+        }
     }
 
     public void TransformIntoTile(Tile tile)
@@ -245,6 +264,8 @@ public class Tile : MonoBehaviour, IPointerUpHandler
 
     IEnumerator RevealCoroutine()
     {
+        container.SetActive(true);
+
         float intensityGrowth = maxIntensity/100;
         WaitForSeconds waiter = new(0.01f);
 

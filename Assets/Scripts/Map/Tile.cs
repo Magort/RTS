@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Linq;
-using System.Diagnostics.Contracts;
 
 public class Tile : MonoBehaviour, IPointerUpHandler
 {
@@ -27,14 +26,17 @@ public class Tile : MonoBehaviour, IPointerUpHandler
     //Navigation
     public int g, h, F;
 
+	private void Awake()
+	{
+		foreach (var area in areas)
+		{
+			data.areas.Add(area.data);
+		}
+	}
+
 	private void Start()
 	{
         data.spaceCoordinates = transform.position;
-
-        foreach (var area in areas)
-        {
-            data.areas.Add(area.data);
-        }
 
         if (data.neighbour)
             BecomeNeighbour();
@@ -62,6 +64,7 @@ public class Tile : MonoBehaviour, IPointerUpHandler
     public void InitializeTile(Vector3Int coordinates)
     {
         data.navigationCoordinates = coordinates;
+        areas.ForEach(area => area.InitDictionary());
 		RollAreas();
     }
 
@@ -71,10 +74,16 @@ public class Tile : MonoBehaviour, IPointerUpHandler
         data.discovered = loadData.discovered;
         data.neighbour = loadData.neighbour;
 
-       for(int i = 0; i < data.areas.Count; i++)
+        for(int i = 0; i < data.areas.Count; i++)
         {
             areas[i].data.type = loadData.areas[i].type;
+            areas[i].data.resourceAmount = loadData.areas[i].resourceAmount;
+            areas[i].InitDictionary();
+            //building load here
         }
+
+        if(data.discovered)
+            ShowDecorations();
     }
 
     public void TransformIntoTile(Tile tile)

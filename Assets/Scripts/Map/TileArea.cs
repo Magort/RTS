@@ -40,17 +40,20 @@ public class TileArea : MonoBehaviour
 
     Dictionary<Type, GameObject> typeToDecoration;
 
-    private void Awake()
+    public void InitDictionary()
     {
-        typeToDecoration = new()
-        {
-			{Type.WoodSource, woodDecorations },
-			{Type.FoodSource, foodDecorations },
-			{Type.GoldSource, goldDecorations },
-			{Type.EssenceSource, essenceDecorations },
-			{Type.Building, buildingSlot }
+        if (typeToDecoration != null)
+            return;
+
+		typeToDecoration = new()
+		{
+			{ Type.WoodSource, woodDecorations },
+			{ Type.FoodSource, foodDecorations },
+			{ Type.GoldSource, goldDecorations },
+			{ Type.EssenceSource, essenceDecorations },
+			{ Type.Building, buildingSlot }
 		};
-    }
+	}
 
     public void DepleteResources()
     {
@@ -68,6 +71,7 @@ public class TileArea : MonoBehaviour
     {
         if(data.type != Type.Empty)
         {
+            Debug.Log(data.type);
             typeToDecoration[data.type].SetActive(true);
         }
     }

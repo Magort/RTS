@@ -39,7 +39,7 @@ public class MapGenerator : MonoBehaviour
 		{
 			var tile = Instantiate(tilePrefab, tileData.spaceCoordinates, Quaternion.identity).GetComponent<Tile>();
 
-			tile.ShowDecorations();
+			tile.LoadFromData(tileData);
 			tile.transform.parent = gameObject.transform;
 			TileGrid.AddTile(tile);
 		}

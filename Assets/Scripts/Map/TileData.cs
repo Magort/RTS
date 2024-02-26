@@ -9,6 +9,7 @@ public class TileData
 	public bool beingScouted;
 	public List<MapUnit> units;
 	public Affiliation affiliation;
+	public Biome biome;
 	public Vector3Int navigationCoordinates;
 	public Vector3 spaceCoordinates;
 	public List<TileAreaData> areas;

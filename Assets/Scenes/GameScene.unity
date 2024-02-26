@@ -5981,8 +5981,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dd1097c37701404b8d0bc9d85046287, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainTilePrefab: {fileID: 0}
-  tilePrefab: {fileID: 1092668520974257327, guid: bf698c1968424e94e96daa86c7a2ae74, type: 3}
+  neutralTilePrefab: {fileID: 8568120371965588413, guid: 2332e26282f6a714d88b9dda98a1f31d, type: 3}
+  fireTilePrefab: {fileID: 862676888439290973, guid: d9a9cd5805fca7145b07dc123bff5388, type: 3}
+  waterTilePrefab: {fileID: 0}
+  airTilePrefab: {fileID: 0}
+  earthTilePrefab: {fileID: 0}
   startingFoodTile: {fileID: 3185285131872373667, guid: 7eaa7c6ff2d2b344eaaeede71ea88be7, type: 3}
   startingWoodTile: {fileID: 7131013926425449806, guid: eccf9dbe2c7860040bb64c8442681e42, type: 3}
   startingGoldTile: {fileID: 2910938102403119597, guid: f1641654438d3af4998f00acb3eb71e0, type: 3}

@@ -7,14 +7,21 @@ public class MapGenerator : MonoBehaviour
 	public static MapGenerator Instance;
 
 	[Header("Prefabs")]
-	public Tile mainTilePrefab;
-	public GameObject tilePrefab;
+	public GameObject neutralTilePrefab;
+	public GameObject fireTilePrefab;
+	public GameObject waterTilePrefab;
+	public GameObject airTilePrefab;
+	public GameObject earthTilePrefab;
+
+	[Header("Random Map")]
 	public Tile startingFoodTile;
 	public Tile startingWoodTile;
 	public Tile startingGoldTile;
 	public Tile startingEssenceTile;
 	public List<NeutralMapUnitSpawnData> neutralMapUnits = new();
 	public List<Tile> enemyTiles = new();
+
+	Dictionary<Biome, GameObject> biomeToTilePrefab = new();
 
 	[System.Serializable]
 	public class NeutralMapUnitSpawnData
@@ -23,21 +30,34 @@ public class MapGenerator : MonoBehaviour
 		public int tier;
 	}
 
-	readonly float xOffsetFull = 1.73f;
-	readonly float zOffsetFull = 1.5f;
+	public static float xOffsetFull = 1.73f;
+	public static float zOffsetFull = 1.5f;
 
     Vector3 startingPoint = Vector3.zero;
 
 	private void Awake()
 	{
 		Instance = this;
+		MapPrefabs();
+	}
+
+	void MapPrefabs()
+	{
+		biomeToTilePrefab = new()
+		{
+			{ Biome.Neutral, neutralTilePrefab },
+			{ Biome.Fire, fireTilePrefab },
+			{ Biome.Water, waterTilePrefab },
+			{ Biome.Air, airTilePrefab },
+			{ Biome.Earth, earthTilePrefab }
+		};
 	}
 
 	public void LoadMap(LevelData levelData)
 	{
 		foreach (var tileData in levelData.tiles)
 		{
-			var tile = Instantiate(tilePrefab, tileData.spaceCoordinates, Quaternion.identity).GetComponent<Tile>();
+			var tile = Instantiate(biomeToTilePrefab[tileData.biome], tileData.spaceCoordinates, Quaternion.identity).GetComponent<Tile>();
 
 			tile.LoadFromData(tileData);
 			tile.transform.parent = gameObject.transform;
@@ -45,12 +65,11 @@ public class MapGenerator : MonoBehaviour
 		}
 	}
 
-    public void GenerateRandomMap(int size)
+    public void GenerateRandomMap(int size, Biome biome)
     {
+		var tilePrefab = biomeToTilePrefab[biome];
         var midRowSize = size * 2 + 1;
 		TileGrid.Size = size;
-		TileGrid.MainTile = Instantiate(mainTilePrefab, startingPoint, Quaternion.identity);
-		TileGrid.AddTile(TileGrid.MainTile);
 
 		for (int i = 0; i < midRowSize; i++)
         {
@@ -62,7 +81,7 @@ public class MapGenerator : MonoBehaviour
 			}
 			else
 			{
-				TileGrid.MainTile.data.navigationCoordinates = new Vector3Int(size, size, size * -2);
+				SetMainTile(Instantiate(tilePrefab, startingPoint - new Vector3(xOffsetFull, 0, 0) * (size - i), Quaternion.identity, transform).GetComponent<Tile>(), size);
 			}
 		}
 
@@ -75,7 +94,7 @@ public class MapGenerator : MonoBehaviour
             {
 				var tile = Instantiate(tilePrefab, newStartingPoint + new Vector3(xOffsetFull, 0, 0) * j, Quaternion.identity, transform)
 					.GetComponent<Tile>();
-				tile.InitializeTile(new Vector3Int(j, size + i, (j + size + i) * -1));
+				tile.InitializeTile(new(j, size + i, (j + size + i) * -1));
 				TileGrid.AddTile(tile);
 			}
 		}
@@ -89,7 +108,7 @@ public class MapGenerator : MonoBehaviour
 			{
 				var tile = Instantiate(tilePrefab, newStartingPoint + new Vector3(xOffsetFull, 0, 0) * j, Quaternion.identity, transform)
 					.GetComponent<Tile>();
-				tile.InitializeTile(new Vector3Int(i + j, size - i, (i + j + size - i) * -1));
+				tile.InitializeTile(new(i + j, size - i, (i + j + size - i) * -1));
 				TileGrid.AddTile(tile);
 			}
 		}
@@ -100,9 +119,16 @@ public class MapGenerator : MonoBehaviour
 		GenerateEnemyBases();
 	}
 
+	void SetMainTile(Tile tile, int size)
+	{
+		TileGrid.MainTile = tile;
+		tile.ChangeAffiliation(Affiliation.Player);
+		tile.InitializeTile(new(size, size, -size * 2));
+	}
+
 	void EnsureStartingResources()
 	{
-		var potentialTiles = TileGrid.GetNeighbouringTiles(mainTilePrefab);
+		var potentialTiles = TileGrid.GetNeighbouringTiles(TileGrid.MainTile);
 
 		var foodTile = potentialTiles[Random.Range(0, potentialTiles.Count)];
 		potentialTiles.Remove(foodTile);

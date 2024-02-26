@@ -24,18 +24,10 @@ public class MapEditorLevelGenerator : MonoBehaviour
 
 		for (int i = 0; i < midRowSize; i++)
 		{
-			if (i != size)
-			{
-				var tile = Instantiate(tilePrefab, startingPoint - new Vector3(xOffsetFull, 0, 0) * (size - i), Quaternion.identity, transform).GetComponent<Tile>();
-				tile.data.navigationCoordinates = new Vector3Int(i, size, (i + size) * -1);
-				TileGrid.AddTile(tile);
-				ShowTile(tile);
-			}
-			else
-			{
-				TileGrid.AddTile(mainTile);
-				mainTile.data.navigationCoordinates = new Vector3Int(size, size, size * -2);
-			}
+			var tile = Instantiate(tilePrefab, startingPoint - new Vector3(xOffsetFull, 0, 0) * (size - i), Quaternion.identity, transform).GetComponent<Tile>();
+			tile.data.navigationCoordinates = new Vector3Int(i, size, (i + size) * -1);
+			TileGrid.AddTile(tile);
+			ShowTile(tile);
 		}
 
 		for (int i = 1; i <= size; i++)

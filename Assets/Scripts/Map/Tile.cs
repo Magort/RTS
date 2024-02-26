@@ -32,7 +32,7 @@ public class Tile : MonoBehaviour, IPointerUpHandler
 		{
 			data.areas.Add(area.data);
 		}
-	}
+    }
 
 	private void Start()
 	{
@@ -43,6 +43,11 @@ public class Tile : MonoBehaviour, IPointerUpHandler
 
         if (data.discovered)
             Reveal();
+
+		foreach (var tile in TileGrid.GetNeighbouringTiles(this))
+		{
+            Debug.Log(Vector3.Distance(transform.position, tile.transform.position));
+		}
 	}
 
 	private void Update()
@@ -73,6 +78,7 @@ public class Tile : MonoBehaviour, IPointerUpHandler
         data.affiliation = loadData.affiliation;
         data.discovered = loadData.discovered;
         data.neighbour = loadData.neighbour;
+        data.navigationCoordinates = loadData.navigationCoordinates;
 
         for(int i = 0; i < data.areas.Count; i++)
         {

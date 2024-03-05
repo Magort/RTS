@@ -163,6 +163,9 @@ public class Tile : MonoBehaviour, IPointerUpHandler
         if (unit.affiliation == Affiliation.Neutral && data.affiliation == Affiliation.Enemy)
             return;
 
+        if (unit.affiliation == Affiliation.Player)
+            GameEventsManager.TileControlled.Invoke(data.navigationCoordinates);
+
         CheckForOccupation();
     }
 

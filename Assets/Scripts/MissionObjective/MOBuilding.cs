@@ -1,18 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class MOBuilding : MissionObjective
 {
 	public Building.Code requiredBuilding;
 
 	public override bool ConditionsMet()
 	{
-		throw new System.NotImplementedException();
+		return GameState.GetBuildingAmount(requiredBuilding) >= quantityToPass;
 	}
 
-	public override void SubscribeToEvents()
+	public override void Innit()
 	{
-		throw new System.NotImplementedException();
+		GameEventsManager.BuildingCompleted.AddListener(CheckNewBuilding);
+	}
+
+	void CheckNewBuilding(Building.Code newBuilding)
+	{
+		if(newBuilding == requiredBuilding)
+		{
+			ProgressQuantity();
+		}
+	}
+
+	public override void Clear()
+	{
+		GameEventsManager.BuildingCompleted.RemoveListener(CheckNewBuilding);
 	}
 }

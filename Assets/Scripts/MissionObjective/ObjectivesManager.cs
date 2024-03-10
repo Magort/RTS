@@ -6,11 +6,11 @@ public class ObjectivesManager : MonoBehaviour
 {
     public static ObjectivesManager Instance;
 
-    public List<MissionObjective> MissionObjectives;
+    public static List<MissionObjective> MissionObjectives;
 
-    int currentQuantity = 0;
-    int currentTimer = 0;
-    int currentObjective = 0;
+	public static int currentQuantity = 0;
+	public static int currentTimer = 0;
+	public static int currentObjective = 0;
 
     readonly WaitForSeconds waiter = new(1);
 
@@ -19,11 +19,19 @@ public class ObjectivesManager : MonoBehaviour
 		Instance = this;
 	}
 
+    public static MissionObjective GetCurrentObjective()
+    {
+        return MissionObjectives[currentObjective];
+    }
+
 	public void ProgressQuantity()
     {
         currentQuantity++;
+
         if(currentQuantity >= MissionObjectives[currentObjective].quantityToPass)
             CompleteObjective();
+
+        MissionObjectivePanel.instance.UpdateDisplay();
     }
 
     public void CompleteObjective()
@@ -37,7 +45,6 @@ public class ObjectivesManager : MonoBehaviour
         else
         {
 			SetObjective(currentObjective + 1);
-            //update display
 		}
     }
 
@@ -48,7 +55,9 @@ public class ObjectivesManager : MonoBehaviour
 
         if (MissionObjectives[currentObjective].timeToPass > 0)
             StartCoroutine(ProgressOverTime());
-    }
+
+		MissionObjectivePanel.instance.UpdateDisplay();
+	}
 
     IEnumerator ProgressOverTime()
     {
@@ -67,8 +76,8 @@ public class ObjectivesManager : MonoBehaviour
             if (MissionObjectives[currentObjective].ConditionsMet())
             {
                 currentTimer++;
-                //Update display
-            }
+				MissionObjectivePanel.instance.UpdateDisplay();
+			}
         }
     }
 }

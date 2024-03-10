@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
         GameState.AddScouts(2);
         AudioManager.Instance.Play(Sound.Name.MainMusic);
         Application.targetFrameRate = 60;
+        GameEventsManager.BuildingCompleted.AddListener(GameState.AddBuilding);
     }
 
     void GrantStartingResources()

@@ -16,6 +16,7 @@ public abstract class Building : MonoBehaviour
 		builtOn = tile;
 		GameEventsManager.BuildingCompleted.Invoke(code);
 		SpecialOnBuild(tile, area);
+		GameEventsManager.BuildingCompleted.Invoke(code);
 	}
 	public abstract void SpecialOnBuild(Tile tile, TileArea area);
 	public abstract string Description();

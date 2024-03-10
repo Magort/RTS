@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3068340961320264480, guid: de7b2f4e1fdf9b744bce2043357bf2b8, type: 3}
       propertyPath: m_Name
-      value: TileArea (2)
+      value: NeutralTileArea
       objectReference: {fileID: 0}
     - target: {fileID: 9033931239299399907, guid: de7b2f4e1fdf9b744bce2043357bf2b8, type: 3}
       propertyPath: m_RootOrder

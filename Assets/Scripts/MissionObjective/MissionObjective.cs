@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,11 +6,18 @@ public abstract class MissionObjective : ScriptableObject
 {
     public int quantityToPass;
     public int timeToPass;
-    public string description;
+	public string title;
+	public string description;
+
+    public List<string> dialogues = new();
+
+    //rewards
+
     public void ProgressQuantity()
     {
-
-    }    
+        ObjectivesManager.Instance.ProgressQuantity();
+    }
     public abstract bool ConditionsMet();
-    public abstract void SubscribeToEvents();
+    public abstract void Innit();
+    public abstract void Clear();
 }

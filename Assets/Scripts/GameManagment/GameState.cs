@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class GameState
@@ -25,6 +26,8 @@ public static class GameState
 	public static int MaxScouts = 0;
 	public static int ScoutsAvailable = 0;
 
+	public static List<Building.Code> BuildingsBuilt = new();
+
 	public static void AddScouts(int amount)
 	{
 		MaxScouts += amount;
@@ -41,5 +44,19 @@ public static class GameState
 	{
 		ResourcesGrowth[resource] += amount;
 		ResourcesPanel.Instance.UpdateDisplay();
+	}
+
+	public static void AddBuilding(Building.Code building)
+	{
+		BuildingsBuilt.Add(building);
+	}
+	public static void RemoveBuilding(Building.Code building)
+	{
+		BuildingsBuilt.Remove(building);
+	}
+
+	public static int GetBuildingAmount(Building.Code building)
+	{
+		return BuildingsBuilt.Where(entry => entry == building).Count();
 	}
 }

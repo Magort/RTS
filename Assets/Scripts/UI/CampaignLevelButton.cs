@@ -33,7 +33,8 @@ public class CampaignLevelButton : MonoBehaviour
 			yield return null;
 		}
 		SceneManager.SetActiveScene(SceneManager.GetSceneByName("GameScene"));
-		MapGenerator.Instance.LoadMap(levelData);
+		MapGenerator.Instance.LoadMap(levelData.tiles);
+		ObjectivesManager.Instance.LoadObjectives(levelData.missionObjects);
 		SceneManager.UnloadSceneAsync("MainMenu");
 	}
 }

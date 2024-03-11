@@ -14,10 +14,16 @@ public class ObjectivesManager : MonoBehaviour
 
     readonly WaitForSeconds waiter = new(1);
 
-	private void Start()
+	private void Awake()
 	{
 		Instance = this;
 	}
+
+    public void LoadObjectives(List<MissionObjective> objectives)
+    {
+        MissionObjectives = objectives;
+        SetObjective(0);
+    }
 
     public static MissionObjective GetCurrentObjective()
     {
@@ -50,12 +56,16 @@ public class ObjectivesManager : MonoBehaviour
 
     public void SetObjective(int index)
     {
-        currentObjective = index;
+        if(index == 0)
+		    MissionObjectives[currentObjective].Clear();
+
+		currentObjective = index;
         currentQuantity = 0;
 
         if (MissionObjectives[currentObjective].timeToPass > 0)
             StartCoroutine(ProgressOverTime());
 
+        MissionObjectives[currentObjective].Innit();
 		MissionObjectivePanel.instance.UpdateDisplay();
 	}
 

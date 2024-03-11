@@ -53,9 +53,9 @@ public class MapGenerator : MonoBehaviour
 		};
 	}
 
-	public void LoadMap(LevelData levelData)
+	public void LoadMap(List<TileData> tilesData)
 	{
-		foreach (var tileData in levelData.tiles)
+		foreach (var tileData in tilesData)
 		{
 			var tile = Instantiate(biomeToTilePrefab[tileData.biome], tileData.spaceCoordinates, Quaternion.identity).GetComponent<Tile>();
 

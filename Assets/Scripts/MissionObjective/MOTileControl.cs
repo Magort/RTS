@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "MissionObjective", menuName = "MissionObjectives/TileControl", order = 1)]
 public class MOTileControl : MissionObjective
 {
 	public List<Vector3Int> requiredTilesByCoords = new();

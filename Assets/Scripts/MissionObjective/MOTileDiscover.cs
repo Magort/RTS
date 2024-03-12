@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "MissionObjective", menuName = "MissionObjectives/TileDiscover", order = 3)]
 public class MOTileDiscover : MissionObjective
 {
 	public List<Vector3Int> tilesByCoords = new();

@@ -192,7 +192,7 @@ public class Tile : MonoBehaviour, IPointerUpHandler
 
 		contested = true;
         contestProgressBar = ProgressBarManager.Instance.GetProgressBar();
-        contestProgressBar.ShowProgress(transform, maxContestPoints, "Contesting...");
+        contestProgressBar.ShowProgress(transform, maxContestPoints, "Contesting...", TileArea.affiliationToColor[data.units[0].affiliation]);
     }
 
     public void CaptureTile()
@@ -202,19 +202,7 @@ public class Tile : MonoBehaviour, IPointerUpHandler
         KindgomLine.Instance.ChangeKingdomLine(this, false);
 		data.affiliation = Affiliation.Neutral;
 		areas.Where(area => area.data.type == TileArea.Type.Building).ToList().ForEach(area => area.RemoveBuilding());
-        CheckGameObjectives();
 	}
-
-    void CheckGameObjectives()
-    {
-        if (data.navigationCoordinates == TileGrid.MainTile.data.navigationCoordinates)
-        {
-            GameEndHandler.Instance.LoseGame();
-        }
-
-        if (TileGrid.WinTargetTiles.Contains(this))
-            GameEndHandler.Instance.ProgressWinCon(this);
-    }
 
     public void RemoveUnit(MapUnit unit)
     {
@@ -223,6 +211,9 @@ public class Tile : MonoBehaviour, IPointerUpHandler
 		if (data.units.Count == 0)
 		{
 			unitSpot.HideUnitModel();
+
+            if (unit.affiliation == Affiliation.Player)
+                GameEventsManager.TileLostControll.Invoke(data.navigationCoordinates);
 		}
         else
         {
@@ -230,8 +221,6 @@ public class Tile : MonoBehaviour, IPointerUpHandler
         }
 
 		ContextMenu.Instance.tileInfoPanel.PopulatePanel(true);
-
-        //CheckForOccupation();
 	}
 
     public void ChangeAffiliation(Affiliation affiliation)

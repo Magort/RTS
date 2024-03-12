@@ -36,11 +36,12 @@ public class ProgressBar : MonoBehaviour
 		progressBar.fillAmount = timer / duration;
 	}
 
-	public void ShowProgress(Transform target, float time, string text)
+	public void ShowProgress(Transform target, float time, string text, Color color)
 	{
 		duration = time;
 		this.target = target;
 		textBar.text = text;
+		progressBar.color = color;
 		UpdatePosition();
 		UpdateFill();
 		gameObject.SetActive(true);

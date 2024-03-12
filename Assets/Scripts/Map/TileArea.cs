@@ -65,6 +65,8 @@ public class TileArea : MonoBehaviour
     {
         Destroy(buildingSlot.transform.GetChild(0).gameObject);
 		data.type = Type.Empty;
+        GameEventsManager.BuildingRemoved.Invoke(data.building);
+
     }
 
     public void ShowDecorations()

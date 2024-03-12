@@ -91,7 +91,7 @@ public class BuildingHandler : MonoBehaviour
 
 	IEnumerator DelayUpgrade(Building building, TileArea tileArea, Tile tile)
 	{
-		ProgressBarManager.Instance.GetProgressBar().ShowProgress(tileArea.buildingSlot.transform, building.buildingTime, buildingText);
+		ProgressBarManager.Instance.GetProgressBar().ShowProgress(tileArea.buildingSlot.transform, building.buildingTime, buildingText, TileArea.affiliationToColor[Affiliation.Player]);
 
 		yield return new WaitForSeconds(building.buildingTime);
 
@@ -106,7 +106,7 @@ public class BuildingHandler : MonoBehaviour
 
 	IEnumerator DelayBuild(Building building, TileArea tileArea, Tile tile)
     {
-        ProgressBarManager.Instance.GetProgressBar().ShowProgress(tileArea.buildingSlot.transform, building.buildingTime, buildingText);
+        ProgressBarManager.Instance.GetProgressBar().ShowProgress(tileArea.buildingSlot.transform, building.buildingTime, buildingText, TileArea.affiliationToColor[Affiliation.Player]);
 
         yield return new WaitForSeconds(building.buildingTime);
 

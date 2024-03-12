@@ -6,23 +6,12 @@ public class GameEndHandler : MonoBehaviour
     
     public GameEndPrompt prompt;
 
-    int winConCounter = 0;
-    int winConRequired = 3;
-
     private void Start()
     {
         Instance = this;
     }
 
-    public void ProgressWinCon(Tile tile)
-    {
-        winConCounter++;
-        TileGrid.WinTargetTiles.Remove(tile);
-        if (winConCounter >= winConRequired)
-            WinGame();
-    }
-
-    void WinGame()
+    public void WinGame()
     {
         prompt.PopulatePrompt(true);
     }

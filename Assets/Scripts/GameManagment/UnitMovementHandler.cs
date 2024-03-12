@@ -115,7 +115,7 @@ public class UnitMovementHandler : MonoBehaviour
 			if (unit.currentTile.data.discovered)
 			{
 				unit.movementProgressBar = ProgressBarManager.Instance.GetProgressBar();
-				unit.movementProgressBar.ShowProgress(unit.currentTile.transform, stepTime, "Moving...");
+				unit.movementProgressBar.ShowProgress(unit.currentTile.transform, stepTime, "Moving...", TileArea.affiliationToColor[unit.affiliation]);
 			}
 
 			yield return waiter;

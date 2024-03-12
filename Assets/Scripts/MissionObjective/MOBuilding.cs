@@ -1,3 +1,6 @@
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "MissionObjective", menuName = "MissionObjectives/Building", order = 2)]
 public class MOBuilding : MissionObjective
 {
 	public Building.Code requiredBuilding;

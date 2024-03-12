@@ -46,7 +46,7 @@ public class ScoutingHandler : MonoBehaviour
         GameState.ScoutsAvailable--;
         float scoutingTime = defaultScoutingTime + (ScoutingTime() / 3);
 
-		ProgressBarManager.Instance.GetProgressBar().ShowProgress(scoutedTile.transform, scoutingTime, scoutingText);
+		ProgressBarManager.Instance.GetProgressBar().ShowProgress(scoutedTile.transform, scoutingTime, scoutingText, TileArea.affiliationToColor[Affiliation.Player]);
         scoutedTile.data.beingScouted = true;
 
 		float timer = 0;

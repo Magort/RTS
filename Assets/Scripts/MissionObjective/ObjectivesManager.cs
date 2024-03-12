@@ -46,7 +46,7 @@ public class ObjectivesManager : MonoBehaviour
 
         if(currentObjective == MissionObjectives.Count)
         {
-            //end game
+            GameEndHandler.Instance.WinGame();
         }
         else
         {

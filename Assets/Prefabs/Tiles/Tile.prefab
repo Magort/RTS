@@ -57,7 +57,25 @@ MonoBehaviour:
     biome: 0
     navigationCoordinates: {x: 0, y: 0, z: 0}
     spaceCoordinates: {x: 0, y: 0, z: 0}
-    areas: []
+    areas:
+    - type: 0
+      resourceAmount: 0
+      building: 0
+    - type: 0
+      resourceAmount: 0
+      building: 0
+    - type: 0
+      resourceAmount: 0
+      building: 0
+    - type: 0
+      resourceAmount: 0
+      building: 0
+    - type: 0
+      resourceAmount: 0
+      building: 0
+    - type: 0
+      resourceAmount: 0
+      building: 0
   lighting: {fileID: 3273440224093584141}
   maxIntensity: 5
   container: {fileID: 2510267300210715041}

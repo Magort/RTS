@@ -294,10 +294,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 137890988}
     m_Modifications:
-    - target: {fileID: 790706529765324036, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: cc803cb3e9ef5fa47961d0dfb2fcc7a4, type: 3}
     - target: {fileID: 2564811976178958970, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: m_Name
       value: BuildingSlot (6)
@@ -390,10 +386,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: building
-      value: 
-      objectReference: {fileID: 5720266881620482133, guid: 6e9de87dd4b3615499de86ecd733fc0d, type: 3}
     - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: unlocked
       value: 1
@@ -1509,15 +1501,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28f062a2efeb21244b86d358ca91bb00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingResources:
-  - resource: 0
-    amount: 50
-  - resource: 1
-    amount: 50
-  - resource: 2
-    amount: 10
-  - resource: 3
-    amount: 10
+  BuildingsList:
+  - {fileID: 6361318069061965517, guid: 4d63d62d8b2cb0f40abf28b181cc4af5, type: 3}
+  - {fileID: 7655332901979392170, guid: a4a981b919bbb564cbae58e548e40105, type: 3}
+  - {fileID: 1066235219909443872, guid: 587af489feb63af4e8f44e3f77027582, type: 3}
+  - {fileID: 4907208908434916038, guid: 2fb55caf7eed93d46babcdb6ca974f96, type: 3}
+  - {fileID: -2662648838204096713, guid: cd6f339237e1d684684edab3a5c07edc, type: 3}
+  - {fileID: 7323688721538099713, guid: 648064dda36a15847b3256561ff2894a, type: 3}
+  - {fileID: -8073365341528280388, guid: 7a87bd3afb47dc5478fd2e82bcdb09cb, type: 3}
+  - {fileID: -7455310647905372699, guid: 59551ebfaac43bb45b435621d6647088, type: 3}
+  - {fileID: 6747059226390267311, guid: fc829ce499c0ed74bbd7843b0f0e1289, type: 3}
+  - {fileID: 8048762590349294790, guid: 5c0ca123a4a3e324f87d938d3e5b9d43, type: 3}
+  - {fileID: -4521788395115013600, guid: 0a480b0cd08196342a1f81be180cc24f, type: 3}
+  - {fileID: 3876046719243291511, guid: 78c71f1e9deba93419d12d06b4ce4255, type: 3}
+  - {fileID: 4726164931626655329, guid: 8adb89880d212474987dde226f34b0a9, type: 3}
+  - {fileID: 5720266881620482133, guid: 6e9de87dd4b3615499de86ecd733fc0d, type: 3}
+  - {fileID: 3068628631512297052, guid: 64d3838c639e79d489e27427a3b70fb4, type: 3}
+  - {fileID: -1299994866911050356, guid: 3651ef36a3289df41a7013dfa14a5a2c, type: 3}
+  - {fileID: 6150593346070481593, guid: c024a6a7876ded1488480bfb4515cafe, type: 3}
+  - {fileID: -540109434330995558, guid: 0921d40bd36fd6742b8ee6ac8d6e0720, type: 3}
+  - {fileID: 1996696372353344075, guid: 8d9ccf6160b26d8409a2cddaef0e5ba1, type: 3}
 --- !u!1001 &61676804
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1768,6 +1771,7 @@ Transform:
   - {fileID: 488433925}
   - {fileID: 1604316707}
   - {fileID: 1100889851}
+  - {fileID: 523864594}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1874,10 +1878,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 137890988}
     m_Modifications:
-    - target: {fileID: 790706529765324036, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: cc803cb3e9ef5fa47961d0dfb2fcc7a4, type: 3}
     - target: {fileID: 2564811976178958970, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: m_Name
       value: BuildingSlot (10)
@@ -1970,10 +1970,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: building
-      value: 
-      objectReference: {fileID: 1996696372353344075, guid: 8d9ccf6160b26d8409a2cddaef0e5ba1, type: 3}
     - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: unlocked
       value: 0
@@ -2780,10 +2776,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 137890988}
     m_Modifications:
-    - target: {fileID: 790706529765324036, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 2cbc973107738644cb8fd190cc1275ce, type: 3}
     - target: {fileID: 2564811976178958970, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: m_Name
       value: BuildingSlot (17)
@@ -2876,10 +2868,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: building
-      value: 
-      objectReference: {fileID: -4521788395115013600, guid: 0a480b0cd08196342a1f81be180cc24f, type: 3}
     - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: unlocked
       value: 0
@@ -3217,10 +3205,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 137890988}
     m_Modifications:
-    - target: {fileID: 790706529765324036, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 2cbc973107738644cb8fd190cc1275ce, type: 3}
     - target: {fileID: 2564811976178958970, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: m_Name
       value: BuildingSlot (5)
@@ -3314,10 +3298,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: building
-      value: 
-      objectReference: {fileID: 8048762590349294790, guid: 5c0ca123a4a3e324f87d938d3e5b9d43, type: 3}
-    - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: unlocked
       value: 1
       objectReference: {fileID: 0}
@@ -3335,10 +3315,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 137890988}
     m_Modifications:
-    - target: {fileID: 790706529765324036, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 562a3ddd0f0f51c458000d96dffd52b0, type: 3}
     - target: {fileID: 2564811976178958970, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: m_Name
       value: BuildingSlot (2)
@@ -3431,10 +3407,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: building
-      value: 
-      objectReference: {fileID: 3876046719243291511, guid: 78c71f1e9deba93419d12d06b4ce4255, type: 3}
     - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: unlocked
       value: 1
@@ -3850,10 +3822,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 137890988}
     m_Modifications:
-    - target: {fileID: 790706529765324036, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 12ea326f0f370c84d9f3a84000ea26c2, type: 3}
     - target: {fileID: 2564811976178958970, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: m_Name
       value: BuildingSlot
@@ -3946,10 +3914,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: building
-      value: 
-      objectReference: {fileID: -540109434330995558, guid: 0921d40bd36fd6742b8ee6ac8d6e0720, type: 3}
     - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: unlocked
       value: 1
@@ -4143,6 +4107,7 @@ MonoBehaviour:
   - {fileID: 161177140}
   buildingText: Building...
   panel: {fileID: 1128907808}
+  availableBuildings: 
 --- !u!1 &352775163
 GameObject:
   m_ObjectHideFlags: 0
@@ -4593,10 +4558,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 137890988}
     m_Modifications:
-    - target: {fileID: 790706529765324036, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: f524a6148e012fe4fbed5c941b17daee, type: 3}
     - target: {fileID: 2564811976178958970, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: m_Name
       value: BuildingSlot (1)
@@ -4689,10 +4650,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: building
-      value: 
-      objectReference: {fileID: -8073365341528280388, guid: 7a87bd3afb47dc5478fd2e82bcdb09cb, type: 3}
     - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: unlocked
       value: 1
@@ -7066,10 +7023,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 137890988}
     m_Modifications:
-    - target: {fileID: 790706529765324036, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: cc803cb3e9ef5fa47961d0dfb2fcc7a4, type: 3}
     - target: {fileID: 2564811976178958970, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: m_Name
       value: BuildingSlot (15)
@@ -7162,10 +7115,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: building
-      value: 
-      objectReference: {fileID: 3068628631512297052, guid: 64d3838c639e79d489e27427a3b70fb4, type: 3}
     - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: unlocked
       value: 0
@@ -7283,6 +7232,54 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6786353545315005628, guid: e81e24e23a730be48bc5967166be592d, type: 3}
   m_PrefabInstance: {fileID: 522542391}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &523864593
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 523864594}
+  - component: {fileID: 523864595}
+  m_Layer: 0
+  m_Name: ObjectivesManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &523864594
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523864593}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 71678344}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &523864595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523864593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79b75b9cf26238d4bab139831321d259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  missionObjectives: []
+  currentQuantity: 0
+  currentTimer: 0
+  currentObjective: 0
 --- !u!1001 &534507342
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8844,10 +8841,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 137890988}
     m_Modifications:
-    - target: {fileID: 790706529765324036, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: cc803cb3e9ef5fa47961d0dfb2fcc7a4, type: 3}
     - target: {fileID: 2564811976178958970, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: m_Name
       value: BuildingSlot (4)
@@ -8940,10 +8933,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: building
-      value: 
-      objectReference: {fileID: 7323688721538099713, guid: 648064dda36a15847b3256561ff2894a, type: 3}
     - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: unlocked
       value: 1
@@ -12963,10 +12952,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 137890988}
     m_Modifications:
-    - target: {fileID: 790706529765324036, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: f524a6148e012fe4fbed5c941b17daee, type: 3}
     - target: {fileID: 2564811976178958970, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: m_Name
       value: BuildingSlot (9)
@@ -13059,10 +13044,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: building
-      value: 
-      objectReference: {fileID: -2662648838204096713, guid: cd6f339237e1d684684edab3a5c07edc, type: 3}
     - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: unlocked
       value: 0
@@ -17489,10 +17470,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 137890988}
     m_Modifications:
-    - target: {fileID: 790706529765324036, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 562a3ddd0f0f51c458000d96dffd52b0, type: 3}
     - target: {fileID: 2564811976178958970, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: m_Name
       value: BuildingSlot (8)
@@ -17585,10 +17562,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: building
-      value: 
-      objectReference: {fileID: -1299994866911050356, guid: 3651ef36a3289df41a7013dfa14a5a2c, type: 3}
     - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: unlocked
       value: 0
@@ -19379,10 +19352,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 137890988}
     m_Modifications:
-    - target: {fileID: 790706529765324036, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: cc803cb3e9ef5fa47961d0dfb2fcc7a4, type: 3}
     - target: {fileID: 2564811976178958970, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: m_Name
       value: BuildingSlot (12)
@@ -19475,10 +19444,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: building
-      value: 
-      objectReference: {fileID: 6361318069061965517, guid: 4d63d62d8b2cb0f40abf28b181cc4af5, type: 3}
     - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: unlocked
       value: 0
@@ -22732,10 +22697,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 137890988}
     m_Modifications:
-    - target: {fileID: 790706529765324036, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 12ea326f0f370c84d9f3a84000ea26c2, type: 3}
     - target: {fileID: 2564811976178958970, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: m_Name
       value: BuildingSlot (13)
@@ -22828,10 +22789,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: building
-      value: 
-      objectReference: {fileID: -7455310647905372699, guid: 59551ebfaac43bb45b435621d6647088, type: 3}
     - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: unlocked
       value: 0
@@ -25129,10 +25086,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 137890988}
     m_Modifications:
-    - target: {fileID: 790706529765324036, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: e0f969637e675ff4d868f07ac309b03b, type: 3}
     - target: {fileID: 2564811976178958970, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: m_Name
       value: BuildingSlot (11)
@@ -25225,10 +25178,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: building
-      value: 
-      objectReference: {fileID: 6150593346070481593, guid: c024a6a7876ded1488480bfb4515cafe, type: 3}
     - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: unlocked
       value: 0
@@ -28306,10 +28255,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 137890988}
     m_Modifications:
-    - target: {fileID: 790706529765324036, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 7f719030a6e6b6749951d19e0dc25543, type: 3}
     - target: {fileID: 2564811976178958970, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: m_Name
       value: BuildingSlot (16)
@@ -28402,10 +28347,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: building
-      value: 
-      objectReference: {fileID: 4907208908434916038, guid: 2fb55caf7eed93d46babcdb6ca974f96, type: 3}
     - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: unlocked
       value: 0
@@ -29236,10 +29177,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 137890988}
     m_Modifications:
-    - target: {fileID: 790706529765324036, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 7f719030a6e6b6749951d19e0dc25543, type: 3}
     - target: {fileID: 2564811976178958970, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: m_Name
       value: BuildingSlot (3)
@@ -29332,10 +29269,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: building
-      value: 
-      objectReference: {fileID: 4726164931626655329, guid: 8adb89880d212474987dde226f34b0a9, type: 3}
     - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: unlocked
       value: 1
@@ -30778,10 +30711,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 137890988}
     m_Modifications:
-    - target: {fileID: 790706529765324036, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: cc803cb3e9ef5fa47961d0dfb2fcc7a4, type: 3}
     - target: {fileID: 2564811976178958970, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: m_Name
       value: BuildingSlot (14)
@@ -30875,10 +30804,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: building
-      value: 
-      objectReference: {fileID: 1066235219909443872, guid: 587af489feb63af4e8f44e3f77027582, type: 3}
-    - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: unlocked
       value: 0
       objectReference: {fileID: 0}
@@ -30912,10 +30837,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 137890988}
     m_Modifications:
-    - target: {fileID: 790706529765324036, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: ed2e9de5b54f1ad4689d137d6ae9f862, type: 3}
     - target: {fileID: 2564811976178958970, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: m_Name
       value: BuildingSlot (7)
@@ -31008,10 +30929,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
-      propertyPath: building
-      value: 
-      objectReference: {fileID: 7655332901979392170, guid: a4a981b919bbb564cbae58e548e40105, type: 3}
     - target: {fileID: 9123693586412032001, guid: 029475624639d8c44a8da3574148824a, type: 3}
       propertyPath: unlocked
       value: 1

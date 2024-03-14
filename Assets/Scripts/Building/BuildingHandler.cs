@@ -9,17 +9,23 @@ public class BuildingHandler : MonoBehaviour
     public List<BuildingSlot> buildingSlots;
     public string buildingText;
     public GameObject panel;
+    public List<Building.Code> availableBuildings;
 
-    private void Start()
+    private void Awake()
     {
         Instance = this;
+    }
+
+    public void LoadAvailableBuildingsList(List<Building.Code> buildings)
+    {
+        availableBuildings = buildings;
     }
 
     public void PopulateBuildingsList(bool discovered)
     {
         if (TileGrid.IsNextToPlyerKingdom(ContextMenu.Instance.SelectedTile)
             && ContextMenu.Instance.SelectedTile.data.affiliation != Affiliation.Player)
-        { 
+        {
             panel.SetActive(false);
             return;
         }
@@ -31,18 +37,21 @@ public class BuildingHandler : MonoBehaviour
 		if (ContextMenu.Instance.SelectedTile.areas.Find(area => area.data.type == TileArea.Type.Empty) == null)
             return;
 
-		foreach (BuildingSlot slot in buildingSlots)
+        for (int i = 0; i < availableBuildings.Count; i++)
         {
-            if(slot.unlocked && slot.building.ValidPlacement())
-            {
-                slot.gameObject.SetActive(true);
-            }
+            var building = GameManager.Instance.BuildingsList.Find(building => building.code == availableBuildings[i]);
+
+            if (building.ValidPlacement())
+                buildingSlots[i].PopulateButton(building);
         }
     }
 
-    public void SwitchBuildingLock(Building.Code building, bool state)
+    public void SwitchBuildingLock(Building.Code building, bool available)
     {
-        buildingSlots.Find(slot => slot.building.code == building).unlocked = state;
+        if(available)
+            availableBuildings.Add(building);
+        else
+            availableBuildings.Remove(building);
     }
 
     public void ClearBuildingsList()
@@ -70,6 +79,13 @@ public class BuildingHandler : MonoBehaviour
         return true;
     }
 
+    public void LoadBuilding(TileArea tileArea, bool enable)
+    {
+        Instantiate(GameManager.Instance.BuildingsList.Find(building => building.code == tileArea.data.building)
+            ,tileArea.buildingSlot.transform.position, Quaternion.identity, tileArea.buildingSlot.transform)
+            .GetComponent<Building>().enabled = enable;
+    }
+
     void Upgrade(Building building)
     {
 		var currentBuildingArea = ContextMenu.Instance.SelectedTile.areas
@@ -91,7 +107,8 @@ public class BuildingHandler : MonoBehaviour
 
 	IEnumerator DelayUpgrade(Building building, TileArea tileArea, Tile tile)
 	{
-		ProgressBarManager.Instance.GetProgressBar().ShowProgress(tileArea.buildingSlot.transform, building.buildingTime, buildingText, TileArea.affiliationToColor[Affiliation.Player]);
+		ProgressBarManager.Instance.GetProgressBar()
+            .ShowProgress(tileArea.buildingSlot.transform, building.buildingTime, buildingText, TileArea.affiliationToColor[Affiliation.Player]);
 
 		yield return new WaitForSeconds(building.buildingTime);
 
@@ -106,7 +123,8 @@ public class BuildingHandler : MonoBehaviour
 
 	IEnumerator DelayBuild(Building building, TileArea tileArea, Tile tile)
     {
-        ProgressBarManager.Instance.GetProgressBar().ShowProgress(tileArea.buildingSlot.transform, building.buildingTime, buildingText, TileArea.affiliationToColor[Affiliation.Player]);
+        ProgressBarManager.Instance.GetProgressBar()
+            .ShowProgress(tileArea.buildingSlot.transform, building.buildingTime, buildingText, TileArea.affiliationToColor[Affiliation.Player]);
 
         yield return new WaitForSeconds(building.buildingTime);
 

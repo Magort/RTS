@@ -223,7 +223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 1092668520974257327, guid: bf698c1968424e94e96daa86c7a2ae74, type: 3}
   mainTile: {fileID: 0}
-  debugSize: 3
+  debugSize: 2
 --- !u!4 &621947533
 Transform:
   m_ObjectHideFlags: 0

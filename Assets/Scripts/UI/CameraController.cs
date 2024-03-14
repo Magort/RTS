@@ -61,7 +61,7 @@ public class CameraController : MonoBehaviour
 
 		var tf = transform;
 		var pos = tf.position;
-		pos = new Vector3(pos.x, Mathf.Lerp(pos.y, currentZoom, Time.unscaledDeltaTime * 5), pos.z);
+		pos = new Vector3(pos.x, Mathf.Lerp(pos.y, currentZoom, Time.unscaledDeltaTime * 3), pos.z);
 		tf.position = pos;
 
 		lastTouchDistance = Vector2.Distance(touch1.position, touch2.position);

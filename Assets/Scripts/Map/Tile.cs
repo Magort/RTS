@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Linq;
+using Mono.Cecil;
 
 public class Tile : MonoBehaviour, IPointerUpHandler
 {
@@ -28,10 +29,10 @@ public class Tile : MonoBehaviour, IPointerUpHandler
 
 	private void Awake()
 	{
-		foreach (var area in areas)
-		{
-			data.areas.Add(area.data);
-		}
+		for (int i = 0; i < data.areas.Count; i++)
+        {
+            areas[i].data = data.areas[i];
+        }
     }
 
 	private void Start()
@@ -43,11 +44,6 @@ public class Tile : MonoBehaviour, IPointerUpHandler
 
         if (data.discovered)
             Reveal();
-
-		foreach (var tile in TileGrid.GetNeighbouringTiles(this))
-		{
-            Debug.Log(Vector3.Distance(transform.position, tile.transform.position));
-		}
 	}
 
 	private void Update()
@@ -75,21 +71,37 @@ public class Tile : MonoBehaviour, IPointerUpHandler
 
     public void LoadFromData(TileData loadData)
     {
-        data.affiliation = loadData.affiliation;
         data.discovered = loadData.discovered;
         data.neighbour = loadData.neighbour;
         data.navigationCoordinates = loadData.navigationCoordinates;
+
+        foreach (var unit in loadData.units)
+        {
+            AddUnit(unit);
+        }
 
         for(int i = 0; i < data.areas.Count; i++)
         {
             areas[i].data.type = loadData.areas[i].type;
             areas[i].data.resourceAmount = loadData.areas[i].resourceAmount;
             areas[i].InitDictionary();
-            //building load here
+            if (areas[i].data.type == TileArea.Type.Building)
+            {
+                areas[i].data.building = loadData.areas[i].building;
+				BuildingHandler.Instance.LoadBuilding(areas[i], data.affiliation == Affiliation.Player);
+			}
         }
 
-        if(data.discovered)
-            ShowDecorations();
+        if (data.discovered)
+        {
+			ShowDecorations();
+            if (data.units.Count > 0)
+            {
+                unitSpot.ShowUnitModel(data.units[0].affiliation);
+            }
+		}
+
+        ChangeAffiliation(loadData.affiliation);
     }
 
     public void TransformIntoTile(Tile tile)

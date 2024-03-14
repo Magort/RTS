@@ -6,6 +6,6 @@ public class LevelData : ScriptableObject
 {
     public List<MissionObjective> missionObjects;
     public List<Building.Requirements.ResourceRequirement> startingResources;
-    public List<Building> availableBuildings;
+    public List<Building.Code> availableBuildings;
     public List<TileData> tiles = new();
 }

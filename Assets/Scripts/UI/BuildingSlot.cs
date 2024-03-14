@@ -1,13 +1,21 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class BuildingSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public bool unlocked;
+    public Image image;
     public Building building;
 
     WaitForSeconds popupWaiter = new(0.4f);
+
+    public void PopulateButton(Building building)
+    {
+        this.building = building;
+        image.sprite = building.icon;
+        gameObject.SetActive(true);
+    }
 
     public void OnClick()
     {

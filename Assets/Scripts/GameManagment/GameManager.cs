@@ -3,18 +3,31 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	public List<Building.Requirements.ResourceRequirement> startingResources;
-   
-    void Start()
+    public static GameManager Instance;
+    public List<Building> BuildingsList;
+
+	private void Awake()
+	{
+		Instance = this;
+	}
+
+	void Start()
     {
-        GrantStartingResources();
         GameState.AddScouts(2);
         AudioManager.Instance.Play(Sound.Name.MainMusic);
         Application.targetFrameRate = 60;
         GameEventsManager.BuildingCompleted.AddListener(GameState.AddBuilding);
     }
 
-    void GrantStartingResources()
+    public void LoadLevel(LevelData levelData)
+    {
+		MapGenerator.Instance.LoadMap(levelData.tiles);
+		ObjectivesManager.Instance.LoadObjectives(levelData.missionObjects);
+        BuildingHandler.Instance.LoadAvailableBuildingsList(levelData.availableBuildings);
+		GrantStartingResources(levelData.startingResources);
+	}
+
+    public void GrantStartingResources(List<Building.Requirements.ResourceRequirement> startingResources)
     {
         foreach(var resource in startingResources)
         {

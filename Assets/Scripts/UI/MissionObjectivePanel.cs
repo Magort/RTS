@@ -15,7 +15,7 @@ public class MissionObjectivePanel : MonoBehaviour
 
 	public void UpdateDisplay()
     {
-		var currentObjective = ObjectivesManager.GetCurrentObjective();
+		var currentObjective = ObjectivesManager.Instance.GetCurrentObjective();
 
 		objectiveTitle.text = currentObjective.title;
 		objectiveDescription.text = GenerateDescription(currentObjective);
@@ -27,14 +27,14 @@ public class MissionObjectivePanel : MonoBehaviour
 
 		dscr += objective.description;
 
-		if (objective.quantityToPass > 0)
+		if (objective.quantityToPass > 1)
 		{
-			dscr += " (" + ObjectivesManager.currentQuantity + "/" + objective.quantityToPass + ")";
+			dscr += " (" + ObjectivesManager.Instance.currentQuantity + "/" + objective.quantityToPass + ")";
 		}
 
 		if(objective.timeToPass > 0)
 		{
-			dscr += " (" + ObjectivesManager.currentTimer + "/" + objective.timeToPass + ")";
+			dscr += " (" + ObjectivesManager.Instance.currentTimer + "/" + objective.timeToPass + ")";
 		}
 
 		return dscr;

@@ -6,11 +6,11 @@ public class ObjectivesManager : MonoBehaviour
 {
     public static ObjectivesManager Instance;
 
-    public static List<MissionObjective> MissionObjectives;
+    public List<MissionObjective> missionObjectives;
 
-	public static int currentQuantity = 0;
-	public static int currentTimer = 0;
-	public static int currentObjective = 0;
+	public int currentQuantity = 0;
+	public int currentTimer = 0;
+	public int currentObjective = 0;
 
     readonly WaitForSeconds waiter = new(1);
 
@@ -21,20 +21,20 @@ public class ObjectivesManager : MonoBehaviour
 
     public void LoadObjectives(List<MissionObjective> objectives)
     {
-        MissionObjectives = objectives;
+        missionObjectives = objectives;
         SetObjective(0);
     }
 
-    public static MissionObjective GetCurrentObjective()
+    public MissionObjective GetCurrentObjective()
     {
-        return MissionObjectives[currentObjective];
+        return missionObjectives[currentObjective];
     }
 
 	public void ProgressQuantity()
     {
         currentQuantity++;
 
-        if(currentQuantity >= MissionObjectives[currentObjective].quantityToPass)
+        if(currentQuantity >= missionObjectives[currentObjective].quantityToPass)
             CompleteObjective();
 
         MissionObjectivePanel.instance.UpdateDisplay();
@@ -44,7 +44,7 @@ public class ObjectivesManager : MonoBehaviour
     {
         //Grant Rewards
 
-        if(currentObjective == MissionObjectives.Count)
+        if(currentObjective == missionObjectives.Count - 1)
         {
             GameEndHandler.Instance.WinGame();
         }
@@ -57,15 +57,15 @@ public class ObjectivesManager : MonoBehaviour
     public void SetObjective(int index)
     {
         if(index == 0)
-		    MissionObjectives[currentObjective].Clear();
+		    missionObjectives[currentObjective].Clear();
 
 		currentObjective = index;
         currentQuantity = 0;
 
-        if (MissionObjectives[currentObjective].timeToPass > 0)
+        if (missionObjectives[currentObjective].timeToPass > 0)
             StartCoroutine(ProgressOverTime());
 
-        MissionObjectives[currentObjective].Innit();
+        missionObjectives[currentObjective].Innit();
 		MissionObjectivePanel.instance.UpdateDisplay();
 	}
 
@@ -75,7 +75,7 @@ public class ObjectivesManager : MonoBehaviour
 
         while(true)
         {
-            if(currentTimer >= MissionObjectives[currentObjective].timeToPass)
+            if(currentTimer >= missionObjectives[currentObjective].timeToPass)
             {
                 CompleteObjective();
                 break;
@@ -83,7 +83,7 @@ public class ObjectivesManager : MonoBehaviour
 
             yield return waiter;
 
-            if (MissionObjectives[currentObjective].ConditionsMet())
+            if (missionObjectives[currentObjective].ConditionsMet())
             {
                 currentTimer++;
 				MissionObjectivePanel.instance.UpdateDisplay();

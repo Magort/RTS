@@ -10,6 +10,7 @@ public abstract class Building : MonoBehaviour
 	public Requirements requirements;
 	public Code code;
 	public bool isUpgrade;
+	public Sprite icon;
 
 	public void OnBuildingComplete(Tile tile, TileArea area)
 	{

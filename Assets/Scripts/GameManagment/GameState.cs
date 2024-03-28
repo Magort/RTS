@@ -27,6 +27,7 @@ public static class GameState
 	public static int ScoutsAvailable = 0;
 
 	public static List<Building.Code> BuildingsBuilt = new();
+	public static List<Unit.Code> UnitsControlled = new();
 
 	public static void AddScouts(int amount)
 	{
@@ -58,5 +59,10 @@ public static class GameState
 	public static int GetBuildingAmount(Building.Code building)
 	{
 		return BuildingsBuilt.Where(entry => entry == building).Count();
+	}
+
+	public static int GetUnitAmount(Unit.Code unit)
+	{
+		return UnitsControlled.Where(entry => entry == unit).Count();
 	}
 }

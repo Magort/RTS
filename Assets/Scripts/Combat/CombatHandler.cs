@@ -311,30 +311,33 @@ public static class CombatHandler
     static void EndCombat(Affiliation looser)
     {
         CombatPanel.Instance.ShowCombatEndPrompt(looser);
+	}
 
-        if(looser != Affiliation.Player)
-        {
-            float healthLeft = playerArmy.health / playerArmy.maxHealth;
-            int unitsToKill = Mathf.RoundToInt((1 - healthLeft) / survivalRate * playerArmy.mapUnit.units.Count);
-            for(int i = 0; i < unitsToKill; i++)
+    public static void ResolvePostCombatLoses(Affiliation looser)
+    {
+		GameManager.SwitchPauseState(false);
+
+		if (looser != Affiliation.Player)
+		{
+			float healthLeft = playerArmy.health / playerArmy.maxHealth;
+			int unitsToKill = Mathf.RoundToInt((1 - healthLeft) / survivalRate * playerArmy.mapUnit.units.Count);
+            for (int i = 0; i < unitsToKill; i++)
             {
                 playerArmy.mapUnit.KillRandomUnit();
             }
-        }
+		}
 
-        tileFoughtOn.data.units = new();
+		tileFoughtOn.data.units = new();
 
-        foreach(var unit in presentMapUnits)
-        {
+		foreach (var unit in presentMapUnits)
+		{
 			tileFoughtOn.AddUnit(unit);
 		}
 
-        foreach(var unit in survivingMapUnits)
-        {
-            TileGrid.MainTile.AddUnit(unit);
-        }
-        
-		GameManager.SwitchPauseState(false);
+		foreach (var unit in survivingMapUnits)
+		{
+			TileGrid.MainTile.AddUnit(unit);
+		}
 	}
 
 	static MapUnit GetNextMapUnit(Affiliation affiliation)

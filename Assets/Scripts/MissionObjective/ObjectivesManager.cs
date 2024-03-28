@@ -42,7 +42,7 @@ public class ObjectivesManager : MonoBehaviour
 
     public void CompleteObjective()
     {
-        //Grant Rewards
+        missionObjectives[currentObjective].reward.GrantRewards();
 
         if(currentObjective == missionObjectives.Count - 1)
         {

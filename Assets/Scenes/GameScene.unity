@@ -1501,6 +1501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28f062a2efeb21244b86d358ca91bb00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameCamera: {fileID: 963194225}
   BuildingsList:
   - {fileID: 6361318069061965517, guid: 4d63d62d8b2cb0f40abf28b181cc4af5, type: 3}
   - {fileID: 7655332901979392170, guid: a4a981b919bbb564cbae58e548e40105, type: 3}
@@ -4512,7 +4513,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 380676328}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 61620269}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: ReturnToMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &380676328
 MonoBehaviour:
   m_ObjectHideFlags: 0

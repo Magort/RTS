@@ -731,10 +731,50 @@ PrefabInstance:
       propertyPath: areas.Array.data[5]
       value: 
       objectReference: {fileID: 3380665488785798800}
+    - target: {fileID: 2387368519232200710, guid: bf698c1968424e94e96daa86c7a2ae74, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 2387368519232200710, guid: bf698c1968424e94e96daa86c7a2ae74, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2387368519232200710, guid: bf698c1968424e94e96daa86c7a2ae74, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2387368519232200710, guid: bf698c1968424e94e96daa86c7a2ae74, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2387368519232200710, guid: bf698c1968424e94e96daa86c7a2ae74, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2387368519232200710, guid: bf698c1968424e94e96daa86c7a2ae74, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 2510267300210715041, guid: bf698c1968424e94e96daa86c7a2ae74, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4839677956474916656, guid: bf698c1968424e94e96daa86c7a2ae74, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4839677956474916656, guid: bf698c1968424e94e96daa86c7a2ae74, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4839677956474916656, guid: bf698c1968424e94e96daa86c7a2ae74, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7146364975317887825, guid: bf698c1968424e94e96daa86c7a2ae74, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f11ec8345ec20844aa9b6a77a8edea7f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf698c1968424e94e96daa86c7a2ae74, type: 3}
 --- !u!4 &4244670530598088738 stripped

@@ -29,6 +29,8 @@ public class CombatPanel : MonoBehaviour
 	public SpeedPrompt speedPrompt;
 	public CombatEndPrompt combatEndPrompt;
 
+	Affiliation looser = Affiliation.Enemy;
+
 	private void Start()
 	{
 		Instance = this;
@@ -42,6 +44,7 @@ public class CombatPanel : MonoBehaviour
 
 	public void ShowCombatEndPrompt(Affiliation looser)
 	{
+		this.looser = looser;
 		combatEndPrompt.ShowPrompt(looser);
 	}
 
@@ -56,6 +59,7 @@ public class CombatPanel : MonoBehaviour
 
 	public void HidePanel()
 	{
+		CombatHandler.ResolvePostCombatLoses(looser);
 		gameObject.SetActive(false);
 	}	
 

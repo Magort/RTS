@@ -79,12 +79,17 @@ public class BuildingHandler : MonoBehaviour
         return true;
     }
 
-    public void LoadBuilding(TileArea tileArea, bool enable)
+    public void LoadBuilding(Tile tile, TileArea tileArea, bool enable)
     {
-        Instantiate(GameManager.Instance.BuildingsList.Find(building => building.code == tileArea.data.building)
+        var building = Instantiate(GameManager.Instance.BuildingsList.Find(building => building.code == tileArea.data.building)
             ,tileArea.buildingSlot.transform.position, Quaternion.identity, tileArea.buildingSlot.transform)
-            .GetComponent<Building>().enabled = enable;
-    }
+            .GetComponent<Building>();
+
+        building.enabled = enable;
+
+        if(enable)
+            building.OnBuildingComplete(tile, tileArea);
+	}
 
     void Upgrade(Building building)
     {

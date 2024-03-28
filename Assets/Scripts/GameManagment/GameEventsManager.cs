@@ -8,4 +8,5 @@ public static class GameEventsManager
     public static UnityEvent<Vector3Int> TileControlled = new();
     public static UnityEvent<Vector3Int> TileLostControll = new();
     public static UnityEvent<Vector3Int> TileDiscovered = new();
+    public static UnityEvent<Unit.Code> UnitRecruited = new();
 }

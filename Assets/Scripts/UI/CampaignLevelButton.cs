@@ -29,7 +29,6 @@ public class CampaignLevelButton : MonoBehaviour
 
 		while(!asyncLoad.isDone)
 		{
-			Debug.Log("loading");
 			yield return null;
 		}
 		SceneManager.SetActiveScene(SceneManager.GetSceneByName("GameScene"));

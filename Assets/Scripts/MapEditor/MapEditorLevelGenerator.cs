@@ -3,7 +3,6 @@ using UnityEngine;
 public class MapEditorLevelGenerator : MonoBehaviour
 {
 	public GameObject tilePrefab;
-	public Tile mainTile;
 	public int debugSize;
 
 	float xOffsetFull = 1.73f;

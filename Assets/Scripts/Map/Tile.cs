@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Linq;
-using Mono.Cecil;
 
 public class Tile : MonoBehaviour, IPointerUpHandler
 {
@@ -29,6 +28,9 @@ public class Tile : MonoBehaviour, IPointerUpHandler
 
 	private void Awake()
 	{
+        if (areas.Count == 0)
+            return;
+
 		for (int i = 0; i < data.areas.Count; i++)
         {
             areas[i].data = data.areas[i];
@@ -78,6 +80,15 @@ public class Tile : MonoBehaviour, IPointerUpHandler
         foreach (var unit in loadData.units)
         {
             AddUnit(unit);
+
+            if (unit.affiliation == Affiliation.Player)
+            {
+                foreach (var recrutableUnit in unit.units)
+                {
+                    foreach (var cost in recrutableUnit.upkeepCost)
+                        UnitUpkeepHandler.Instance.AddUpkeep(cost.amount, cost.resource);
+                }
+            }
         }
 
         for(int i = 0; i < data.areas.Count; i++)
@@ -88,8 +99,14 @@ public class Tile : MonoBehaviour, IPointerUpHandler
             if (areas[i].data.type == TileArea.Type.Building)
             {
                 areas[i].data.building = loadData.areas[i].building;
-				BuildingHandler.Instance.LoadBuilding(areas[i], data.affiliation == Affiliation.Player);
+				BuildingHandler.Instance.LoadBuilding(this, areas[i], loadData.affiliation == Affiliation.Player);
 			}
+        }
+
+        if (data.neighbour)
+        {
+            container.SetActive(true);
+            lighting.intensity = maxIntensity/5;
         }
 
         if (data.discovered)
@@ -307,7 +324,9 @@ public class Tile : MonoBehaviour, IPointerUpHandler
         if(data.units.Count > 0)
         {
             unitSpot.ShowUnitModel(data.units[0].affiliation);
-        }    
+        }
+
+        GameEventsManager.TileDiscovered.Invoke(data.navigationCoordinates);
 	}
 
 	public void OnDestroy()

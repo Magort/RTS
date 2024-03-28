@@ -10,8 +10,7 @@ public abstract class MissionObjective : ScriptableObject
 	public string description;
 
     public List<string> dialogues = new();
-
-    //rewards
+    public ObjectiveReward reward;
 
     public void ProgressQuantity()
     {

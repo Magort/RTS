@@ -1,10 +1,13 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public List<Building> BuildingsList;
+	public GameObject gameCamera;
+	public List<Building> BuildingsList;
 
 	private void Awake()
 	{
@@ -24,6 +27,7 @@ public class GameManager : MonoBehaviour
 		MapGenerator.Instance.LoadMap(levelData.tiles);
 		ObjectivesManager.Instance.LoadObjectives(levelData.missionObjects);
         BuildingHandler.Instance.LoadAvailableBuildingsList(levelData.availableBuildings);
+        gameCamera.transform.position = levelData.cameraStartingPos;
 		GrantStartingResources(levelData.startingResources);
 	}
 
@@ -34,6 +38,24 @@ public class GameManager : MonoBehaviour
             GameState.AddResource(resource.resource, resource.amount);
         }
     }
+
+    public void ReturnToMainMenu()
+    {
+        StartCoroutine(SwitchScenes());
+	}
+
+    IEnumerator SwitchScenes()
+    {
+		var asyncLoad = SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Additive);
+
+		while (!asyncLoad.isDone)
+		{
+			yield return null;
+		}
+
+		SceneManager.UnloadSceneAsync("MainMenu");
+		SceneManager.SetActiveScene(SceneManager.GetSceneByName("MainMenu"));
+	}
 
     public static void SwitchPauseState(bool state)
     {

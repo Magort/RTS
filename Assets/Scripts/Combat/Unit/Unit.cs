@@ -15,6 +15,15 @@ public class Unit : ScriptableObject
     [Header("Identification")]
     public string unitName;
     public Sprite icon;
+    public Code code;
+
+    public enum Code
+    {
+        Skirmisher,
+        Fighter,
+        Archer,
+        Watchman
+    }
 
     public (CombatAction, CombatAction) RollActions()
     {

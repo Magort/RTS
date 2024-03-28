@@ -68,6 +68,8 @@ public class MapUnit
     {
         var unit = units[Random.Range(0, units.Count)];
 
+        Debug.Log(customName);
+
 		if (affiliation == Affiliation.Player)
 		{
 			foreach (var requirement in unit.upkeepCost)

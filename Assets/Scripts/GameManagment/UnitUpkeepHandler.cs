@@ -26,7 +26,7 @@ public class UnitUpkeepHandler : MonoBehaviour
         public Coroutine coroutine;
     }
 
-    private void Start()
+    private void Awake()
     {
         Instance = this;
     }

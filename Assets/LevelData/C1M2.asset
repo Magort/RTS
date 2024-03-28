@@ -10,19 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 485b207b5cb46054d801adbb896eec1d, type: 3}
-  m_Name: C1M1
+  m_Name: C1M2
   m_EditorClassIdentifier: 
-  cameraStartingPos: {x: 0, y: 4, z: -5}
+  cameraStartingPos: {x: 0, y: 3, z: -1.5}
   missionObjects:
-  - {fileID: 11400000, guid: 3d5c899f61facb24f975d0a2a301f02a, type: 2}
+  - {fileID: 11400000, guid: 4fc80df0948b772498962793b8ac4262, type: 2}
+  - {fileID: 11400000, guid: 98027e3b7d364f14ba3309b97139fab1, type: 2}
+  - {fileID: 11400000, guid: 2fdbcffbc10c00248ba0083671e91334, type: 2}
+  - {fileID: 11400000, guid: fd311c24b95144944a6034b6f3ededfa, type: 2}
+  - {fileID: 11400000, guid: 5e6e8abc8ba9d0240a81011157d44a2f, type: 2}
+  - {fileID: 11400000, guid: f254d51620981ed4e8c031993c90c767, type: 2}
   startingResources:
   - resource: 0
-    amount: 500
-  - resource: 1
-    amount: 500
-  - resource: 2
-    amount: 500
-  availableBuildings: 
+    amount: 40
+  availableBuildings: 000000000100000009000000
   tiles:
   - discovered: 1
     neighbour: 0
@@ -33,11 +34,8 @@ MonoBehaviour:
     navigationCoordinates: {x: 1, y: 2, z: -3}
     spaceCoordinates: {x: -1.73, y: 0, z: 0}
     areas:
-    - type: 0
-      resourceAmount: 0
-      building: 0
     - type: 1
-      resourceAmount: 10
+      resourceAmount: 25
       building: 0
     - type: 0
       resourceAmount: 0
@@ -46,7 +44,10 @@ MonoBehaviour:
       resourceAmount: 0
       building: 0
     - type: 1
-      resourceAmount: 10
+      resourceAmount: 25
+      building: 0
+    - type: 0
+      resourceAmount: 0
       building: 0
     - type: 0
       resourceAmount: 0
@@ -54,22 +55,15 @@ MonoBehaviour:
   - discovered: 1
     neighbour: 0
     beingScouted: 0
-    units:
-    - customName: Outpost Defenders
-      units:
-      - {fileID: 11400000, guid: 2538b0d79e1b2154fbc06b9761babb1c, type: 2}
-      affiliation: 2
-      movementProgressBar: {fileID: 0}
-      currentTile: {fileID: 0}
-      path: []
-    affiliation: 2
+    units: []
+    affiliation: 1
     biome: 0
     navigationCoordinates: {x: 2, y: 2, z: -4}
     spaceCoordinates: {x: 0, y: 0, z: 0}
     areas:
-    - type: 0
+    - type: 5
       resourceAmount: 0
-      building: 0
+      building: 5
     - type: 0
       resourceAmount: 0
       building: 0
@@ -97,17 +91,44 @@ MonoBehaviour:
     - type: 0
       resourceAmount: 0
       building: 0
-    - type: 1
-      resourceAmount: 10
+    - type: 0
+      resourceAmount: 0
       building: 0
     - type: 0
       resourceAmount: 0
       building: 0
     - type: 1
-      resourceAmount: 10
+      resourceAmount: 25
       building: 0
-    - type: 1
-      resourceAmount: 10
+    - type: 0
+      resourceAmount: 0
+      building: 0
+    - type: 0
+      resourceAmount: 0
+      building: 0
+  - discovered: 0
+    neighbour: 1
+    beingScouted: 0
+    units: []
+    affiliation: 0
+    biome: 0
+    navigationCoordinates: {x: 0, y: 3, z: -3}
+    spaceCoordinates: {x: -2.595, y: 0, z: 1.5}
+    areas:
+    - type: 0
+      resourceAmount: 0
+      building: 0
+    - type: 0
+      resourceAmount: 0
+      building: 0
+    - type: 0
+      resourceAmount: 0
+      building: 0
+    - type: 0
+      resourceAmount: 0
+      building: 0
+    - type: 0
+      resourceAmount: 0
       building: 0
     - type: 0
       resourceAmount: 0
@@ -121,23 +142,23 @@ MonoBehaviour:
     navigationCoordinates: {x: 1, y: 3, z: -4}
     spaceCoordinates: {x: -0.865, y: 0, z: 1.5}
     areas:
-    - type: 1
-      resourceAmount: 10
-      building: 0
-    - type: 0
-      resourceAmount: 0
-      building: 0
-    - type: 0
-      resourceAmount: 0
-      building: 0
     - type: 0
       resourceAmount: 0
       building: 0
     - type: 1
-      resourceAmount: 10
+      resourceAmount: 25
       building: 0
     - type: 1
-      resourceAmount: 10
+      resourceAmount: 25
+      building: 0
+    - type: 1
+      resourceAmount: 25
+      building: 0
+    - type: 1
+      resourceAmount: 25
+      building: 0
+    - type: 0
+      resourceAmount: 0
       building: 0
   - discovered: 1
     neighbour: 0
@@ -149,13 +170,10 @@ MonoBehaviour:
     spaceCoordinates: {x: 0.865, y: 0, z: 1.5}
     areas:
     - type: 1
-      resourceAmount: 10
+      resourceAmount: 25
       building: 0
     - type: 1
-      resourceAmount: 10
-      building: 0
-    - type: 1
-      resourceAmount: 10
+      resourceAmount: 25
       building: 0
     - type: 0
       resourceAmount: 0
@@ -165,6 +183,90 @@ MonoBehaviour:
       building: 0
     - type: 0
       resourceAmount: 0
+      building: 0
+    - type: 0
+      resourceAmount: 0
+      building: 0
+  - discovered: 0
+    neighbour: 1
+    beingScouted: 0
+    units: []
+    affiliation: 0
+    biome: 0
+    navigationCoordinates: {x: 3, y: 3, z: -6}
+    spaceCoordinates: {x: 2.595, y: 0, z: 1.5}
+    areas:
+    - type: 0
+      resourceAmount: 0
+      building: 0
+    - type: 0
+      resourceAmount: 0
+      building: 0
+    - type: 0
+      resourceAmount: 0
+      building: 0
+    - type: 0
+      resourceAmount: 0
+      building: 0
+    - type: 0
+      resourceAmount: 0
+      building: 0
+    - type: 0
+      resourceAmount: 0
+      building: 0
+  - discovered: 0
+    neighbour: 1
+    beingScouted: 0
+    units: []
+    affiliation: 0
+    biome: 0
+    navigationCoordinates: {x: 1, y: 4, z: -5}
+    spaceCoordinates: {x: 0, y: 0, z: 3}
+    areas:
+    - type: 0
+      resourceAmount: 0
+      building: 0
+    - type: 0
+      resourceAmount: 0
+      building: 0
+    - type: 0
+      resourceAmount: 0
+      building: 0
+    - type: 0
+      resourceAmount: 0
+      building: 0
+    - type: 0
+      resourceAmount: 0
+      building: 0
+    - type: 0
+      resourceAmount: 0
+      building: 0
+  - discovered: 0
+    neighbour: 1
+    beingScouted: 0
+    units: []
+    affiliation: 0
+    biome: 0
+    navigationCoordinates: {x: 1, y: 1, z: -2}
+    spaceCoordinates: {x: -2.595, y: 0, z: -1.5}
+    areas:
+    - type: 2
+      resourceAmount: 50
+      building: 0
+    - type: 0
+      resourceAmount: 0
+      building: 0
+    - type: 0
+      resourceAmount: 0
+      building: 0
+    - type: 2
+      resourceAmount: 50
+      building: 0
+    - type: 2
+      resourceAmount: 50
+      building: 0
+    - type: 2
+      resourceAmount: 50
       building: 0
   - discovered: 1
     neighbour: 0
@@ -176,22 +278,22 @@ MonoBehaviour:
     spaceCoordinates: {x: -0.865, y: 0, z: -1.5}
     areas:
     - type: 1
-      resourceAmount: 10
+      resourceAmount: 25
+      building: 0
+    - type: 1
+      resourceAmount: 25
       building: 0
     - type: 0
       resourceAmount: 0
       building: 0
-    - type: 1
-      resourceAmount: 10
+    - type: 0
+      resourceAmount: 0
       building: 0
     - type: 0
       resourceAmount: 0
       building: 0
-    - type: 1
-      resourceAmount: 10
-      building: 0
-    - type: 1
-      resourceAmount: 10
+    - type: 0
+      resourceAmount: 0
       building: 0
   - discovered: 1
     neighbour: 0
@@ -203,10 +305,7 @@ MonoBehaviour:
     spaceCoordinates: {x: 0.865, y: 0, z: -1.5}
     areas:
     - type: 1
-      resourceAmount: 10
-      building: 0
-    - type: 1
-      resourceAmount: 10
+      resourceAmount: 25
       building: 0
     - type: 0
       resourceAmount: 0
@@ -215,32 +314,50 @@ MonoBehaviour:
       resourceAmount: 0
       building: 0
     - type: 1
-      resourceAmount: 10
+      resourceAmount: 25
+      building: 0
+    - type: 0
+      resourceAmount: 0
       building: 0
     - type: 1
-      resourceAmount: 10
+      resourceAmount: 25
       building: 0
-  - discovered: 1
-    neighbour: 0
+  - discovered: 0
+    neighbour: 1
     beingScouted: 0
-    units:
-    - customName: Rebel Army
-      units:
-      - {fileID: 11400000, guid: c690481e8b1fd164fa7e1b2e21c7a5fd, type: 2}
-      - {fileID: 11400000, guid: c995d61035b6ffc4380ebbfa4304aab1, type: 2}
-      - {fileID: 11400000, guid: c995d61035b6ffc4380ebbfa4304aab1, type: 2}
-      affiliation: 1
-      movementProgressBar: {fileID: 0}
-      currentTile: {fileID: 0}
-      path: []
-    affiliation: 1
+    units: []
+    affiliation: 0
+    biome: 0
+    navigationCoordinates: {x: 4, y: 1, z: -5}
+    spaceCoordinates: {x: 2.595, y: 0, z: -1.5}
+    areas:
+    - type: 0
+      resourceAmount: 0
+      building: 0
+    - type: 0
+      resourceAmount: 0
+      building: 0
+    - type: 0
+      resourceAmount: 0
+      building: 0
+    - type: 0
+      resourceAmount: 0
+      building: 0
+    - type: 0
+      resourceAmount: 0
+      building: 0
+    - type: 0
+      resourceAmount: 0
+      building: 0
+  - discovered: 0
+    neighbour: 1
+    beingScouted: 0
+    units: []
+    affiliation: 0
     biome: 0
     navigationCoordinates: {x: 3, y: 0, z: -3}
     spaceCoordinates: {x: 0, y: 0, z: -3}
     areas:
-    - type: 5
-      resourceAmount: 0
-      building: 5
     - type: 0
       resourceAmount: 0
       building: 0
@@ -255,111 +372,6 @@ MonoBehaviour:
       building: 0
     - type: 0
       resourceAmount: 0
-      building: 0
-  - discovered: 1
-    neighbour: 0
-    beingScouted: 0
-    units: []
-    affiliation: 0
-    biome: 0
-    navigationCoordinates: {x: 4, y: 0, z: -4}
-    spaceCoordinates: {x: 1.73, y: 0, z: -3}
-    areas:
-    - type: 1
-      resourceAmount: 10
-      building: 0
-    - type: 0
-      resourceAmount: 0
-      building: 0
-    - type: 0
-      resourceAmount: 0
-      building: 0
-    - type: 1
-      resourceAmount: 10
-      building: 0
-    - type: 0
-      resourceAmount: 0
-      building: 0
-    - type: 1
-      resourceAmount: 10
-      building: 0
-  - discovered: 1
-    neighbour: 0
-    beingScouted: 0
-    units: []
-    affiliation: 0
-    biome: 0
-    navigationCoordinates: {x: 2, y: 0, z: -2}
-    spaceCoordinates: {x: -1.73, y: 0, z: -3}
-    areas:
-    - type: 0
-      resourceAmount: 0
-      building: 0
-    - type: 1
-      resourceAmount: 10
-      building: 0
-    - type: 0
-      resourceAmount: 0
-      building: 0
-    - type: 1
-      resourceAmount: 10
-      building: 0
-    - type: 0
-      resourceAmount: 0
-      building: 0
-    - type: 1
-      resourceAmount: 10
-      building: 0
-  - discovered: 1
-    neighbour: 0
-    beingScouted: 0
-    units: []
-    affiliation: 0
-    biome: 0
-    navigationCoordinates: {x: 3, y: -1, z: -2}
-    spaceCoordinates: {x: -0.865, y: 0, z: -4.5}
-    areas:
-    - type: 0
-      resourceAmount: 0
-      building: 0
-    - type: 1
-      resourceAmount: 10
-      building: 0
-    - type: 0
-      resourceAmount: 0
-      building: 0
-    - type: 1
-      resourceAmount: 10
-      building: 0
-    - type: 0
-      resourceAmount: 0
-      building: 0
-    - type: 1
-      resourceAmount: 10
-      building: 0
-  - discovered: 1
-    neighbour: 0
-    beingScouted: 0
-    units: []
-    affiliation: 0
-    biome: 0
-    navigationCoordinates: {x: 4, y: -1, z: -3}
-    spaceCoordinates: {x: 0.865, y: 0, z: -4.5}
-    areas:
-    - type: 0
-      resourceAmount: 0
-      building: 0
-    - type: 0
-      resourceAmount: 0
-      building: 0
-    - type: 1
-      resourceAmount: 10
-      building: 0
-    - type: 1
-      resourceAmount: 10
-      building: 0
-    - type: 1
-      resourceAmount: 10
       building: 0
     - type: 0
       resourceAmount: 0

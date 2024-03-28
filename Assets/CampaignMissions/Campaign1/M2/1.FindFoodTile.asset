@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc46f7c5a599ad846bde53f180bf9b41, type: 3}
+  m_Name: 1.FindFoodTile
+  m_EditorClassIdentifier: 
+  quantityToPass: 1
+  timeToPass: 0
+  title: Warm meals
+  description: Find an area rich in food
+  dialogues: []
+  tilesByCoords:
+  - {x: 1, y: 1, z: -2}

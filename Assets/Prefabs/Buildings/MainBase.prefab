@@ -83,11 +83,9 @@ MonoBehaviour:
     requiredBuilding: 0
   code: 5
   isUpgrade: 0
-  resourcesToProduce: 010000000000000002000000
-  productionSpeeds:
-  - 6
-  - 6
-  - 10
+  icon: {fileID: 0}
+  resourcesToProduce: 
+  productionSpeeds: []
 --- !u!4 &8803979639260200462 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8687861292292457714, guid: 3c09760cbd46f0f4c9a4dd2a714e9103, type: 3}

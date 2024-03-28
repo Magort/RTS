@@ -15,6 +15,8 @@ public class UnitRecruiter : Building
         AddUnit();
         SubstarctResources();
         StartUpkeep();
+        GameState.UnitsControlled.Add(unit.code);
+        GameEventsManager.UnitRecruited.Invoke(unit.code);
     }
 
     public void AddUnit()
@@ -79,6 +81,6 @@ public class UnitRecruiter : Building
 
     public override string Description()
     {
-        return "Allows to recruit <i>" + unit.name + "</i> on this tile.";
+        return "Allows to recruit <b>" + unit.name + "</b> on this tile.";
     }
 }

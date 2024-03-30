@@ -166,6 +166,7 @@ MonoBehaviour:
     requiredBuilding: 0
   code: 1
   isUpgrade: 0
+  icon: {fileID: 21300000, guid: f524a6148e012fe4fbed5c941b17daee, type: 3}
   resourceToExtract: 1
   extractInterval: 3
 --- !u!4 &2560181093747634071 stripped

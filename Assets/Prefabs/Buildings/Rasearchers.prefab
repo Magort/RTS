@@ -87,5 +87,6 @@ MonoBehaviour:
     requiredBuilding: 0
   code: 3
   isUpgrade: 0
+  icon: {fileID: 21300000, guid: 2cbc973107738644cb8fd190cc1275ce, type: 3}
   resourceToExtract: 3
   extractInterval: 5

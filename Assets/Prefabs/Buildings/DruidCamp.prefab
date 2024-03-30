@@ -159,4 +159,5 @@ MonoBehaviour:
     requiredBuilding: 0
   code: 8
   isUpgrade: 0
+  icon: {fileID: 21300000, guid: 8858cc7ba64220e4580e0338fd2ea512, type: 3}
   unit: {fileID: 11400000, guid: 3ab72ba5e25d2154c85ef7c3dbbfcab4, type: 2}

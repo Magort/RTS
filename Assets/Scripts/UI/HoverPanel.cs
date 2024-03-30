@@ -8,7 +8,7 @@ public class HoverPanel : MonoBehaviour
     public TextMeshProUGUI title;
     public TextMeshProUGUI body;
 
-    int screenEdgeOffset = 15;
+    int screenEdgeOffset = 75;
 
     Vector3 offset = new(0, 175, 0);
 
@@ -40,7 +40,7 @@ public class HoverPanel : MonoBehaviour
 
         title.text = titleText;
         body.text = bodyText;
-    }
+	}
 
     public void DepopulateHoverPanel()
     {
@@ -55,13 +55,13 @@ public class HoverPanel : MonoBehaviour
     {
         RectTransform rectTransform = GetComponent<RectTransform>();
 
-        if (rectTransform.position.x + (rectTransform.rect.width / 2) > Camera.main.scaledPixelWidth)
+        if (rectTransform.position.x + (rectTransform.rect.width) > Camera.main.scaledPixelWidth)
         {
-            transform.position = new(Camera.main.scaledPixelWidth - (rectTransform.rect.width / 2) - screenEdgeOffset, transform.position.y, transform.position.z);
+            transform.position = new(Camera.main.scaledPixelWidth - (rectTransform.rect.width) - screenEdgeOffset, transform.position.y, transform.position.z);
         }
-        if (rectTransform.position.x - (rectTransform.rect.width / 2) < 0)
+        if (rectTransform.position.x - (rectTransform.rect.width) < 0)
         {
-            transform.position = new(0 + (rectTransform.rect.width / 2) + screenEdgeOffset, transform.position.y, transform.position.z);
-		}
+            transform.position = new(0 + (rectTransform.rect.width) + screenEdgeOffset, transform.position.y, transform.position.z);
+        }
     }
 }

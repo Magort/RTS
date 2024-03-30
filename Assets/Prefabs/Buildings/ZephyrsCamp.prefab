@@ -87,6 +87,7 @@ MonoBehaviour:
     requiredBuilding: 0
   code: 11
   isUpgrade: 0
+  icon: {fileID: 21300000, guid: 8b1a953668334d34296364875d21833c, type: 3}
   unit: {fileID: 11400000, guid: 93c9679918e591e468a89e5d211e55a4, type: 2}
 --- !u!4 &4071348516276067444 stripped
 Transform:

@@ -87,6 +87,7 @@ MonoBehaviour:
     requiredBuilding: 0
   code: 18
   isUpgrade: 0
+  icon: {fileID: 21300000, guid: 2cbc973107738644cb8fd190cc1275ce, type: 3}
   resourcesToProduce: 03000000
   productionSpeeds:
   - 1

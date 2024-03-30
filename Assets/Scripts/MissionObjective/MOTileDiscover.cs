@@ -24,7 +24,6 @@ public class MOTileDiscover : MissionObjective
 		.Add(TileGrid.Tiles.Find(searchedTiled => searchedTiled.data.navigationCoordinates == tile)));
 
 		GameEventsManager.TileDiscovered.AddListener(CheckDiscoveredTile);
-		Debug.Log("innit");
 	}
 
 	void CheckDiscoveredTile(Vector3Int tile)

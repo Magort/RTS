@@ -23,6 +23,8 @@ public class UnitMovementHandler : MonoBehaviour
 		if (unit.affiliation != Affiliation.Player)
 			return;
 
+		GameEventsManager.MapUnitSelected.Invoke(unit);
+
 		selectedUnits.Add(unit);
 		ShowPath(unit.path);
 	}
@@ -52,6 +54,7 @@ public class UnitMovementHandler : MonoBehaviour
 		foreach (var unit in selectedUnits)
 		{ 	
 			unit.path = path.ToList();
+			GameEventsManager.UnitMoveOrder.Invoke(unit, path.Last().data.navigationCoordinates);
 
 			if (movementDictionary.ContainsKey(unit))
 			{

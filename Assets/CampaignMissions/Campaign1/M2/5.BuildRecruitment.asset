@@ -17,4 +17,10 @@ MonoBehaviour:
   title: Recruitment
   description: Build a Skirmishers' Camp
   dialogues: []
+  reward:
+    resources:
+    - resource: 1
+      amount: 50
+    buildings: 
+    tiles: []
   requiredBuilding: 9

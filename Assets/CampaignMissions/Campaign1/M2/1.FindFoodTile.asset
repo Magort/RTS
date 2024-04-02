@@ -17,5 +17,9 @@ MonoBehaviour:
   title: Warm meals
   description: Find an area rich in food
   dialogues: []
+  reward:
+    resources: []
+    buildings: 00000000
+    tiles: []
   tilesByCoords:
   - {x: 1, y: 1, z: -2}

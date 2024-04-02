@@ -22,8 +22,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f254d51620981ed4e8c031993c90c767, type: 2}
   startingResources:
   - resource: 0
-    amount: 40
-  availableBuildings: 000000000100000009000000
+    amount: 15
+  availableBuildings: 
   tiles:
   - discovered: 1
     neighbour: 0

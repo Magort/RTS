@@ -81,4 +81,8 @@ public static class TileGrid
 		return neighbouringTiles;
 	}
 
+	public static Tile GetTile(Vector3Int navigationCoords)
+	{
+		return Tiles.Find(tile => tile.data.navigationCoordinates == navigationCoords);
+	}
 }

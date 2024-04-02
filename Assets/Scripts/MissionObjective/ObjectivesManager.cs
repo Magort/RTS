@@ -67,6 +67,11 @@ public class ObjectivesManager : MonoBehaviour
 
         missionObjectives[currentObjective].Innit();
 		MissionObjectivePanel.instance.UpdateDisplay();
+
+        if (missionObjectives[currentObjective].narration.Count > 0)
+        {
+            NarrativePanel.Instance.StartNewNarration(missionObjectives[currentObjective].narration);
+        }
 	}
 
     IEnumerator ProgressOverTime()

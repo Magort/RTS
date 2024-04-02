@@ -9,7 +9,7 @@ public abstract class MissionObjective : ScriptableObject
 	public string title;
 	public string description;
 
-    public List<string> dialogues = new();
+    public List<NarrativeTextPackage> narration = new();
     public ObjectiveReward reward;
 
     public void ProgressQuantity()

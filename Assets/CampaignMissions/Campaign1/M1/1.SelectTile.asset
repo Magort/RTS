@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6527b924958a52843832382ba6bd7b55, type: 3}
+  m_Name: 1.SelectTile
+  m_EditorClassIdentifier: 
+  quantityToPass: 1
+  timeToPass: 0
+  title: Learning The Basics
+  description: Select the area with allied (blue) army
+  narration:
+  - narrator: Commander Hiro
+    content: General! A Harbinger has arrived! The Council orders immediate action,
+      it is time to rise our steel again!
+  - narrator: Commander Hiro
+    content: Our striking force has been mobilized and equipped with yesterday's
+      shipment. All that is left is to lead them into battle.
+  - narrator: Tutorial
+    content: Select the highlighted area to see units stationed on it.
+  reward:
+    resources: []
+    buildings: 
+    tiles: []
+  tileToSelect: {x: 3, y: 0, z: -3}

@@ -14,14 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraStartingPos: {x: 0, y: 4, z: -5}
   missionObjects:
+  - {fileID: 11400000, guid: a47cb2fd905f4814fb342864a24b966c, type: 2}
+  - {fileID: 11400000, guid: 1e0b919d7cb77a045a6cbe58d42a49f4, type: 2}
+  - {fileID: 11400000, guid: 959a27822b752de4b940a27b0232fff0, type: 2}
   - {fileID: 11400000, guid: 3d5c899f61facb24f975d0a2a301f02a, type: 2}
   startingResources:
   - resource: 0
-    amount: 500
+    amount: 0
   - resource: 1
-    amount: 500
+    amount: 0
   - resource: 2
-    amount: 500
+    amount: 0
   availableBuildings: 
   tiles:
   - discovered: 1
@@ -224,7 +227,7 @@ MonoBehaviour:
     neighbour: 0
     beingScouted: 0
     units:
-    - customName: Rebel Army
+    - customName: Liberation Army
       units:
       - {fileID: 11400000, guid: c690481e8b1fd164fa7e1b2e21c7a5fd, type: 2}
       - {fileID: 11400000, guid: c995d61035b6ffc4380ebbfa4304aab1, type: 2}

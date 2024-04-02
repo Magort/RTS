@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class NarrativePanel : MonoBehaviour
 {
+    public static NarrativePanel Instance;
+
     public TextMeshProUGUI narratorName;
     public TextMeshProUGUI textField;
     public TextMeshProUGUI buttonText;
@@ -12,7 +14,13 @@ public class NarrativePanel : MonoBehaviour
 
     int currentText = 0;
 
-    public void StartNewNarration(List<NarrativeTextPackage> packages)
+	private void Awake()
+	{
+		Instance = this;
+        gameObject.SetActive(false);
+	}
+
+	public void StartNewNarration(List<NarrativeTextPackage> packages)
     {
         GameManager.SwitchPauseState(true);
         gameObject.SetActive(true);

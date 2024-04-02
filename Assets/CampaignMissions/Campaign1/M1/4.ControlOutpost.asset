@@ -10,12 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: daece064b694f384a8bf819dc0d4ba52, type: 3}
-  m_Name: 1.ControlOutpost
+  m_Name: 4.ControlOutpost
   m_EditorClassIdentifier: 
   quantityToPass: 1
   timeToPass: 0
   title: First Strike
   description: Capture the enemy outpost
-  dialogues: []
+  narration:
+  - narrator: Commander Hiro
+    content: The battle is nigh... Good luck, General. I will see you on the battlefield.
+  reward:
+    resources: []
+    buildings: 
+    tiles: []
   requiredTilesByCoords:
   - {x: 2, y: 2, z: -4}

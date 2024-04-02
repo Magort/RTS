@@ -17,6 +17,10 @@ MonoBehaviour:
   title: Economy kickoff
   description: Gather 50 wood to expand our base
   dialogues: []
+  reward:
+    resources: []
+    buildings: 01000000
+    tiles: []
   resourceRequirements:
   - resource: 0
     amount: 50

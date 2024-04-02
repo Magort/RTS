@@ -17,4 +17,8 @@ MonoBehaviour:
   title: Expand!
   description: Build Gatherers' Lodge on an area with food
   dialogues: []
+  reward:
+    resources: []
+    buildings: 09000000
+    tiles: []
   requiredBuilding: 1

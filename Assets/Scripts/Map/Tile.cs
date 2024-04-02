@@ -363,6 +363,7 @@ public class Tile : MonoBehaviour, IPointerUpHandler
 		AudioManager.Instance.Play(Sound.Name.Click);
 		ContextMenu.Instance.SelectedTile = this;
 		ContextMenu.Instance.ShowTileInfo(data.discovered, data.affiliation);
+        GameEventsManager.TileSelected.Invoke(data.navigationCoordinates);
 		UnitMovementHandler.Instance.DeselectAll();
 	}
 }

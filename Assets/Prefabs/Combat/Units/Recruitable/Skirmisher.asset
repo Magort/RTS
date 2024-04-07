@@ -19,9 +19,10 @@ MonoBehaviour:
     amount: 2
   upkeepCost:
   - resource: 1
-    amount: 0.25
+    amount: 0
   health: 30
   speed: 15
   dice: {fileID: 11400000, guid: a68eeeb771fd23b4bb47fb6c6b12102d, type: 2}
   unitName: Skirmisher
-  icon: {fileID: 21300000, guid: 26fdc6058eaf09e4aaf6593a5347af35, type: 3}
+  icon: {fileID: 21300000, guid: 4cdcc63e2b1f8934fa453ce82f3fd41d, type: 3}
+  code: 0

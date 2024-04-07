@@ -37,12 +37,22 @@ public class BuildingHandler : MonoBehaviour
 		if (ContextMenu.Instance.SelectedTile.areas.Find(area => area.data.type == TileArea.Type.Empty) == null)
             return;
 
+        int foundBuildings = 0;
+
         for (int i = 0; i < availableBuildings.Count; i++)
         {
             var building = GameManager.Instance.BuildingsList.Find(building => building.code == availableBuildings[i]);
 
             if (building.ValidPlacement())
-                buildingSlots[i].PopulateButton(building);
+            {
+				buildingSlots[i].PopulateButton(building);
+                foundBuildings++;
+			}
+        }
+
+        if(foundBuildings == 0)
+        {
+            panel.SetActive(false);
         }
     }
 

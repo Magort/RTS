@@ -5,6 +5,7 @@ using UnityEngine;
 public class NarrativePanel : MonoBehaviour
 {
     public static NarrativePanel Instance;
+    public GameObject blockingPanel;
 
     public TextMeshProUGUI narratorName;
     public TextMeshProUGUI textField;
@@ -17,6 +18,7 @@ public class NarrativePanel : MonoBehaviour
 	private void Awake()
 	{
 		Instance = this;
+        blockingPanel.SetActive(false);
         gameObject.SetActive(false);
 	}
 
@@ -24,6 +26,7 @@ public class NarrativePanel : MonoBehaviour
     {
         GameManager.SwitchPauseState(true);
         gameObject.SetActive(true);
+		blockingPanel.SetActive(true);
 
 		currentNarration = packages;
         PopulateText(0);
@@ -39,7 +42,7 @@ public class NarrativePanel : MonoBehaviour
 
     void HandleButtonText()
     {
-		if (currentText >= currentNarration.Count)
+		if (currentText >= currentNarration.Count - 1)
 			buttonText.text = "End";
 		else
 			buttonText.text = "Next";
@@ -48,14 +51,16 @@ public class NarrativePanel : MonoBehaviour
     void EndNarration()
     {
 		GameManager.SwitchPauseState(false);
+		blockingPanel.SetActive(false);
 		gameObject.SetActive(false);
 	}
 
     public void ShowNextText()
     {
-        if (currentText >= currentNarration.Count)
+        if (currentText >= currentNarration.Count - 1)
         {
             EndNarration();
+            return;
 		}
 
 		currentText++;

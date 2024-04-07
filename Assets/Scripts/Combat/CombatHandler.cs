@@ -470,72 +470,58 @@ public static class CombatHandler
     {
         Army target = SelectTarget(subAction, affiliation);
 
-        int multiplier = 0;
-
-        switch(subAction.quantity)
-        {
-            case Quantity.Single:
-                 multiplier = 1;
-                 break;
-			case Quantity.AoE:
-                 multiplier = target.mapUnit.units.Count;
-				 break;
-		}
-
 		switch (subAction.effect)
 		{
 			case Effect.Damage:
 				if (!OtherArmy(target).disarmed.Contains(unitID))
 				{
-                    for (int i = 0; i < multiplier; i++)
+                    if (subAction.target == Target.Opponent && OtherArmy(target).GetStatusAmount(CombatStatus.Focus) > 0)
                     {
-                        if (subAction.target == Target.Opponent && OtherArmy(target).GetStatusAmount(CombatStatus.Focus) > 0)
-                        {
-							target.TakeDamage(Mathf.RoundToInt(subAction.value * 1.5f));
-                            OtherArmy(target).RemoveCombatStatus(CombatStatus.Focus, 1);
-						}
-                        else
-							target.TakeDamage(subAction.value);
+					    target.TakeDamage(Mathf.RoundToInt(subAction.value * 1.5f));
+                        OtherArmy(target).RemoveCombatStatus(CombatStatus.Focus, 1);
 					}
+
+                    else
+						target.TakeDamage(subAction.value);
 				}
 				AudioManager.Instance.Play(Sound.Name.CombatDamage);
 				break;
 			case Effect.Heal:
-				target.HealHealth(subAction.value * multiplier);
+				target.HealHealth(subAction.value);
 				AudioManager.Instance.Play(Sound.Name.CombatHeal);
 				break;
 			case Effect.Block:
-				target.ChangeBlock(subAction.value * multiplier);
+				target.ChangeBlock(subAction.value);
 				AudioManager.Instance.Play(Sound.Name.CombatBlock);
 				break;
 			case Effect.Disarm:
-				target.AddCombatStatus(CombatStatus.Disarm, subAction.value * multiplier);
+				target.AddCombatStatus(CombatStatus.Disarm, subAction.value);
 				AudioManager.Instance.Play(Sound.Name.CombatDisarm);
 				break;
 			case Effect.Burn:
-				target.AddCombatStatus(CombatStatus.Burn, subAction.value * multiplier);
+				target.AddCombatStatus(CombatStatus.Burn, subAction.value);
 				AudioManager.Instance.Play(Sound.Name.CombatBurn);
 				break;
 			case Effect.Freeze:
-				target.AddCombatStatus(CombatStatus.Freeze, subAction.value * multiplier);
+				target.AddCombatStatus(CombatStatus.Freeze, subAction.value);
 				AudioManager.Instance.Play(Sound.Name.CombatFreeze);
 				break;
 			case Effect.Poison:
-				target.AddCombatStatus(CombatStatus.Poison, subAction.value * multiplier);
+				target.AddCombatStatus(CombatStatus.Poison, subAction.value);
 				AudioManager.Instance.Play(Sound.Name.CombatPoison);
 				break;
 			case Effect.Haste:
-				target.AddCombatStatus(CombatStatus.Haste, subAction.value * multiplier);
+				target.AddCombatStatus(CombatStatus.Haste, subAction.value);
 				AudioManager.Instance.Play(Sound.Name.CombatHaste);
 				break;
 			case Effect.Focus:
-				target.AddCombatStatus(CombatStatus.Focus, subAction.value * multiplier);
+				target.AddCombatStatus(CombatStatus.Focus, subAction.value);
 				break;
 			case Effect.Shatter:
-				target.ChangeBlock(-subAction.value * multiplier);
+				target.ChangeBlock(-subAction.value);
 				break;
 			case Effect.Wound:
-				target.ChangeWounds(subAction.value * multiplier);
+				target.ChangeWounds(subAction.value);
 				AudioManager.Instance.Play(Sound.Name.CombatWound);
 				break;
 		}

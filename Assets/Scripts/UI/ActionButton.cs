@@ -13,8 +13,7 @@ public class ActionButton : MonoBehaviour
 		foreach (var subAction in action.subActions)
 		{
 			actionText.text += subAction.value
-							+ "<sprite=" + IconIDs.effectToIconID[subAction.effect] + "> "
-							+ "<sprite=" + IconIDs.quantityToIconID[(subAction.quantity, subAction.target)] + ">\n";
+							+ "<sprite=" + IconIDs.effectToIconID[subAction.effect] + ">\n";
 		}
 
 		if (affiliation != Affiliation.Player)

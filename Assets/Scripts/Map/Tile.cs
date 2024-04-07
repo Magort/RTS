@@ -3,10 +3,12 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 public class Tile : MonoBehaviour, IPointerUpHandler
 {
     public TileData data;
+    public GameObject particles;
 	[Header("Light")]
     public Light lighting;
     public float maxIntensity;
@@ -152,6 +154,12 @@ public class Tile : MonoBehaviour, IPointerUpHandler
             areas[i].data.resourceAmount = TileArea.ResourceStartingAmount[rolledAreas[i]];
         }
 	}
+
+    public void SwitchParticles()
+    {
+        particles.SetActive(!particles.activeSelf);
+    }
+
 	public void ShowDecorations()
     {
         foreach(TileArea area in areas)

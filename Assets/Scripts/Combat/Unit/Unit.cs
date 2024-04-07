@@ -47,8 +47,7 @@ public class Unit : ScriptableObject
             foreach(var subAction in action.subActions)
             {
                 description += subAction.value
-                    + "<sprite=" + IconIDs.effectToIconID[subAction.effect] + ">"
-					+ "<sprite=" + IconIDs.quantityToIconID[(subAction.quantity, subAction.target)] + ">";
+                    + "<sprite=" + IconIDs.effectToIconID[subAction.effect] + ">";
             }
             description += " | ";
         }

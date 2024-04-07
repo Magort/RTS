@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
 			yield return null;
 		}
 
-		SceneManager.UnloadSceneAsync("MainMenu");
+		SceneManager.UnloadSceneAsync("GameScene");
 		SceneManager.SetActiveScene(SceneManager.GetSceneByName("MainMenu"));
 	}
 

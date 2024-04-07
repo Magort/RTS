@@ -50,15 +50,13 @@ public class ObjectivesManager : MonoBehaviour
         }
         else
         {
+            ClearObjective();
 			SetObjective(currentObjective + 1);
 		}
     }
 
     public void SetObjective(int index)
     {
-        if(index == 0)
-		    missionObjectives[currentObjective].Clear();
-
 		currentObjective = index;
         currentQuantity = 0;
 
@@ -72,6 +70,11 @@ public class ObjectivesManager : MonoBehaviour
         {
             NarrativePanel.Instance.StartNewNarration(missionObjectives[currentObjective].narration);
         }
+	}
+
+    public void ClearObjective()
+    {
+		missionObjectives[currentObjective].Clear();
 	}
 
     IEnumerator ProgressOverTime()

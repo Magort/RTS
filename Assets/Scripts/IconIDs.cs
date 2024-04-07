@@ -17,15 +17,6 @@ public static class IconIDs
 		{ CombatAction.Effect.Focus, 18 }
 	};
 
-	public static Dictionary<(CombatAction.Quantity, CombatAction.Target), int> quantityToIconID = new()
-	{
-		{ (CombatAction.Quantity.Single, CombatAction.Target.Ally), 6 },
-		{ (CombatAction.Quantity.AoE, CombatAction.Target.Ally), 7 },
-		{ (CombatAction.Quantity.Single, CombatAction.Target.Opponent), 16 },
-		{ (CombatAction.Quantity.AoE, CombatAction.Target.Opponent), 17 }
-
-	};
-
 	public static Dictionary<Resource, int> resourceToIconID = new()
 	{
 		{ Resource.Wood, 0 },

@@ -12,7 +12,6 @@ public class CombatAction
 		public int value;
 		public Target target;
 		public Effect effect;
-        public Quantity quantity;
 	}
 
     public CombatAction CloneAction()
@@ -29,7 +28,6 @@ public class CombatAction
             var newAction = new SubAction()
             {
                 effect = subAction.effect,
-                quantity = subAction.quantity,
                 target = subAction.target,
                 value = subAction.value
             };
@@ -43,12 +41,6 @@ public class CombatAction
     {
         Ally,
         Opponent
-    }
-
-    public enum Quantity
-    {
-        Single,
-        AoE
     }
 
     public enum Effect

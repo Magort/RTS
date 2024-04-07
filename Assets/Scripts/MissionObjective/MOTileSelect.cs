@@ -8,6 +8,7 @@ public class MOTileSelect : MissionObjective
 	public override void Clear()
 	{
 		GameEventsManager.TileSelected.RemoveListener(CheckTile);
+		TileGrid.Tiles.Find(tile => tile.data.navigationCoordinates == tileToSelect).SwitchParticles();
 	}
 
 	public override bool ConditionsMet()
@@ -18,6 +19,7 @@ public class MOTileSelect : MissionObjective
 	public override void Innit()
 	{
 		GameEventsManager.TileSelected.AddListener(CheckTile);
+		TileGrid.Tiles.Find(tile => tile.data.navigationCoordinates == tileToSelect).SwitchParticles();
 	}
 
 	void CheckTile(Vector3Int coords)

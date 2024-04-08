@@ -12,4 +12,6 @@ public static class GameEventsManager
     public static UnityEvent<MapUnit, Vector3Int> UnitMoveOrder = new();
 	public static UnityEvent<MapUnit> MapUnitSelected = new();
 	public static UnityEvent<Unit.Code> UnitRecruited = new();
+    public static UnityEvent<Affiliation> ActionsRolled = new();
+    public static UnityEvent RoundEnded = new();
 }

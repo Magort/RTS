@@ -215,6 +215,7 @@ public static class CombatHandler
 
     public static void EndRound()
     {
+        GameEventsManager.RoundEnded.Invoke();
         CombatPanel.Instance.SwitchRollButton(true);
         if(CheckForArmyDeath(playerArmy))
         {

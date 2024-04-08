@@ -28,6 +28,7 @@ public class CombatPanel : MonoBehaviour
 	public GameObject combatStartPrompt;
 	public SpeedPrompt speedPrompt;
 	public CombatEndPrompt combatEndPrompt;
+	public GameObject combatTutorial;
 
 	Affiliation looser = Affiliation.Enemy;
 
@@ -126,6 +127,7 @@ public class CombatPanel : MonoBehaviour
 
 	public void ShowActionRolls(Affiliation affiliation)
 	{
+		GameEventsManager.ActionsRolled.Invoke(affiliation);
 		StartCoroutine(ShowActionRollsCoroutine(affiliation));
 	}
 

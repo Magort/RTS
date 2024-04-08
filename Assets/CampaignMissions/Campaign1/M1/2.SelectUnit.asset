@@ -19,8 +19,8 @@ MonoBehaviour:
   narration:
   - narrator: Tutorial
     content: This is an area's info panel. You'll find all necessary information
-      here, such as stationed armies. Select the Liberation Army by tapping on the
-      highlighted button.
+      here, such as stationed armies. Select the Liberation Army by tapping on a
+      button with its name.
   reward:
     resources: []
     buildings: 

@@ -26,3 +26,4 @@ MonoBehaviour:
   destinationTile: {x: 2, y: 2, z: -4}
   unitTile: {x: 3, y: 0, z: -3}
   unitIndex: 0
+  showCombatTutorial: 1

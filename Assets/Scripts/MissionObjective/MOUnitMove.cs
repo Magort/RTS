@@ -7,10 +7,13 @@ public class MOUnitMove : MissionObjective
 	public Vector3Int unitTile;
 	public int unitIndex;
 
+	public bool showCombatTutorial;
+
 	MapUnit requiredUnit;
 
 	public override void Clear()
 	{
+		TileGrid.Tiles.Find(tile => tile.data.navigationCoordinates == destinationTile).SwitchParticles();
 		GameEventsManager.UnitMoveOrder.RemoveListener(CheckTile);
 	}
 
@@ -22,6 +25,11 @@ public class MOUnitMove : MissionObjective
 	public override void Innit()
 	{
 		requiredUnit = TileGrid.GetTile(unitTile).data.units[unitIndex];
+		if(showCombatTutorial)
+		{
+			CombatPanel.Instance.combatTutorial.SetActive(true);
+		}
+		TileGrid.Tiles.Find(tile => tile.data.navigationCoordinates == destinationTile).SwitchParticles();
 		GameEventsManager.UnitMoveOrder.AddListener(CheckTile);
 	}
 

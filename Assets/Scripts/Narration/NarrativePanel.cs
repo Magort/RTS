@@ -1,17 +1,21 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NarrativePanel : MonoBehaviour
 {
     public static NarrativePanel Instance;
     public GameObject blockingPanel;
 
+    public Image avatar;
     public TextMeshProUGUI narratorName;
     public TextMeshProUGUI textField;
     public TextMeshProUGUI buttonText;
 
     public List<NarrativeTextPackage> currentNarration;
+    public List<Narrator> narrators;
 
     int currentText = 0;
 
@@ -34,8 +38,11 @@ public class NarrativePanel : MonoBehaviour
 
     public void PopulateText(int index)
     {
-        narratorName.text = currentNarration[index].narrator;
-        textField.text = currentNarration[index].content;
+        var narrator = narrators.First(n => n.code == currentNarration[index].narrator);
+
+		narratorName.text = narrator.name;
+		avatar.sprite = narrator.avatar;
+		textField.text = currentNarration[index].content;
 
         HandleButtonText();
 	}
@@ -50,6 +57,7 @@ public class NarrativePanel : MonoBehaviour
 
     void EndNarration()
     {
+        currentText = 0;
 		GameManager.SwitchPauseState(false);
 		blockingPanel.SetActive(false);
 		gameObject.SetActive(false);

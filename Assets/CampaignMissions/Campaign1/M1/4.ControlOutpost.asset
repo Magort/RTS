@@ -17,8 +17,8 @@ MonoBehaviour:
   title: First Strike
   description: Capture the enemy outpost
   narration:
-  - narrator: Commander Hiro
-    content: The battle is nigh... Good luck, General. I will see you on the battlefield.
+  - narrator: 1
+    content: <i>The battle is nigh... Good luck, General. I will see you on the battlefield.</i>
   reward:
     resources: []
     buildings: 

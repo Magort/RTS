@@ -17,8 +17,9 @@ MonoBehaviour:
   title: Learning The Basics
   description: Tap on the hilighted area
   narration:
-  - narrator: Tutorial
-    content: With the Army selected, tap on the highlighted area to start the movement.
+  - narrator: 0
+    content: <i>With the Army selected, tap on the highlighted area to start the
+      movement.</i>
   reward:
     resources: []
     buildings: 

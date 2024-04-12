@@ -61,6 +61,8 @@ MonoBehaviour:
     - customName: Outpost Defenders
       units:
       - {fileID: 11400000, guid: 2538b0d79e1b2154fbc06b9761babb1c, type: 2}
+      - {fileID: 11400000, guid: d35d50452ed22424db51d954a917278f, type: 2}
+      - {fileID: 11400000, guid: d35d50452ed22424db51d954a917278f, type: 2}
       affiliation: 2
       movementProgressBar: {fileID: 0}
       currentTile: {fileID: 0}
@@ -229,21 +231,23 @@ MonoBehaviour:
     units:
     - customName: Liberation Army
       units:
-      - {fileID: 11400000, guid: c690481e8b1fd164fa7e1b2e21c7a5fd, type: 2}
-      - {fileID: 11400000, guid: c995d61035b6ffc4380ebbfa4304aab1, type: 2}
-      - {fileID: 11400000, guid: c995d61035b6ffc4380ebbfa4304aab1, type: 2}
+      - {fileID: 11400000, guid: 491b803ce1e3473478fc2f62db309b5c, type: 2}
+      - {fileID: 11400000, guid: 1628d69a4dc3bad4281c622eab8480bd, type: 2}
+      - {fileID: 11400000, guid: 1628d69a4dc3bad4281c622eab8480bd, type: 2}
+      - {fileID: 11400000, guid: 1628d69a4dc3bad4281c622eab8480bd, type: 2}
+      - {fileID: 11400000, guid: 1628d69a4dc3bad4281c622eab8480bd, type: 2}
       affiliation: 1
       movementProgressBar: {fileID: 0}
       currentTile: {fileID: 0}
       path: []
-    affiliation: 1
+    affiliation: 0
     biome: 0
     navigationCoordinates: {x: 3, y: 0, z: -3}
     spaceCoordinates: {x: 0, y: 0, z: -3}
     areas:
-    - type: 5
+    - type: 0
       resourceAmount: 0
-      building: 5
+      building: 0
     - type: 0
       resourceAmount: 0
       building: 0

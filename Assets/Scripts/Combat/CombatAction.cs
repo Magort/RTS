@@ -55,6 +55,7 @@ public class CombatAction
         Block,
         Shatter,
         Wound,
-        Focus
+        Focus,
+        Slow
     }
 }

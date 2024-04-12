@@ -14,6 +14,7 @@ public class SpeedPrompt : MonoBehaviour
     public TextMeshProUGUI descriptionTextBox;
     public TextMeshProUGUI playerSpeed;
     public TextMeshProUGUI enemySpeed;
+    public GameObject button;
 
     public void PopulateSpeedPrompt(Affiliation affiliation)
     {

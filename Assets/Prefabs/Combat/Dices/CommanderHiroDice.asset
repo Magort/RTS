@@ -10,35 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f7ad3c37f7602a46879781f8cd1b208, type: 3}
-  m_Name: SkirmisherDice
+  m_Name: CommanderHiroDice
   m_EditorClassIdentifier: 
   actions:
   - subActions:
-    - value: 8
+    - value: 10
       target: 1
       effect: 1
     name: Slash
   - subActions:
-    - value: 8
+    - value: 2
       target: 1
       effect: 1
-    name: Slash
-  - subActions:
-    - value: 5
-      target: 1
-      effect: 1
-    - value: 1
-      target: 0
-      effect: 7
-    name: Riposte
-  - subActions:
     - value: 1
       target: 1
       effect: 6
-    - value: 1
+    name: Tackle
+  - subActions:
+    - value: 4
+      target: 1
+      effect: 1
+    - value: 4
       target: 0
-      effect: 7
-    name: Feint
+      effect: 1
+    name: Double Strike
   - subActions:
     - value: 4
       target: 1
@@ -48,10 +43,21 @@ MonoBehaviour:
       effect: 9
     name: Lacerate
   - subActions:
-    - value: 2
+    - value: 3
+      target: 1
+      effect: 8
+    - value: 4
+      target: 1
+      effect: 1
+    name: Push Onward!
+  - subActions:
+    - value: 1
+      target: 0
+      effect: 10
+    - value: 1
       target: 0
       effect: 7
     - value: 1
       target: 0
       effect: 5
-    name: Fancy Feet
+    name: Raise Morale

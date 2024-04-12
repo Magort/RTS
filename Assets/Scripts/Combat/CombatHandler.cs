@@ -393,10 +393,9 @@ public static class CombatHandler
 		}
 
         army.TakeDamageNoModifiers(army.GetStatusAmount(CombatStatus.Poison));
-        army.TakeDamageNoModifiers(army.GetStatusAmount(CombatStatus.Burn) * army.mapUnit.units.Count);
 
-        army.RemoveCombatStatus(CombatStatus.Burn, Mathf.RoundToInt(army.GetStatusAmount(CombatStatus.Burn) * 0.75f));
 		army.RemoveCombatStatus(CombatStatus.Block, army.GetStatusAmount(CombatStatus.Block));
+		army.RemoveCombatStatus(CombatStatus.Block, army.GetStatusAmount(CombatStatus.Burn));
 
 		CombatPanel.Instance.UpdateStats();
 	}
@@ -484,6 +483,8 @@ public static class CombatHandler
 
                     else
 						target.TakeDamage(subAction.value);
+
+					OtherArmy(target).TakeDamageNoModifiers(target.GetStatusAmount(CombatStatus.Burn));
 				}
 				AudioManager.Instance.Play(Sound.Name.CombatDamage);
 				break;

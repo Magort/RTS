@@ -15,7 +15,8 @@ public class CombatTutorial : MonoBehaviour
         GameEventsManager.ActionsRolled.AddListener(PlayerRolledActions);
         GameEventsManager.RoundEnded.AddListener(ShowRoundEndTip);
         CombatPanel.Instance.speedPrompt.gameObject.SetActive(false);
-    }
+		CombatPanel.Instance.speedPrompt.button.gameObject.SetActive(false);
+	}
 
     void StartTutorial()
     {
@@ -26,11 +27,16 @@ public class CombatTutorial : MonoBehaviour
     {
         initialTips[tipIndex++].SetActive(false);
         initialTips[tipIndex].SetActive(true);
-        if(tipIndex == initialTips.Count - 1)
+        if(tipIndex == initialTips.Count - 2)
         {
 			CombatPanel.Instance.speedPrompt.gameObject.SetActive(true);
 		}
-    }
+
+		if (tipIndex == initialTips.Count - 1)
+		{
+			CombatPanel.Instance.speedPrompt.button.gameObject.SetActive(true);
+		}
+	}
 
     void PlayerRolledActions(Affiliation affiliation)
     {
@@ -42,7 +48,7 @@ public class CombatTutorial : MonoBehaviour
 
     IEnumerator WaitForRolls()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSecondsRealtime(1.5f);
 
         ShowActionsTip();
     }

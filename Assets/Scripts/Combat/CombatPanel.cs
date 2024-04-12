@@ -111,7 +111,10 @@ public class CombatPanel : MonoBehaviour
 			.Where(unit => unit.affiliation == Affiliation.Player).ToList().Count.ToString();
 		foreach (StatusSlot status in playerStatuses)
 		{
-			status.text.text = CombatHandler.playerArmy.GetStatusAmount(status.status).ToString();
+			var statusAmount = CombatHandler.playerArmy.GetStatusAmount(status.status);
+			status.text.text = statusAmount.ToString();
+
+			status.gameObject.SetActive(statusAmount == 0);
 		}
 
 		opponentHealthText.text = CombatHandler.opponentArmy.health.ToString();

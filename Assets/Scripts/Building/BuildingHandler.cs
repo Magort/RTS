@@ -18,7 +18,10 @@ public class BuildingHandler : MonoBehaviour
 
     public void LoadAvailableBuildingsList(List<Building.Code> buildings)
     {
-        availableBuildings = buildings;
+        foreach (var bulding in buildings)
+        {
+            availableBuildings.Add(bulding);
+        }
     }
 
     public void PopulateBuildingsList(bool discovered)

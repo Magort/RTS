@@ -17,13 +17,13 @@ MonoBehaviour:
   title: Learning The Basics
   description: Select the area with allied (blue) army
   narration:
-  - narrator: Commander Hiro
+  - narrator: 1
     content: General! A Harbinger has arrived! The Council orders immediate action,
       it is time to rise our steel again!
-  - narrator: Commander Hiro
+  - narrator: 1
     content: Our striking force has been mobilized and equipped with yesterday's
       shipment. All that is left is to lead them into battle.
-  - narrator: Tutorial
+  - narrator: 1
     content: Select the highlighted area to see units stationed on it.
   reward:
     resources: []

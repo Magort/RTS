@@ -17,10 +17,10 @@ MonoBehaviour:
   title: Learning The Basics
   description: Tap on the Army on area's panel
   narration:
-  - narrator: Tutorial
-    content: This is an area's info panel. You'll find all necessary information
+  - narrator: 0
+    content: <i>This is an area's info panel. You'll find all necessary information
       here, such as stationed armies. Select the Liberation Army by tapping on a
-      button with its name.
+      button with its name.</i>
   reward:
     resources: []
     buildings: 

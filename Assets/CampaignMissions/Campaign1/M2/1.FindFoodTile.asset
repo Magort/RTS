@@ -15,8 +15,18 @@ MonoBehaviour:
   quantityToPass: 1
   timeToPass: 0
   title: Warm meals
-  description: Find an area rich in food
-  dialogues: []
+  description: Find an area rich in food by scouting nearby areas
+  narration:
+  - narrator: 1
+    content: Great job in the last battle, General. We have moved past the outpost
+      and secured the area. However, to continue our campaing, we must make sure
+      our supply line is secure.
+  - narrator: 1
+    content: To do so, we must find resources nearby and set up ther extraction.
+      First, let's look for something our troops can eat.
+  - narrator: 0
+    content: <i>Select any of the dimmed areas and tap "Scout" on the info panel.
+      It will send your Scouts to reveal the area's content.</i>
   reward:
     resources: []
     buildings: 00000000

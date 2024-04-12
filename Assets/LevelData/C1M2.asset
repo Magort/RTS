@@ -15,6 +15,7 @@ MonoBehaviour:
   cameraStartingPos: {x: 0, y: 3, z: -1.5}
   missionObjects:
   - {fileID: 11400000, guid: 4fc80df0948b772498962793b8ac4262, type: 2}
+  - {fileID: 11400000, guid: 1f6a479ce9ed1fd45b6ae062f86a2661, type: 2}
   - {fileID: 11400000, guid: 98027e3b7d364f14ba3309b97139fab1, type: 2}
   - {fileID: 11400000, guid: 2fdbcffbc10c00248ba0083671e91334, type: 2}
   - {fileID: 11400000, guid: fd311c24b95144944a6034b6f3ededfa, type: 2}

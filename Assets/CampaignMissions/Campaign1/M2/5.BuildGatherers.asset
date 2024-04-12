@@ -10,15 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9feee89f1b0d2e34bae49f22eaaa518c, type: 3}
-  m_Name: 4.BuildGatherers
+  m_Name: 5.BuildGatherers
   m_EditorClassIdentifier: 
   quantityToPass: 1
   timeToPass: 0
   title: Expand!
   description: Build Gatherers' Lodge on an area with food
-  dialogues: []
+  narration:
+  - narrator: 1
+    content: General, we have enough timber to build a Gatherer's Lodge! I thought
+      a storm is coming, but turns out it's just stomachs growling at the camp -
+      so we better get it done quickly!
+  - narrator: 0
+    content: Tap on the area with food and build a Gatherers' Lodge.
   reward:
-    resources: []
+    resources:
+    - resource: 0
+      amount: 20
     buildings: 09000000
     tiles: []
   requiredBuilding: 1

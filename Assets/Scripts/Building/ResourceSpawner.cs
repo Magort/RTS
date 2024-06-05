@@ -25,8 +25,8 @@ public class ResourceSpawner : Building
 	}
 
 	public override void SpecialOnBuild(Tile tile, TileArea area)
-    {
-    }
+	{
+	}
 
 	private void Start()
 	{

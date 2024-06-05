@@ -33,7 +33,7 @@ public class MapGenerator : MonoBehaviour
 	public static float xOffsetFull = 1.73f;
 	public static float zOffsetFull = 1.5f;
 
-    Vector3 startingPoint = Vector3.zero;
+	Vector3 startingPoint = Vector3.zero;
 
 	private void Awake()
 	{
@@ -65,14 +65,14 @@ public class MapGenerator : MonoBehaviour
 		}
 	}
 
-    public void GenerateRandomMap(int size, Biome biome)
-    {
+	public void GenerateRandomMap(int size, Biome biome)
+	{
 		var tilePrefab = biomeToTilePrefab[biome];
-        var midRowSize = size * 2 + 1;
+		var midRowSize = size * 2 + 1;
 		TileGrid.Size = size;
 
 		for (int i = 0; i < midRowSize; i++)
-        {
+		{
 			if (i != size)
 			{
 				var tile = Instantiate(tilePrefab, startingPoint - new Vector3(xOffsetFull, 0, 0) * (size - i), Quaternion.identity, transform).GetComponent<Tile>();
@@ -85,13 +85,13 @@ public class MapGenerator : MonoBehaviour
 			}
 		}
 
-        for(int i = 1; i <= size; i++)
-        {
-            Vector3 newStartingPoint =
-                (startingPoint - new Vector3(xOffsetFull, 0, 0) * size) + new Vector3(xOffsetFull/2, 0, zOffsetFull) * i;
+		for (int i = 1; i <= size; i++)
+		{
+			Vector3 newStartingPoint =
+				(startingPoint - new Vector3(xOffsetFull, 0, 0) * size) + new Vector3(xOffsetFull / 2, 0, zOffsetFull) * i;
 
-            for(int j = 0; j <= (size * 2) - i; j++)
-            {
+			for (int j = 0; j <= (size * 2) - i; j++)
+			{
 				var tile = Instantiate(tilePrefab, newStartingPoint + new Vector3(xOffsetFull, 0, 0) * j, Quaternion.identity, transform)
 					.GetComponent<Tile>();
 				tile.InitializeTile(new(j, size + i, (j + size + i) * -1));
@@ -161,12 +161,12 @@ public class MapGenerator : MonoBehaviour
 
 		var neutralsToSpawn = 0;
 
-		for(int i = 1; i <= TileGrid.Size; i++)
+		for (int i = 1; i <= TileGrid.Size; i++)
 		{
 			neutralsToSpawn += 3 * i;
 		}
 
-		for(int i = 0; i < neutralsToSpawn; i++)
+		for (int i = 0; i < neutralsToSpawn; i++)
 		{
 			Tile selectedTile = availableTiles[Random.Range(0, availableTiles.Count)];
 
@@ -179,7 +179,7 @@ public class MapGenerator : MonoBehaviour
 
 			availableTiles.Remove(selectedTile);
 		}
-	}	
+	}
 
 	MapUnit GetNeutralUnit(int highestCoordinate)
 	{
@@ -192,7 +192,7 @@ public class MapGenerator : MonoBehaviour
 	{
 		List<Vector3> validCoordinates = new()
 		{
-			new(9, 2, -11), 
+			new(9, 2, -11),
 			new(1, 10, -11),
 			new(11, 12, -23),
 			new(4, 16, -20),
@@ -202,7 +202,7 @@ public class MapGenerator : MonoBehaviour
 
 		List<Tile> validTiles = TileGrid.Tiles.Where(tile => validCoordinates.Contains(tile.data.navigationCoordinates)).ToList();
 
-		for(int i = 0; i < enemyTiles.Count; i++)
+		for (int i = 0; i < enemyTiles.Count; i++)
 		{
 			var roll = Random.Range(0, validTiles.Count);
 
@@ -225,7 +225,7 @@ public class MapGenerator : MonoBehaviour
 
 	void EnableNeighbouringTiles()
 	{
-		foreach(var tile in TileGrid.GetNeighbouringTiles(TileGrid.MainTile))
+		foreach (var tile in TileGrid.GetNeighbouringTiles(TileGrid.MainTile))
 		{
 			tile.BecomeNeighbour();
 		}

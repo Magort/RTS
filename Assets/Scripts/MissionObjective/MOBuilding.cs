@@ -17,7 +17,7 @@ public class MOBuilding : MissionObjective
 
 	void CheckNewBuilding(Building.Code newBuilding)
 	{
-		if(newBuilding == requiredBuilding)
+		if (newBuilding == requiredBuilding)
 		{
 			ProgressQuantity();
 		}

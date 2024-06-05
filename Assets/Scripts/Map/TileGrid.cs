@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using UnityEngine;
 
 public static class TileGrid
@@ -51,14 +50,14 @@ public static class TileGrid
 		int minDistance = 100;
 		Tile closestTile = null;
 
-		foreach(Tile tile in availableTiles)
+		foreach (Tile tile in availableTiles)
 		{
 			int estimatedDistance =
 				Mathf.Max(Mathf.Abs(startingTile.data.navigationCoordinates.z - tile.data.navigationCoordinates.z),
 				Mathf.Abs(startingTile.data.navigationCoordinates.x - tile.data.navigationCoordinates.x),
 				Mathf.Abs(startingTile.data.navigationCoordinates.y - tile.data.navigationCoordinates.y));
 
-			if(estimatedDistance < minDistance)
+			if (estimatedDistance < minDistance)
 			{
 				closestTile = tile;
 				minDistance = estimatedDistance;
@@ -70,7 +69,7 @@ public static class TileGrid
 	public static List<Tile> GetNeighbouringTiles(Tile tile)
 	{
 		List<Tile> neighbouringTiles = new();
-		foreach(Vector3Int coords in NeighbouringCoordinates)
+		foreach (Vector3Int coords in NeighbouringCoordinates)
 		{
 			var potentialTile = Tiles.Find(nTile => nTile.data.navigationCoordinates == tile.data.navigationCoordinates + coords);
 

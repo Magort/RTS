@@ -62,7 +62,7 @@ public class CombatPanel : MonoBehaviour
 	{
 		CombatHandler.ResolvePostCombatLoses(looser);
 		gameObject.SetActive(false);
-	}	
+	}
 
 	public void OnRollButtonClick()
 	{
@@ -138,7 +138,7 @@ public class CombatPanel : MonoBehaviour
 	{
 		var waiter = new WaitForSecondsRealtime(0.33f);
 
-		switch(affiliation)
+		switch (affiliation)
 		{
 			case Affiliation.Player:
 				playerActions.ForEach(action => action.ClearActions());

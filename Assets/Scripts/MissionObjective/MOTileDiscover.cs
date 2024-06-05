@@ -11,7 +11,7 @@ public class MOTileDiscover : MissionObjective
 	{
 		foreach (var tile in tiles)
 		{
-			if(!tile.data.discovered)
+			if (!tile.data.discovered)
 				return false;
 		}
 

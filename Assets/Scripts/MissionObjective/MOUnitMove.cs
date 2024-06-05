@@ -25,7 +25,7 @@ public class MOUnitMove : MissionObjective
 	public override void Innit()
 	{
 		requiredUnit = TileGrid.GetTile(unitTile).data.units[unitIndex];
-		if(showCombatTutorial)
+		if (showCombatTutorial)
 		{
 			CombatPanel.Instance.combatTutorial.SetActive(true);
 		}

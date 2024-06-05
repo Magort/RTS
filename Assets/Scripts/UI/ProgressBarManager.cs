@@ -3,17 +3,17 @@ using UnityEngine;
 
 public class ProgressBarManager : MonoBehaviour
 {
-    public List<ProgressBar> progressBars;
+	public List<ProgressBar> progressBars;
 
-    public static ProgressBarManager Instance;
+	public static ProgressBarManager Instance;
 
-    private void Start()
-    {
-        Instance = this;
-    }
+	private void Start()
+	{
+		Instance = this;
+	}
 
-    public ProgressBar GetProgressBar()
-    {
-        return progressBars.Find(bar => !bar.gameObject.activeSelf);
+	public ProgressBar GetProgressBar()
+	{
+		return progressBars.Find(bar => !bar.gameObject.activeSelf);
 	}
 }

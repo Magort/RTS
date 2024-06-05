@@ -5,21 +5,22 @@ public class MissionObjectivePanel : MonoBehaviour
 {
 	public static MissionObjectivePanel instance;
 
-    public TextMeshProUGUI objectiveTitle;
-    public TextMeshProUGUI objectiveDescription;
+	public TextMeshProUGUI objectiveTitle;
+	public TextMeshProUGUI objectiveDescription;
 
-	private void Start()
+	private void Awake()
 	{
 		instance = this;
+		gameObject.SetActive(false);
 	}
 
 	public void UpdateDisplay()
-    {
+	{
 		var currentObjective = ObjectivesManager.Instance.GetCurrentObjective();
 
 		objectiveTitle.text = currentObjective.title;
 		objectiveDescription.text = GenerateDescription(currentObjective);
-    }
+	}
 
 	string GenerateDescription(MissionObjective objective)
 	{
@@ -32,7 +33,7 @@ public class MissionObjectivePanel : MonoBehaviour
 			dscr += " (" + ObjectivesManager.Instance.currentQuantity + "/" + objective.quantityToPass + ")";
 		}
 
-		if(objective.timeToPass > 0)
+		if (objective.timeToPass > 0)
 		{
 			dscr += " (" + ObjectivesManager.Instance.currentTimer + "/" + objective.timeToPass + ")";
 		}

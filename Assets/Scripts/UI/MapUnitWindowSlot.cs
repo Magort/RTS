@@ -40,7 +40,7 @@ public class MapUnitWindowSlot : MonoBehaviour, IPointerEnterHandler, IPointerEx
 	}
 	public void OnPointerEnter(PointerEventData eventData)
 	{
-		if(unit != null)
+		if (unit != null)
 			HoverPanel.instance.PopulateHoverPanel(gameObject, unit.unitName, unit.Description());
 	}
 

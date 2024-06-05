@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class ResourceExtractor : Building
 {
-    public Resource resourceToExtract;
+	public Resource resourceToExtract;
 	public float extractInterval;
-    private Dictionary<Resource, TileArea.Type> resourceToArea = new()
-    {
-        {Resource.Food, TileArea.Type.FoodSource },
+	private Dictionary<Resource, TileArea.Type> resourceToArea = new()
+	{
+		{Resource.Food, TileArea.Type.FoodSource },
 		{Resource.Wood, TileArea.Type.WoodSource },
 		{Resource.Gold, TileArea.Type.GoldSource },
 		{Resource.Essence, TileArea.Type.EssenceSource }
@@ -38,18 +38,18 @@ public class ResourceExtractor : Building
 
 	IEnumerator TryExtract()
 	{
-		while(true)
+		while (true)
 		{
 			yield return extractionPeriod;
 
-			if(currentTarget == null)
+			if (currentTarget == null)
 				currentTarget = builtOn.areas.Find(area => area.data.type == resourceToArea[resourceToExtract]);
 
-			if(currentTarget != null)
+			if (currentTarget != null)
 			{
 				currentTarget.data.resourceAmount--;
 				GameState.AddResource(resourceToExtract, 1);
-				if(currentTarget.data.resourceAmount <= 0)
+				if (currentTarget.data.resourceAmount <= 0)
 				{
 					currentTarget.DepleteResources();
 					currentTarget = null;

@@ -26,7 +26,7 @@ public class MOUnitSelect : MissionObjective
 
 	void CheckArmy(MapUnit unit)
 	{
-		if(unit == requiredUnit)
+		if (unit == requiredUnit)
 			ProgressQuantity();
 	}
 }

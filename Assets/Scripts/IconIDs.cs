@@ -2,9 +2,9 @@ using System.Collections.Generic;
 
 public static class IconIDs
 {
-    public static Dictionary<CombatAction.Effect, int> effectToIconID = new()
-    {
-        { CombatAction.Effect.Heal, 2 },
+	public static Dictionary<CombatAction.Effect, int> effectToIconID = new()
+	{
+		{ CombatAction.Effect.Heal, 2 },
 		{ CombatAction.Effect.Damage, 3 },
 		{ CombatAction.Effect.Block, 4 },
 		{ CombatAction.Effect.Poison, 5 },

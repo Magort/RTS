@@ -17,7 +17,7 @@ public class ProgressBar : MonoBehaviour
 			return;
 
 		UpdatePosition();
-		
+
 		timer += Time.deltaTime;
 
 		UpdateFill();

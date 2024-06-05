@@ -1,11 +1,11 @@
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class UnitMovementHandler : MonoBehaviour
 {
-    public static UnitMovementHandler Instance;
+	public static UnitMovementHandler Instance;
 	public LineRenderer pathLine;
 	public List<MapUnit> selectedUnits = new();
 
@@ -14,9 +14,9 @@ public class UnitMovementHandler : MonoBehaviour
 	Dictionary<MapUnit, Coroutine> movementDictionary = new();
 
 	private void Awake()
-    {
-        Instance = this;
-    }
+	{
+		Instance = this;
+	}
 
 	public void SelectUnit(MapUnit unit)
 	{
@@ -50,9 +50,9 @@ public class UnitMovementHandler : MonoBehaviour
 
 		AudioManager.Instance.Play(Sound.Name.Click);
 		var path = CreatePath(destinationTile, Affiliation.Player);
-		
+
 		foreach (var unit in selectedUnits)
-		{ 	
+		{
 			unit.path = path.ToList();
 			GameEventsManager.UnitMoveOrder.Invoke(unit, path.Last().data.navigationCoordinates);
 
@@ -110,7 +110,7 @@ public class UnitMovementHandler : MonoBehaviour
 	{
 		var waiter = new WaitForSeconds(stepTime);
 
-		while(true)
+		while (true)
 		{
 			if (unit.path.Count == 0)
 				break;
@@ -133,7 +133,7 @@ public class UnitMovementHandler : MonoBehaviour
 			unit.path[0].RemoveUnit(unit);
 			unit.path[1].AddUnit(unit);
 			unit.path.RemoveAt(0);
-			if(selectedUnits.Contains(unit))
+			if (selectedUnits.Contains(unit))
 			{
 				ShowPath(unit.path);
 			}
@@ -157,7 +157,7 @@ public class UnitMovementHandler : MonoBehaviour
 		ClearNavigationParameters();
 
 		return FindPath(selectedUnits[0].currentTile, destinationTile, affiliation);
-    }
+	}
 
 	public List<Tile> CreatePath(Tile startingTile, Tile destinationTile, Affiliation affiliation)
 	{

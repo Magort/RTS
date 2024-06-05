@@ -5,20 +5,20 @@ using UnityEngine;
 public class ResourcesPanel : MonoBehaviour
 {
 	public static ResourcesPanel Instance;
-    public TextMeshProUGUI foodText;
+	public TextMeshProUGUI foodText;
 	public TextMeshProUGUI woodText;
 	public TextMeshProUGUI goldText;
 	public TextMeshProUGUI essenceText;
 
 	private void Awake()
-    {
+	{
 		Instance = this;
-        UpdateDisplay();
-    }
+		UpdateDisplay();
+	}
 
-    public void UpdateDisplay()
-    {
-        foodText.text = GameState.Resources[Resource.Food].ToString()
+	public void UpdateDisplay()
+	{
+		foodText.text = GameState.Resources[Resource.Food].ToString()
 			+ " "
 			+ GetGrowthText(GameState.ResourcesGrowth[Resource.Food] * 10);
 
@@ -39,7 +39,7 @@ public class ResourcesPanel : MonoBehaviour
 	{
 		if (value < 0)
 			return "<color=red>" + Math.Round(value, 2) + "</color>";
-		if(value > 0)
+		if (value > 0)
 			return "<color=green>+" + Math.Round(value, 2) + "</color>";
 
 

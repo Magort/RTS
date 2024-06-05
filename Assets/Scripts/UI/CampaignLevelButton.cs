@@ -27,7 +27,7 @@ public class CampaignLevelButton : MonoBehaviour
 	{
 		var asyncLoad = SceneManager.LoadSceneAsync("GameScene", LoadSceneMode.Additive);
 
-		while(!asyncLoad.isDone)
+		while (!asyncLoad.isDone)
 		{
 			yield return null;
 		}

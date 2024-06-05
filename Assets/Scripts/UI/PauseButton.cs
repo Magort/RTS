@@ -4,24 +4,24 @@ using UnityEngine.UI;
 
 public class PauseButton : MonoBehaviour
 {
-    public Image image;
+	public Image image;
 
-    public Sprite playSprite;
-    public Sprite pauseSprite;
+	public Sprite playSprite;
+	public Sprite pauseSprite;
 
-    Dictionary<float, Sprite> pauseStateToImage;
+	Dictionary<float, Sprite> pauseStateToImage;
 
 	private void Start()
 	{
 		pauseStateToImage = new()
-        {
-            { 0, playSprite },
-            { 1, pauseSprite }
-        };
+		{
+			{ 0, playSprite },
+			{ 1, pauseSprite }
+		};
 	}
 	public void SwitchPauseState()
-    {
-        GameManager.SwitchPauseState(Time.timeScale == 1);
-        image.sprite = pauseStateToImage[Time.timeScale];
-    }    
+	{
+		GameManager.SwitchPauseState(Time.timeScale == 1);
+		image.sprite = pauseStateToImage[Time.timeScale];
+	}
 }

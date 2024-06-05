@@ -7,9 +7,9 @@ public static class GameState
 	public static bool TapLocked;
 	public static bool DragLocked;
 
-    public static Dictionary<Resource, int> Resources = new()
-    {
-        {Resource.Wood, 0 },
+	public static Dictionary<Resource, int> Resources = new()
+	{
+		{Resource.Wood, 0 },
 		{Resource.Food, 0 },
 		{Resource.Gold, 0 },
 		{Resource.Essence, 0 }

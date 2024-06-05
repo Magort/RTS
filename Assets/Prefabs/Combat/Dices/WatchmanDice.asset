@@ -34,9 +34,18 @@ MonoBehaviour:
       effect: 6
     name: Low Blow
   - subActions:
-    - value: 1
+    - value: 2
       target: 1
-      effect: 0
+      effect: 1
+    - value: 2
+      target: 1
+      effect: 9
     name: Knee Strike
-  - subActions: []
-    name: 
+  - subActions:
+    - value: 2
+      target: 1
+      effect: 1
+    - value: 2
+      target: 1
+      effect: 9
+    name: Knee Strike

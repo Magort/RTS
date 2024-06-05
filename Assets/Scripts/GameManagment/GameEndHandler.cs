@@ -2,22 +2,22 @@ using UnityEngine;
 
 public class GameEndHandler : MonoBehaviour
 {
-    public static GameEndHandler Instance;
-    
-    public GameEndPrompt prompt;
+	public static GameEndHandler Instance;
 
-    private void Start()
-    {
-        Instance = this;
-    }
+	public GameEndPrompt prompt;
 
-    public void WinGame()
-    {
-        prompt.PopulatePrompt(true);
-    }
+	private void Start()
+	{
+		Instance = this;
+	}
 
-    public void LoseGame()
-    {
+	public void WinGame()
+	{
+		prompt.PopulatePrompt(true);
+	}
+
+	public void LoseGame()
+	{
 		prompt.PopulatePrompt(false);
 	}
 

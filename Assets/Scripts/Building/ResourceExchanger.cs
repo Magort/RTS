@@ -12,13 +12,13 @@ public class ResourceExchanger : Building
 	void Start()
 	{
 		StartCoroutine(Exchange());
-		foreach(var resource in resourcesToGain)
+		foreach (var resource in resourcesToGain)
 		{
-			GameState.AddResourceGrowth(resource, 1/productionSpeed);
+			GameState.AddResourceGrowth(resource, 1 / productionSpeed);
 		}
-		foreach(var resource in resourcesToLose)
+		foreach (var resource in resourcesToLose)
 		{
-			GameState.AddResourceGrowth(resource, -1/productionSpeed);
+			GameState.AddResourceGrowth(resource, -1 / productionSpeed);
 		}
 	}
 
@@ -26,13 +26,13 @@ public class ResourceExchanger : Building
 	{
 		WaitForSeconds waiter = new(productionSpeed);
 
-		while(true)
+		while (true)
 		{
 			yield return waiter;
 
-			if(TryPayResources())
+			if (TryPayResources())
 			{
-				for(int i = 0; i < resourcesToGain.Count; i++)
+				for (int i = 0; i < resourcesToGain.Count; i++)
 				{
 					GameState.AddResource(resourcesToGain[i], gainAmounts[i]);
 				}
@@ -45,7 +45,7 @@ public class ResourceExchanger : Building
 		foreach (Resource resource in resourcesToLose)
 		{
 			if (GameState.Resources[resource] <= 0)
-			{ 
+			{
 				return false;
 			}
 		}
@@ -62,14 +62,14 @@ public class ResourceExchanger : Building
 	}
 
 	public override string Description()
-    {
+	{
 		string description = "Trades: ";
 		for (int i = 0; i < resourcesToLose.Count; i++)
 		{
 			description += "1<sprite="
 			   + IconIDs.resourceToIconID[resourcesToLose[i]] + ">/";
 		}
-        description += "\nFor: ";
+		description += "\nFor: ";
 		for (int i = 0; i < resourcesToGain.Count; i++)
 		{
 			description += "1<sprite="
@@ -81,7 +81,7 @@ public class ResourceExchanger : Building
 	}
 
 	public override void SpecialOnBuild(Tile tile, TileArea area)
-    {
-        
-    }
+	{
+
+	}
 }

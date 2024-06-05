@@ -3,59 +3,59 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [Range(0.1f, 0.3f)] public float intensity;
-    public float minZoom;
-    public float maxZoom;
-    public float currentZoom;
+	[Range(0.1f, 0.3f)] public float intensity;
+	public float minZoom;
+	public float maxZoom;
+	public float currentZoom;
 
-    Vector3 moveToTileOffset = new(0, 0, -1.5f);
-    float lastTouchDistance = 0;
+	Vector3 moveToTileOffset = new(0, 0, -1.5f);
+	float lastTouchDistance = 0;
 
 	WaitForSecondsRealtime tapLockWaiter = new(0.1f);
-    float tapLockTimer = 0;
-    float tapLockTime = 0.2f;
+	float tapLockTimer = 0;
+	float tapLockTime = 0.2f;
 
 	public static CameraController Instance;
 
-    private void Start()
-    {
-        Instance = this;
-        currentZoom = transform.position.y;
-    }
+	private void Start()
+	{
+		Instance = this;
+		currentZoom = transform.position.y;
+	}
 
-    private void Update()
-    {
-        if(Input.touchCount == 0)
-            return;
+	private void Update()
+	{
+		if (Input.touchCount == 0)
+			return;
 
-        if (Input.touchCount >= 2)
-        {
-            UpdateZoom();
-            return;
-        }
+		if (Input.touchCount >= 2)
+		{
+			UpdateZoom();
+			return;
+		}
 
-        var touch = Input.GetTouch(0);
+		var touch = Input.GetTouch(0);
 
-        if (touch.phase == TouchPhase.Moved)
-        {
-            transform.position -= intensity * Time.unscaledDeltaTime * new Vector3(touch.deltaPosition.x, 0, touch.deltaPosition.y);
+		if (touch.phase == TouchPhase.Moved)
+		{
+			transform.position -= intensity * Time.unscaledDeltaTime * new Vector3(touch.deltaPosition.x, 0, touch.deltaPosition.y);
 
-            HandleTapLock();
-        }
-    }
+			HandleTapLock();
+		}
+	}
 
-    void UpdateZoom()
-    {
-        var touch1 = Input.GetTouch(0);
-        var touch2 = Input.GetTouch(1);
+	void UpdateZoom()
+	{
+		var touch1 = Input.GetTouch(0);
+		var touch2 = Input.GetTouch(1);
 
-        if (touch1.phase != TouchPhase.Moved && touch2.phase != TouchPhase.Moved)
-            return;
+		if (touch1.phase != TouchPhase.Moved && touch2.phase != TouchPhase.Moved)
+			return;
 
 		if (touch1.deltaPosition.x * touch2.deltaPosition.x >= 0)
-            return;
+			return;
 
-        var currentDistance = Vector2.Distance(touch1.position, touch2.position);
+		var currentDistance = Vector2.Distance(touch1.position, touch2.position);
 
 		currentZoom = Mathf.Clamp(currentZoom + lastTouchDistance - currentDistance, minZoom, maxZoom);
 
@@ -69,13 +69,13 @@ public class CameraController : MonoBehaviour
 		HandleTapLock();
 	}
 
-    public void MoveToTile(Vector3 spot)
-    {
-        StartCoroutine(MoveTo(spot + moveToTileOffset));
-    }
+	public void MoveToTile(Vector3 spot)
+	{
+		StartCoroutine(MoveTo(spot + moveToTileOffset));
+	}
 
-    void HandleTapLock()
-    {
+	void HandleTapLock()
+	{
 		if (!GameState.TapLocked)
 		{
 			StartCoroutine(TapLock());
@@ -86,34 +86,34 @@ public class CameraController : MonoBehaviour
 		}
 	}
 
-    IEnumerator TapLock()
-    {
-        GameState.TapLocked = true;
+	IEnumerator TapLock()
+	{
+		GameState.TapLocked = true;
 
-        tapLockTimer = 0;
+		tapLockTimer = 0;
 
-        while(tapLockTimer < tapLockTime)
-        {
-            yield return tapLockWaiter;
+		while (tapLockTimer < tapLockTime)
+		{
+			yield return tapLockWaiter;
 
-            tapLockTimer += 0.1f;
-        }
+			tapLockTimer += 0.1f;
+		}
 
 		GameState.TapLocked = false;
-    }
+	}
 
-    IEnumerator MoveTo(Vector3 spot)
-    {
-        Vector3 startingPosition = transform.position;
-        float step = 0;
-        var waiter = new WaitForSecondsRealtime(0.01f);
-        spot.y = startingPosition.y;
+	IEnumerator MoveTo(Vector3 spot)
+	{
+		Vector3 startingPosition = transform.position;
+		float step = 0;
+		var waiter = new WaitForSecondsRealtime(0.01f);
+		spot.y = startingPosition.y;
 
-        while(step < 1)
-        {
-            transform.position = Vector3.Lerp(startingPosition, spot, step);
-            step += 0.01f;
-            yield return waiter;
-        }
-    }  
+		while (step < 1)
+		{
+			transform.position = Vector3.Lerp(startingPosition, spot, step);
+			step += 0.01f;
+			yield return waiter;
+		}
+	}
 }

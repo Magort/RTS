@@ -11,7 +11,7 @@ public class MOTileControl : MissionObjective
 	{
 		foreach (var tile in requiredTiles)
 		{
-			if(tile.data.units.Count > 0)
+			if (tile.data.units.Count > 0)
 			{
 				if (tile.data.units[0].affiliation != Affiliation.Player)
 					return false;

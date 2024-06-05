@@ -22,7 +22,7 @@ public class MOUnitsControl : MissionObjective
 
 	void CheckUnit(Unit.Code unit)
 	{
-		if(unit == unitByCode)
+		if (unit == unitByCode)
 		{
 			ProgressQuantity();
 		}

@@ -1,34 +1,43 @@
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using System.IO;
 
 public class UnitMovementHandler : MonoBehaviour
 {
-    public static UnitMovementHandler Instance;
+	public static UnitMovementHandler Instance;
 	public LineRenderer pathLine;
-	List<MapUnit> selectedUnits = new();
+	public List<MapUnit> selectedUnits = new();
 
 	int stepTime = 4;
 
 	Dictionary<MapUnit, Coroutine> movementDictionary = new();
 
 	private void Awake()
-    {
-        Instance = this;
-    }
+	{
+		Instance = this;
+	}
 
 	public void SelectUnit(MapUnit unit)
 	{
 		if (unit.affiliation != Affiliation.Player)
 			return;
 
+		GameEventsManager.MapUnitSelected.Invoke(unit);
+
 		selectedUnits.Add(unit);
 		ShowPath(unit.path);
 	}
 
-	public void Deselect()
+	public void Deselect(MapUnit unit)
+	{
+		if (unit.affiliation != Affiliation.Player)
+			return;
+
+		selectedUnits.Remove(unit);
+	}
+
+	public void DeselectAll()
 	{
 		selectedUnits = new();
 		HidePath();
@@ -41,10 +50,11 @@ public class UnitMovementHandler : MonoBehaviour
 
 		AudioManager.Instance.Play(Sound.Name.Click);
 		var path = CreatePath(destinationTile, Affiliation.Player);
-		
+
 		foreach (var unit in selectedUnits)
-		{ 	
+		{
 			unit.path = path.ToList();
+			GameEventsManager.UnitMoveOrder.Invoke(unit, path.Last().data.navigationCoordinates);
 
 			if (movementDictionary.ContainsKey(unit))
 			{
@@ -55,8 +65,8 @@ public class UnitMovementHandler : MonoBehaviour
 			else
 				movementDictionary.Add(unit, StartCoroutine(Move(unit)));
 		}
-
-		ShowPath(path);
+		DeselectAll();
+		ContextMenu.Instance.UpdatePanel();
 	}
 
 	public void MoveEnemyUnit(MapUnit unit, int maxStep)
@@ -100,15 +110,15 @@ public class UnitMovementHandler : MonoBehaviour
 	{
 		var waiter = new WaitForSeconds(stepTime);
 
-		while(true)
+		while (true)
 		{
 			if (unit.path.Count == 0)
 				break;
 
-			if (unit.currentTile.discovered)
+			if (unit.currentTile.data.discovered)
 			{
 				unit.movementProgressBar = ProgressBarManager.Instance.GetProgressBar();
-				unit.movementProgressBar.ShowProgress(unit.currentTile.transform, stepTime, "Moving...");
+				unit.movementProgressBar.ShowProgress(unit.currentTile.transform, stepTime, "Moving...", TileArea.affiliationToColor[unit.affiliation]);
 			}
 
 			yield return waiter;
@@ -123,7 +133,7 @@ public class UnitMovementHandler : MonoBehaviour
 			unit.path[0].RemoveUnit(unit);
 			unit.path[1].AddUnit(unit);
 			unit.path.RemoveAt(0);
-			if(selectedUnits.Contains(unit))
+			if (selectedUnits.Contains(unit))
 			{
 				ShowPath(unit.path);
 			}
@@ -147,7 +157,7 @@ public class UnitMovementHandler : MonoBehaviour
 		ClearNavigationParameters();
 
 		return FindPath(selectedUnits[0].currentTile, destinationTile, affiliation);
-    }
+	}
 
 	public List<Tile> CreatePath(Tile startingTile, Tile destinationTile, Affiliation affiliation)
 	{
@@ -179,7 +189,7 @@ public class UnitMovementHandler : MonoBehaviour
 
 	void ClearNavigationParameters()
 	{
-		foreach (Tile tile in TileGrid.Tiles.Where(tile => tile.neighbour))
+		foreach (Tile tile in TileGrid.Tiles.Where(tile => tile.data.neighbour))
 		{
 			tile.g = 0;
 			tile.h = 0;
@@ -195,7 +205,7 @@ public class UnitMovementHandler : MonoBehaviour
 		Tile currentTile = startPoint;
 
 		currentTile.g = 0;
-		currentTile.h = GetEstimatedPathCost(startPoint.coordinates, endPoint.coordinates);
+		currentTile.h = GetEstimatedPathCost(startPoint.data.navigationCoordinates, endPoint.data.navigationCoordinates);
 
 		openPathTiles.Add(currentTile);
 
@@ -218,7 +228,7 @@ public class UnitMovementHandler : MonoBehaviour
 
 			foreach (Tile adjacentTile in TileGrid.GetNeighbouringTiles(currentTile))
 			{
-				if (!adjacentTile.neighbour && affiliation == Affiliation.Player)
+				if (!adjacentTile.data.neighbour && affiliation == Affiliation.Player)
 				{
 					continue;
 				}
@@ -231,7 +241,7 @@ public class UnitMovementHandler : MonoBehaviour
 				if (!(openPathTiles.Contains(adjacentTile)))
 				{
 					adjacentTile.g = g;
-					adjacentTile.h = GetEstimatedPathCost(adjacentTile.coordinates, endPoint.coordinates);
+					adjacentTile.h = GetEstimatedPathCost(adjacentTile.data.navigationCoordinates, endPoint.data.navigationCoordinates);
 					openPathTiles.Add(adjacentTile);
 				}
 
@@ -242,7 +252,7 @@ public class UnitMovementHandler : MonoBehaviour
 			}
 		}
 
-		List<Tile> finalPathTiles = new List<Tile>();
+		List<Tile> finalPathTiles = new();
 
 		if (closedPathTiles.Contains(endPoint))
 		{

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class FloatingTextManager : MonoBehaviour
 {
@@ -10,7 +10,7 @@ public class FloatingTextManager : MonoBehaviour
 	private List<FloatingText> floatingTexts = new();
 
 	public static FloatingTextManager Instance;
-	
+
 	public void Show(string msg, Color color, Vector3 position, Vector3 motion, float duration)
 	{
 		FloatingText txt = GetFloatingText();
@@ -29,7 +29,7 @@ public class FloatingTextManager : MonoBehaviour
 	{
 		FloatingText txt = floatingTexts.Find(t => !t.isActive);
 
-		if(txt == null)
+		if (txt == null)
 		{
 			txt = new FloatingText();
 			txt.gObject = Instantiate(textPrefab);
@@ -66,7 +66,7 @@ public class FloatingTextManager : MonoBehaviour
 
 	private void Update()
 	{
-		foreach(FloatingText text in floatingTexts)
+		foreach (FloatingText text in floatingTexts)
 		{
 			text.UpdateFloatingText();
 		}

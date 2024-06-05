@@ -154,6 +154,7 @@ MonoBehaviour:
     requiredBuilding: 0
   code: 12
   isUpgrade: 0
+  icon: {fileID: 21300000, guid: 562a3ddd0f0f51c458000d96dffd52b0, type: 3}
   resourcesToGain: 02000000
   resourcesToLose: 0100000000000000
   gainAmounts:

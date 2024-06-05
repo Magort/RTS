@@ -28,6 +28,9 @@ public class CombatPanel : MonoBehaviour
 	public GameObject combatStartPrompt;
 	public SpeedPrompt speedPrompt;
 	public CombatEndPrompt combatEndPrompt;
+	public GameObject combatTutorial;
+
+	Affiliation looser = Affiliation.Enemy;
 
 	private void Start()
 	{
@@ -42,6 +45,7 @@ public class CombatPanel : MonoBehaviour
 
 	public void ShowCombatEndPrompt(Affiliation looser)
 	{
+		this.looser = looser;
 		combatEndPrompt.ShowPrompt(looser);
 	}
 
@@ -56,8 +60,9 @@ public class CombatPanel : MonoBehaviour
 
 	public void HidePanel()
 	{
+		CombatHandler.ResolvePostCombatLoses(looser);
 		gameObject.SetActive(false);
-	}	
+	}
 
 	public void OnRollButtonClick()
 	{
@@ -102,19 +107,21 @@ public class CombatPanel : MonoBehaviour
 	{
 		playerHealthText.text = CombatHandler.playerArmy.health.ToString();
 		playerHealthBar.fillAmount = (float)CombatHandler.playerArmy.health / (float)CombatHandler.playerArmy.maxHealth;
-		playerArmiesText.text = CombatHandler.tileFoughtOn.units
-			.Where(unit => unit.affiliation == Affiliation.Player).ToList().Count.ToString()
-			+ "<sprite=" + IconIDs.quantityToIconID[(CombatAction.Quantity.Single, CombatAction.Target.Ally)] + ">";
+		playerArmiesText.text = CombatHandler.tileFoughtOn.data.units
+			.Where(unit => unit.affiliation == Affiliation.Player).ToList().Count.ToString();
 		foreach (StatusSlot status in playerStatuses)
 		{
-			status.text.text = CombatHandler.playerArmy.GetStatusAmount(status.status).ToString();
+			var statusAmount = CombatHandler.playerArmy.GetStatusAmount(status.status);
+			status.text.text = statusAmount.ToString();
+
+			status.gameObject.SetActive(statusAmount == 0);
 		}
 
 		opponentHealthText.text = CombatHandler.opponentArmy.health.ToString();
 		opponentHealthBar.fillAmount = (float)CombatHandler.opponentArmy.health / (float)CombatHandler.opponentArmy.maxHealth;
-		opponentArmiesText.text = CombatHandler.tileFoughtOn.units
-			.Where(unit => unit.affiliation != Affiliation.Player).ToList().Count.ToString()
-			+ "<sprite=" + IconIDs.quantityToIconID[(CombatAction.Quantity.Single, CombatAction.Target.Opponent)] + ">";
+		opponentArmiesText.text = CombatHandler.tileFoughtOn.data.units
+			.Where(unit => unit.affiliation != Affiliation.Player).ToList().Count.ToString();
+
 		foreach (StatusSlot status in opponentStatuses)
 		{
 			status.text.text = CombatHandler.opponentArmy.GetStatusAmount(status.status).ToString();
@@ -123,6 +130,7 @@ public class CombatPanel : MonoBehaviour
 
 	public void ShowActionRolls(Affiliation affiliation)
 	{
+		GameEventsManager.ActionsRolled.Invoke(affiliation);
 		StartCoroutine(ShowActionRollsCoroutine(affiliation));
 	}
 
@@ -130,7 +138,7 @@ public class CombatPanel : MonoBehaviour
 	{
 		var waiter = new WaitForSecondsRealtime(0.33f);
 
-		switch(affiliation)
+		switch (affiliation)
 		{
 			case Affiliation.Player:
 				playerActions.ForEach(action => action.ClearActions());

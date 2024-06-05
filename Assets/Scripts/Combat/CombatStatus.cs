@@ -7,5 +7,6 @@ public enum CombatStatus
 	Haste,
 	Wound,
 	Block,
-	Focus
+	Focus,
+	Slow
 }

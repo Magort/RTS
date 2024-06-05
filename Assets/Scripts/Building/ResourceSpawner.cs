@@ -25,13 +25,13 @@ public class ResourceSpawner : Building
 	}
 
 	public override void SpecialOnBuild(Tile tile, TileArea area)
-    {
-    }
+	{
+	}
 
 	private void Start()
 	{
 		spawnPeriod = new(spawnInterval);
-		target = builtOn.areas.Find(area => area.type == resourceToArea[resourceToSpawn]);
+		target = builtOn.areas.Find(area => area.data.type == resourceToArea[resourceToSpawn]);
 		StartCoroutine(Spawn());
 	}
 
@@ -41,7 +41,7 @@ public class ResourceSpawner : Building
 		{
 			yield return spawnPeriod;
 
-			target.resourceAmount++;
+			target.data.resourceAmount++;
 		}
 	}
 }

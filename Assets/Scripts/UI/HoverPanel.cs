@@ -3,65 +3,65 @@ using UnityEngine;
 
 public class HoverPanel : MonoBehaviour
 {
-    public static HoverPanel instance;
+	public static HoverPanel instance;
 
-    public TextMeshProUGUI title;
-    public TextMeshProUGUI body;
+	public TextMeshProUGUI title;
+	public TextMeshProUGUI body;
 
-    int screenEdgeOffset = 15;
+	int screenEdgeOffset = 75;
 
-    Vector3 offset = new(0, 100, 0);
+	Vector3 offset = new(0, 175, 0);
 
-    GameObject target;
+	GameObject target;
 
-    private void Start()
-    {
-        instance = this;
-        gameObject.SetActive(false);
-    }
+	private void Start()
+	{
+		instance = this;
+		gameObject.SetActive(false);
+	}
 
-    private void Update()
-    {
-        if (!target) return;
+	private void Update()
+	{
+		if (!target) return;
 
-        if (!target.activeInHierarchy)
-        {
-            gameObject.SetActive(false);
-            target = null;
-        }
-    }
+		if (!target.activeInHierarchy)
+		{
+			gameObject.SetActive(false);
+			target = null;
+		}
+	}
 
-    public void PopulateHoverPanel(GameObject target, string titleText, string bodyText)
-    {
-        this.target = target;
-        gameObject.SetActive(true);
-        gameObject.transform.position = target.transform.position + offset;
-        SetInScreenBounds();
+	public void PopulateHoverPanel(GameObject target, string titleText, string bodyText)
+	{
+		this.target = target;
+		gameObject.SetActive(true);
+		gameObject.transform.position = target.transform.position + offset;
+		SetInScreenBounds();
 
-        title.text = titleText;
-        body.text = bodyText;
-    }
+		title.text = titleText;
+		body.text = bodyText;
+	}
 
-    public void DepopulateHoverPanel()
-    {
+	public void DepopulateHoverPanel()
+	{
 		title.text = "";
 		body.text = "";
 
-        target = null;
-        gameObject.SetActive(false);
+		target = null;
+		gameObject.SetActive(false);
 	}
 
-    void SetInScreenBounds()
-    {
-        RectTransform rectTransform = GetComponent<RectTransform>();
+	void SetInScreenBounds()
+	{
+		RectTransform rectTransform = GetComponent<RectTransform>();
 
-        if (rectTransform.position.x + (rectTransform.rect.width / 2) > Camera.main.scaledPixelWidth)
-        {
-            transform.position = new(Camera.main.scaledPixelWidth - (rectTransform.rect.width / 2) - screenEdgeOffset, transform.position.y, transform.position.z);
-        }
-        if (rectTransform.position.x - (rectTransform.rect.width / 2) < 0)
-        {
-            transform.position = new(0 + (rectTransform.rect.width / 2) + screenEdgeOffset, transform.position.y, transform.position.z);
+		if (rectTransform.position.x + (rectTransform.rect.width) > Camera.main.scaledPixelWidth)
+		{
+			transform.position = new(Camera.main.scaledPixelWidth - (rectTransform.rect.width) - screenEdgeOffset, transform.position.y, transform.position.z);
 		}
-    }
+		if (rectTransform.position.x - (rectTransform.rect.width) < 0)
+		{
+			transform.position = new(0 + (rectTransform.rect.width) + screenEdgeOffset, transform.position.y, transform.position.z);
+		}
+	}
 }

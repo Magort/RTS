@@ -14,54 +14,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actions:
   - subActions:
-    - value: 7
+    - value: 8
       target: 1
       effect: 1
-      quantity: 0
     name: Slash
   - subActions:
-    - value: 7
+    - value: 8
       target: 1
       effect: 1
-      quantity: 0
     name: Slash
   - subActions:
     - value: 5
       target: 1
       effect: 1
-      quantity: 0
     - value: 1
       target: 0
       effect: 7
-      quantity: 0
     name: Riposte
   - subActions:
     - value: 1
       target: 1
       effect: 6
-      quantity: 0
     - value: 1
       target: 0
       effect: 7
-      quantity: 0
     name: Feint
   - subActions:
-    - value: 5
+    - value: 4
       target: 1
       effect: 1
-      quantity: 0
-    - value: 3
+    - value: 2
       target: 1
       effect: 9
-      quantity: 0
     name: Lacerate
   - subActions:
-    - value: 1
-      target: 0
-      effect: 7
-      quantity: 0
     - value: 2
       target: 0
+      effect: 7
+    - value: 1
+      target: 0
       effect: 5
-      quantity: 0
     name: Fancy Feet

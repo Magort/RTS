@@ -14,66 +14,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actions:
   - subActions:
-    - value: 5
-      target: 0
-      effect: 7
-      quantity: 0
-    - value: 1
-      target: 0
-      effect: 10
-      quantity: 0
-    name: Shields Up!
-  - subActions:
-    - value: 5
-      target: 0
-      effect: 7
-      quantity: 0
-    - value: 1
-      target: 0
-      effect: 10
-      quantity: 0
-    name: Shields Up!
-  - subActions:
-    - value: 1
-      target: 0
-      effect: 7
-      quantity: 1
-    - value: 2
-      target: 0
-      effect: 0
-      quantity: 1
-    name: Regroup!
-  - subActions:
-    - value: 8
+    - value: 6
       target: 1
       effect: 1
-      quantity: 0
-    - value: 1
+    name: Blind Blow
+  - subActions:
+    - value: 6
       target: 1
-      effect: 8
-      quantity: 0
+      effect: 1
+    name: Blind Blow
+  - subActions:
     - value: 1
       target: 1
       effect: 6
-      quantity: 0
-    name: Tackle
+    name: Low Blow
   - subActions:
-    - value: 3
-      target: 1
-      effect: 8
-      quantity: 0
-    - value: 2
-      target: 0
-      effect: 5
-      quantity: 0
-    name: After Me!
-  - subActions:
-    - value: 3
-      target: 0
-      effect: 7
-      quantity: 0
     - value: 1
       target: 1
-      effect: 4
-      quantity: 0
-    name: Frost Imbuement
+      effect: 6
+    name: Low Blow
+  - subActions:
+    - value: 2
+      target: 1
+      effect: 1
+    - value: 2
+      target: 1
+      effect: 9
+    name: Knee Strike
+  - subActions:
+    - value: 2
+      target: 1
+      effect: 1
+    - value: 2
+      target: 1
+      effect: 9
+    name: Knee Strike

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 public class MainBase : ResourceProducer
 {
 	public List<Code> buildingsToUnlock;
-    public override string Description()
-    {
+	public override string Description()
+	{
 		string description = "Produces ";
 		foreach (var resource in resourcesToProduce)
 		{
@@ -30,7 +30,7 @@ public class MainBase : ResourceProducer
 	{
 		base.SpecialOnBuild(tile, area);
 
-		foreach(var building in buildingsToUnlock)
+		foreach (var building in buildingsToUnlock)
 		{
 			BuildingHandler.Instance.SwitchBuildingLock(building, true);
 		}

@@ -1,20 +1,19 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ActionButton : MonoBehaviour
 {
-    public TextMeshProUGUI actionText;
+	public TextMeshProUGUI actionText;
 	public Button button;
 
-    public void PopulateButton(CombatAction action, Affiliation affiliation)
-    {
+	public void PopulateButton(CombatAction action, Affiliation affiliation)
+	{
 		actionText.text = "";
 		foreach (var subAction in action.subActions)
 		{
 			actionText.text += subAction.value
-							+ "<sprite=" + IconIDs.effectToIconID[subAction.effect] + "> "
-							+ "<sprite=" + IconIDs.quantityToIconID[(subAction.quantity, subAction.target)] + ">\n";
+							+ "<sprite=" + IconIDs.effectToIconID[subAction.effect] + ">\n";
 		}
 
 		if (affiliation != Affiliation.Player)

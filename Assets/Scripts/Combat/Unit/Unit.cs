@@ -4,52 +4,60 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Unit", menuName = "Combat/Unit", order = 1)]
 public class Unit : ScriptableObject
 {
-    public List<Building.Requirements.ResourceRequirement> recruitCost;
+	public List<Building.Requirements.ResourceRequirement> recruitCost;
 	public List<Building.Requirements.ResourceRequirement> upkeepCost;
 
 	[Header("Stats")]
-    public int health;
-    public int speed;
-    public Dice dice;
+	public int health;
+	public int speed;
+	public Dice dice;
 
-    [Header("Identification")]
-    public string unitName;
-    public Sprite icon;
+	[Header("Identification")]
+	public string unitName;
+	public Sprite icon;
+	public Code code;
 
-    public (CombatAction, CombatAction) RollActions()
-    {
-        var tempActions = dice.CloneActions();
+	public enum Code
+	{
+		Skirmisher,
+		Fighter,
+		Archer,
+		Watchman
+	}
 
-        var action1 = tempActions[Random.Range(0, 6)];
+	public (CombatAction, CombatAction) RollActions()
+	{
+		var tempActions = dice.CloneActions();
 
-        tempActions.Remove(action1);
+		var action1 = tempActions[Random.Range(0, 6)];
 
-        var action2 = tempActions[Random.Range(0, 5)];
+		tempActions.Remove(action1);
 
-        return (action1, action2);
-    }
+		var action2 = tempActions[Random.Range(0, 5)];
 
-    public string Description()
-    {
-        string description = "<b>Health</b>: " + health + "\t<b>Speed</b>: " + speed + "\n<b>Actions</b>: | ";
+		return (action1, action2);
+	}
 
-        foreach(var action in dice.actions)
-        {
-            foreach(var subAction in action.subActions)
-            {
-                description += subAction.value
-                    + "<sprite=" + IconIDs.effectToIconID[subAction.effect] + ">"
-					+ "<sprite=" + IconIDs.quantityToIconID[(subAction.quantity, subAction.target)] + ">";
-            }
-            description += " | ";
-        }
+	public string Description()
+	{
+		string description = "<b>Health</b>: " + health + "\t<b>Speed</b>: " + speed + "\n<b>Actions</b>: | ";
 
-        description += "\n<b>Recruit Cost:</b>";
+		foreach (var action in dice.actions)
+		{
+			foreach (var subAction in action.subActions)
+			{
+				description += subAction.value
+					+ "<sprite=" + IconIDs.effectToIconID[subAction.effect] + ">";
+			}
+			description += " | ";
+		}
 
-        foreach(var cost in recruitCost)
-        {
-            description += "<sprite=" + IconIDs.resourceToIconID[cost.resource] + ">" + cost.amount + " ";
-        }
+		description += "\n<b>Recruit Cost:</b>";
+
+		foreach (var cost in recruitCost)
+		{
+			description += "<sprite=" + IconIDs.resourceToIconID[cost.resource] + ">" + cost.amount + " ";
+		}
 
 		description += "\n<b>Upkeep Cost:</b>";
 
@@ -59,5 +67,5 @@ public class Unit : ScriptableObject
 		}
 
 		return description;
-    }
+	}
 }

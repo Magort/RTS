@@ -3,94 +3,117 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [Range(1, 10)] public float intensity;
-	public bool dragged;
-    public float minZoom;
-    public float maxZoom;
-    public float currentZoom;
+	[Range(0.1f, 0.3f)] public float intensity;
+	public float minZoom;
+	public float maxZoom;
+	public float currentZoom;
 
-	bool dragging;
+	Vector3 moveToTileOffset = new(0, 0, -1.5f);
+	float lastTouchDistance = 0;
 
-    WaitForSeconds draggedWaiter = new(0.4f);
+	WaitForSecondsRealtime tapLockWaiter = new(0.1f);
+	float tapLockTimer = 0;
+	float tapLockTime = 0.2f;
 
-    Vector3 lastMousePos = new();
-    Vector3 moveToTileOffset = new(0, 0, -1.5f);
+	public static CameraController Instance;
 
-    public static CameraController Instance;
+	private void Start()
+	{
+		Instance = this;
+		currentZoom = transform.position.y;
+	}
 
-    private void Start()
-    {
-        Instance = this;
-        currentZoom = transform.position.y;
-    }
+	private void Update()
+	{
+		if (Input.touchCount == 0)
+			return;
 
-    private void Update()
-    {
-        UpdateZoom();
+		if (Input.touchCount >= 2)
+		{
+			UpdateZoom();
+			return;
+		}
 
-        if (Input.GetMouseButtonDown(1))
-        {
-            dragging = true;
-            lastMousePos = Input.mousePosition;
-        }
+		var touch = Input.GetTouch(0);
 
-		if (Input.GetMouseButtonUp(1))
-            dragging = false;
+		if (touch.phase == TouchPhase.Moved)
+		{
+			transform.position -= intensity * Time.unscaledDeltaTime * new Vector3(touch.deltaPosition.x, 0, touch.deltaPosition.y);
 
-        if (!dragging)
-            return;
+			HandleTapLock();
+		}
+	}
 
-        Camera.main.transform.position
-            -= (new Vector3(Input.mousePosition.x - lastMousePos.x, 0, Input.mousePosition.y - lastMousePos.y) / 100 )
-            * intensity * Time.timeScale;
+	void UpdateZoom()
+	{
+		var touch1 = Input.GetTouch(0);
+		var touch2 = Input.GetTouch(1);
 
-        if(!dragged)
-        {
-            if(Input.mousePosition != lastMousePos)
-            {
-                StartCoroutine(Dragged());
-            }
-        }
+		if (touch1.phase != TouchPhase.Moved && touch2.phase != TouchPhase.Moved)
+			return;
 
-        lastMousePos = Input.mousePosition;
-    }
+		if (touch1.deltaPosition.x * touch2.deltaPosition.x >= 0)
+			return;
 
-    void UpdateZoom()
-    {
-		currentZoom = Mathf.Clamp(currentZoom - Input.GetAxis("Mouse ScrollWheel"), minZoom, maxZoom);
+		var currentDistance = Vector2.Distance(touch1.position, touch2.position);
+
+		currentZoom = Mathf.Clamp(currentZoom + lastTouchDistance - currentDistance, minZoom, maxZoom);
 
 		var tf = transform;
 		var pos = tf.position;
-		pos = new Vector3(pos.x, Mathf.Lerp(pos.y, currentZoom, Time.deltaTime * 5), pos.z);
+		pos = new Vector3(pos.x, Mathf.Lerp(pos.y, currentZoom, Time.unscaledDeltaTime * 3), pos.z);
 		tf.position = pos;
+
+		lastTouchDistance = Vector2.Distance(touch1.position, touch2.position);
+
+		HandleTapLock();
 	}
 
-    public void MoveToTile(Vector3 spot)
-    {
-        StartCoroutine(MoveTo(spot + moveToTileOffset));
-    }
+	public void MoveToTile(Vector3 spot)
+	{
+		StartCoroutine(MoveTo(spot + moveToTileOffset));
+	}
 
-    IEnumerator MoveTo(Vector3 spot)
-    {
-        Vector3 startingPosition = transform.position;
-        float step = 0;
-        var waiter = new WaitForSecondsRealtime(0.01f);
-        spot.y = startingPosition.y;
+	void HandleTapLock()
+	{
+		if (!GameState.TapLocked)
+		{
+			StartCoroutine(TapLock());
+		}
+		else
+		{
+			tapLockTimer = 0;
+		}
+	}
 
-        while(step < 1)
-        {
-            transform.position = Vector3.Lerp(startingPosition, spot, step);
-            step += 0.01f;
-            yield return waiter;
-        }
-    }
+	IEnumerator TapLock()
+	{
+		GameState.TapLocked = true;
 
-    IEnumerator Dragged()
-    {
-        dragged = true;
+		tapLockTimer = 0;
 
-        yield return draggedWaiter;
+		while (tapLockTimer < tapLockTime)
+		{
+			yield return tapLockWaiter;
 
-        dragged = false;
-    }    
+			tapLockTimer += 0.1f;
+		}
+
+		GameState.TapLocked = false;
+	}
+
+	IEnumerator MoveTo(Vector3 spot)
+	{
+		Vector3 startingPosition = transform.position;
+		float step = 0;
+		var waiter = new WaitForSecondsRealtime(0.01f);
+		spot.y = startingPosition.y;
+
+		while (step < 1)
+		{
+			transform.position = Vector3.Lerp(startingPosition, spot, step);
+			step += 0.01f;
+			yield return waiter;
+		}
+	}
 }

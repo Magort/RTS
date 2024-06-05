@@ -1,11 +1,10 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ActionSlot : MonoBehaviour
 {
-    List<CombatAction> combatActions;
+	List<CombatAction> combatActions;
 	public Affiliation affiliation;
 
 	[Header("Refs")]
@@ -14,20 +13,20 @@ public class ActionSlot : MonoBehaviour
 	WaitForSecondsRealtime waiter = new(0.25f);
 
 	public void AssignActions((CombatAction, CombatAction) actions, Affiliation affiliation)
-    {
+	{
 		ClearActions();
 
 		combatActions.Add(actions.Item1);
 		combatActions.Add(actions.Item2);
 
-        for(int i = 0; i < 2; i++)
+		for (int i = 0; i < 2; i++)
 		{
 			actionButtons[i].PopulateButton(combatActions[i], affiliation);
 		}
 	}
 
-    public void AssignBonusActions((CombatAction, CombatAction) actions, Affiliation affiliation)
-    {
+	public void AssignBonusActions((CombatAction, CombatAction) actions, Affiliation affiliation)
+	{
 		combatActions.Add(actions.Item1);
 		combatActions.Add(actions.Item2);
 
@@ -44,7 +43,7 @@ public class ActionSlot : MonoBehaviour
 	}
 
 	public void OnClick(int index)
-    {
+	{
 		StartCoroutine(ExecuteSubActions(combatActions[index]));
 		CombatPanel.Instance.ShowAnimations(combatActions[index]);
 		DisablePairActions(index);
@@ -67,7 +66,7 @@ public class ActionSlot : MonoBehaviour
 
 	void DisablePairActions(int index)
 	{
-		switch(index)
+		switch (index)
 		{
 			case 0:
 				actionButtons[0].SetInteractable(false);

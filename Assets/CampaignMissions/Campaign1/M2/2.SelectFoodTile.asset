@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6527b924958a52843832382ba6bd7b55, type: 3}
+  m_Name: 2.SelectFoodTile
+  m_EditorClassIdentifier: 
+  quantityToPass: 1
+  timeToPass: 0
+  title: Get ready to build
+  description: Tap on the highlighted area to select it
+  narration:
+  - narrator: 1
+    content: Our scouts have returned with splendid news - there should be enough
+      food for weeks! But first things first, we don't have enough timber left to
+      set up a camp there. But it should be just enough to construct a Woodcutters'
+      Lodge.
+  - narrator: 1
+    content: Secure steady timber production so we can move on with food rations.
+  - narrator: 0
+    content: <i>To build a building, select the highlighted area.</i>
+  reward:
+    resources: []
+    buildings: 
+    tiles: []
+  tileToSelect: {x: 2, y: 1, z: -3}

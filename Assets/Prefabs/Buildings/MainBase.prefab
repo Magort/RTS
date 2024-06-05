@@ -83,11 +83,9 @@ MonoBehaviour:
     requiredBuilding: 0
   code: 5
   isUpgrade: 0
-  resourcesToProduce: 010000000000000002000000
-  productionSpeeds:
-  - 6
-  - 6
-  - 10
+  icon: {fileID: 21300000, guid: d305755f9805a1c43b9caf89d1d858c7, type: 3}
+  resourcesToProduce: 
+  productionSpeeds: []
 --- !u!4 &8803979639260200462 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8687861292292457714, guid: 3c09760cbd46f0f4c9a4dd2a714e9103, type: 3}
@@ -148,6 +146,10 @@ PrefabInstance:
       propertyPath: m_ReceiveShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4683669308469848369, guid: 4600e47def5edbf4f9c26c785f875c9b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f8ba13d94cea67d4f809cdced09beeca, type: 2}
     - target: {fileID: -3433457063646126736, guid: 4600e47def5edbf4f9c26c785f875c9b, type: 3}
       propertyPath: m_ReceiveShadows
       value: 0

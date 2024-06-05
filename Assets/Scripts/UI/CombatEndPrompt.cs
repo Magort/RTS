@@ -14,7 +14,7 @@ public class CombatEndPrompt : MonoBehaviour
 
 	public void ShowPrompt(Affiliation looser)
 	{
-		switch(looser)
+		switch (looser)
 		{
 			case Affiliation.Player:
 				title.text = opponentWinTitle;

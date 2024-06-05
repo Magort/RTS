@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a063a1f5055757c47bf904c5474cdc5d, type: 3}
+  m_Name: 2.SelectUnit
+  m_EditorClassIdentifier: 
+  quantityToPass: 1
+  timeToPass: 0
+  title: Learning The Basics
+  description: Tap on the Army on area's panel
+  narration:
+  - narrator: 0
+    content: <i>This is an area's info panel. You'll find all necessary information
+      here, such as stationed armies. Select the Liberation Army by tapping on a
+      button with its name.</i>
+  reward:
+    resources: []
+    buildings: 
+    tiles: []
+  unitTile: {x: 3, y: 0, z: -3}
+  unitIndex: 0

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ResourceProducer : Building
 {
-    public List<Resource> resourcesToProduce;
-    public List<float> productionSpeeds;
+	public List<Resource> resourcesToProduce;
+	public List<float> productionSpeeds;
 	private void Start()
 	{
 		for (int i = 0; i < productionSpeeds.Count; i++)
@@ -26,7 +26,7 @@ public class ResourceProducer : Building
 	}
 
 	public override string Description()
-    {
+	{
 		string description = "Produces: ";
 		for (int i = 0; i < productionSpeeds.Count; i++)
 		{
@@ -37,8 +37,8 @@ public class ResourceProducer : Building
 		return description;
 	}
 
-    public override void SpecialOnBuild(Tile tile, TileArea area)
-    {
-        
-    }
+	public override void SpecialOnBuild(Tile tile, TileArea area)
+	{
+
+	}
 }

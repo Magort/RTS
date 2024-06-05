@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc46f7c5a599ad846bde53f180bf9b41, type: 3}
+  m_Name: 1.FindFoodTile
+  m_EditorClassIdentifier: 
+  quantityToPass: 1
+  timeToPass: 0
+  title: Warm meals
+  description: Find an area rich in food by scouting nearby areas
+  narration:
+  - narrator: 1
+    content: Great job in the last battle, General. We have moved past the outpost
+      and secured the area. However, to continue our campaing, we must make sure
+      our supply line is secure.
+  - narrator: 1
+    content: To do so, we must find resources nearby and set up ther extraction.
+      First, let's look for something our troops can eat.
+  - narrator: 0
+    content: <i>Select any of the dimmed areas and tap "Scout" on the info panel.
+      It will send your Scouts to reveal the area's content.</i>
+  reward:
+    resources: []
+    buildings: 00000000
+    tiles: []
+  tilesByCoords:
+  - {x: 1, y: 1, z: -2}
